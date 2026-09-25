@@ -81,6 +81,12 @@ export function SharePanel({ code, large }: { code: string; large?: boolean }) {
             </Button>
             <ContinueOnPhone code={code} origin={origin} />
           </div>
+          {/^(localhost|127\.|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.)/.test(origin.replace(/^https?:\/\//, "")) && (
+            <p className="text-muted mt-2 text-xs">
+              Phones must be on the same Wi-Fi. Can&apos;t connect? On the computer, run <code>npm run party:online</code> for a
+              link that works anywhere.
+            </p>
+          )}
           {unreachable && (
             <p className="text-amber mt-2 text-sm" role="note">
               Phones can&apos;t open “localhost”. Connect this computer to Wi-Fi and reload, or open this page using the

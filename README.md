@@ -26,6 +26,13 @@ Open the address it prints (for example `http://192.168.1.23:3000`) on the Mac a
 
 For development with live reload, use `npm run dev` (it also listens on your Wi-Fi address).
 
+**Phones can't open the link?**
+
+- Check they're on the **same Wi-Fi** as the Mac. Guest networks and mobile data won't work, and some routers block devices from seeing each other ("client isolation").
+- Look at the list `npm run party` prints and try the other addresses, or `http://<your-mac-name>.local:3000` on iPhones.
+- macOS firewall (System Settings → Network → Firewall) must allow incoming connections for Node.
+- **Easiest fix: `npm run party:online`.** It builds, starts the app and creates a free temporary public link (`https://something.trycloudflare.com`) that works on any network, including mobile data and a Fire TV. The link changes each time and stops when you press Control+C.
+
 ## Try it in 5 minutes (get a URL for your TV)
 
 The fastest way to get a public URL is **Render's free tier**. It runs one long-lived Node server, so no database is needed (rooms live in memory and reset when the service restarts).
