@@ -2,7 +2,7 @@
 
 _Generated from the game modules by `npm run rules:generate`. The same rules are shown in the app._
 
-26 games are fully playable. Games marked **bots** can be filled with computer players.
+30 games are fully playable. Games marked **bots** can be filled with computer players.
 
 ## Party games
 
@@ -75,6 +75,24 @@ _Who in the room is most likely to…? Vote and find out._ · 3–12 players · 
 **Ending & ties:** Most points after the set number of prompts wins; ties share the win.
 
 **House rules:** Spicy content (adults) — Mixes in grown-up questions about drinking, dating and nights out.; Sip mode (adults only) — The screen calls out who takes a sip each round — any drink works. Please drink responsibly.
+
+### Code Words
+
+_Codenames rules: one-word clues, secret agents, don't touch the assassin._ · 4–12 players · 15–20 min · bots
+
+**Goal:** Find all of your team's secret agents on the 25-word board before the other team does.
+
+1. Two teams, Red and Blue. Each team has one spymaster — only spymasters see the secret key on their phones.
+2. The spymaster gives a one-word clue and a number, e.g. "OCEAN 3", linking that many of their team's words. The clue can't be a word on the board.
+3. Their team talks it over and taps words. A correct word lets them keep going (up to the number + 1).
+4. Tap a neutral bystander or the other team's word and your turn ends. Tap the assassin and your team loses instantly.
+5. Red starts and has 9 words to find; Blue has 8.
+
+**Scoring:** The winning team's players each get the win.
+
+**Ending & ties:** First team to uncover all their words wins — or the team that avoided the assassin.
+
+**House rules:** Spicy content (adults) — Mixes party and bedroom words into the board.
 
 ### Clue Rush
 
@@ -202,6 +220,58 @@ _Monopoly Deal rules: charge rent, steal sets, just say no._ · 2–5 players ·
 **Ending & ties:** The game ends the moment someone owns the winning sets — even on someone else's turn.
 
 **House rules:** Speed deal — Only 2 full sets needed to win.
+
+### Colour Clash
+
+_UNO rules: match colours, stack +2s, don't forget to call it._ · 2–10 players · 10–30 min · bots
+
+**Goal:** Get rid of all your cards first, then score points for what everyone else is still holding.
+
+1. Everyone gets 7 cards. Match the top card by colour, number or symbol.
+2. Skip jumps the next player, Reverse flips direction (it acts like Skip with two players), Draw Two makes the next player pick up 2.
+3. Wild picks the colour. Wild Draw Four picks the colour and the next player picks up 4.
+4. Can't (or don't want to) play? Draw one. If it fits, you may play it right away; otherwise your turn ends.
+5. Stacking (house rule, on by default): answer a Draw Two with another Draw Two or a Draw Four, and a Draw Four with a Draw Four — the last person who can't stack takes the lot.
+6. Down to one card? Hit UNO! If someone catches you before you do, you pick up 2.
+
+**Scoring:** Whoever goes out scores the cards left in everyone else's hands: numbers at face value, Skip/Reverse/Draw Two 20, wilds 50.
+
+**Ending & ties:** Highest total after the set number of rounds (or first to the target score) wins. Ties share the win.
+
+**House rules:** Stacking — Stack +2s and +4s to pass the pain along.
+
+### Texas Hold'em
+
+_No-limit poker. Two secret cards, five on the table, all-in on a bluff._ · 2–9 players · 20–45 min · bots
+
+**Goal:** Win chips. After the last hand, the biggest stack wins.
+
+1. Everyone starts with 1000 chips. The two players after the button post the small and big blinds, which go up during the game.
+2. You get two secret cards. Betting goes round: fold, check, call, or raise (no limit — you can go all-in any time).
+3. Then three shared cards (the flop), one more (the turn) and a last one (the river), with a betting round after each.
+4. At the showdown the best five-card hand from your two cards plus the five on the table wins the pot. Side pots handle all-ins.
+5. Hand ranks: straight flush > four of a kind > full house > flush > straight > three of a kind > two pair > pair > high card.
+
+**Scoring:** Your score is your final chip count.
+
+**Ending & ties:** The game ends after the set number of hands, or when one player has all the chips.
+
+### Power Grab
+
+_Coup rules: lie about who you are, take the money, stab your friends._ · 2–6 players · 10–15 min · bots
+
+**Goal:** Be the last player with a secret card (influence) left.
+
+1. You get 2 secret character cards and 2 coins. Lose both cards and you're out.
+2. On your turn take one action. Income (+1), Foreign Aid (+2) and Coup (pay 7, someone loses a card — can't be stopped) need no character.
+3. Character actions — you can claim ANY character, true or not: Duke = Tax (+3). Assassin = pay 3, someone loses a card. Captain = steal 2 coins. Ambassador = draw 2 cards, keep the best, return 2.
+4. Blocks: Duke blocks Foreign Aid. Contessa blocks an assassination. Captain or Ambassador block stealing.
+5. Anyone can challenge a claim. If the claim was a lie, the liar loses a card. If it was true, the challenger loses a card and the claimant swaps the shown card for a new one.
+6. With 10 or more coins you must Coup.
+
+**Scoring:** Last one standing wins; everyone else is ranked by how long they survived.
+
+**Ending & ties:** The game ends when only one player has influence left.
 
 ### Crazy Eights
 

@@ -1,11 +1,13 @@
 import { describe, expect, it } from "vitest";
 import { GAMES } from "@/games";
 import type { BluffState } from "@/games/bluff";
+import type { HoldemState } from "@/games/texas-holdem";
 import { viewCtx } from "@/lib/engine/runner";
 import { simulate } from "./sim";
 
 const knownPublic: Record<string, (s: unknown) => string[]> = {
   bluff: (s) => (s as BluffState).reveal?.cards ?? [],
+  "texas-holdem": (s) => Object.values((s as HoldemState).shown).flat(),
 };
 
 function counts(min: number, max: number): number[] {

@@ -2,6 +2,8 @@ import type { AnyGameModule } from "@/lib/engine/types";
 import { bluff } from "./bluff";
 import { captionClash } from "./caption-clash";
 import { clueRush } from "./clue-rush";
+import { codeWords } from "./code-words";
+import { colourClash } from "./colour-clash";
 import { crazyEights } from "./crazy-eights";
 import { emojiMovies } from "./emoji-movies";
 import { goFish } from "./go-fish";
@@ -13,6 +15,7 @@ import { memory } from "./memory";
 import { mostLikely } from "./most-likely";
 import { neverHaveIEver } from "./never-have-i-ever";
 import { oldMaid } from "./old-maid";
+import { powerGrab } from "./power-grab";
 import { president } from "./president";
 import { propertyDeal } from "./property-deal";
 import { quickCategories } from "./quick-categories";
@@ -22,6 +25,7 @@ import { sevens } from "./sevens";
 import { snap } from "./snap";
 import { spades } from "./spades";
 import { switchGame } from "./switch";
+import { texasHoldem } from "./texas-holdem";
 import { trivia } from "./trivia";
 import { twentyOne } from "./twenty-one";
 import { war } from "./war";
@@ -33,6 +37,7 @@ export const GAMES: AnyGameModule[] = [
   trivia,
   emojiMovies,
   mostLikely,
+  codeWords,
   clueRush,
   majorityRules,
   quickCategories,
@@ -41,6 +46,9 @@ export const GAMES: AnyGameModule[] = [
   secretSignal,
   // Card games
   propertyDeal,
+  colourClash,
+  texasHoldem,
+  powerGrab,
   crazyEights,
   goFish,
   oldMaid,

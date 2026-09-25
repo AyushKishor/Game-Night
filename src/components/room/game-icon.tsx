@@ -1,6 +1,7 @@
 import {
   ArrowUpDown,
   Building2,
+  Coins,
   Crown,
   EyeOff,
   Fish,
@@ -11,6 +12,7 @@ import {
   Layers,
   ListOrdered,
   MessageSquareQuote,
+  Palette,
   Radio,
   Repeat,
   Spade,
@@ -29,6 +31,7 @@ import { cn } from "@/lib/utils";
 const ICONS: Record<string, LucideIcon> = {
   ArrowUpDown,
   Building2,
+  Coins,
   Crown,
   EyeOff,
   Fish,
@@ -39,6 +42,7 @@ const ICONS: Record<string, LucideIcon> = {
   Layers,
   ListOrdered,
   MessageSquareQuote,
+  Palette,
   Radio,
   Repeat,
   Spade,

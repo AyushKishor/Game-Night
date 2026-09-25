@@ -15,9 +15,13 @@ import {
 } from "./card-views";
 import { CaptionView } from "./caption-view";
 import { ClueRushView } from "./clue-rush-view";
+import { CodeWordsView } from "./code-words-view";
+import { ColourClashView } from "./colour-clash-view";
+import { HoldemView } from "./holdem-view";
 import { MajorityView } from "./majority-view";
 import { MostLikelyView } from "./most-likely-view";
 import { NhieView } from "./nhie-view";
+import { PowerGrabView } from "./power-grab-view";
 import { PropertyDealView } from "./property-deal-view";
 import { QuickCategoriesView } from "./quick-categories-view";
 import { QuizView } from "./quiz-view";
@@ -57,4 +61,8 @@ export const GAME_VIEWS: Record<string, AnyView> = {
   "caption-clash": CaptionView,
   "clue-rush": ClueRushView,
   "property-deal": PropertyDealView,
+  "colour-clash": ColourClashView,
+  "power-grab": PowerGrabView,
+  "code-words": CodeWordsView,
+  "texas-holdem": HoldemView,
 };

@@ -51,16 +51,16 @@ For a production setup with persistence and multiple instances, use **Vercel + S
 
 ## Features
 
-| Area          | What's included                                                                                                                                                                      |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Rooms         | 6-character codes (no look-alike characters), QR code, share link, lock room, capacity (12 players + 20 spectators), spectators, idle expiry                                         |
-| Players       | Nicknames with duplicate handling (`Sam`, `Sam 2`), avatars, ready status, host removes players, host transfer, leave, bots                                                          |
-| Games         | 26 games (incl. Property Deal — Monopoly Deal rules), presets (Quick / Standard / Long), only relevant settings shown, house rules, rematch, change game, return to lobby            |
-| Real time     | Server-authoritative engine, version pings over Supabase Realtime or Server-Sent Events, polling fallback, timer wake-ups                                                            |
-| Reliability   | Reconnect by token, idempotent action IDs, row-locked mutations, stale-action rejection, autopilot for away players                                                                  |
-| Screens       | Shared **Table** view (public info only) and personal **My hand** view; one-time "continue on my phone" handoff link                                                                 |
-| Accessibility | Keyboard / D-pad navigation, visible focus, screen-reader labels, reduced motion, reduced sensory mode, high-contrast 4-colour cards, text labels next to icons, large touch targets |
-| Sound         | Synthesised Web Audio cues (join, deal, your turn, timer warning, correct, round end, victory); muted until first interaction; mute + volume                                         |
+| Area          | What's included                                                                                                                                                                                             |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Rooms         | 6-character codes (no look-alike characters), QR code, share link, lock room, capacity (12 players + 20 spectators), spectators, idle expiry                                                                |
+| Players       | Nicknames with duplicate handling (`Sam`, `Sam 2`), avatars, ready status, host removes players, host transfer, leave, bots                                                                                 |
+| Games         | 30 games (incl. Property Deal, Colour Clash, Power Grab, Code Words and Texas Hold'em), presets (Quick / Standard / Long), only relevant settings shown, house rules, rematch, change game, return to lobby |
+| Real time     | Server-authoritative engine, version pings over Supabase Realtime or Server-Sent Events, polling fallback, timer wake-ups                                                                                   |
+| Reliability   | Reconnect by token, idempotent action IDs, row-locked mutations, stale-action rejection, autopilot for away players                                                                                         |
+| Screens       | Shared **Table** view (public info only) and personal **My hand** view; one-time "continue on my phone" handoff link                                                                                        |
+| Accessibility | Keyboard / D-pad navigation, visible focus, screen-reader labels, reduced motion, reduced sensory mode, high-contrast 4-colour cards, text labels next to icons, large touch targets                        |
+| Sound         | Synthesised Web Audio cues (join, deal, your turn, timer warning, correct, round end, victory); muted until first interaction; mute + volume                                                                |
 
 ---
 
