@@ -2,7 +2,7 @@
 
 _Generated from the game modules by `npm run rules:generate`. The same rules are shown in the app._
 
-25 games are fully playable. Games marked **bots** can be filled with computer players.
+26 games are fully playable. Games marked **bots** can be filled with computer players.
 
 ## Party games
 
@@ -180,6 +180,28 @@ _Find the player who shares your secret symbol — one word at a time._ · 4–1
 **House rules:** Sip mode (adults only) — The screen calls out who takes a sip each round — any drink works. Please drink responsibly.
 
 ## Card games
+
+### Property Deal
+
+_Monopoly Deal rules: charge rent, steal sets, just say no._ · 2–5 players · 20–40 min · bots
+
+**Goal:** Be the first to collect 3 full property sets in different colours.
+
+1. Everyone starts with 5 cards. On your turn draw 2 (or 5 if your hand is empty), then play up to 3 cards.
+2. Play properties in front of you, bank money (action and rent cards can be banked as money too), or play actions.
+3. Rent cards charge rent for a colour you own — the more of the set you have, the more it costs. Double the Rent doubles it (and uses a play).
+4. Debt Collector takes $5M from one player; It's My Birthday takes $2M from everyone; Pass Go draws 2.
+5. Sly Deal steals a property, Forced Deal swaps one, and Deal Breaker steals a whole full set (buildings included).
+6. Just Say No cancels an action against you — and can be cancelled by another Just Say No.
+7. Pay from your bank and properties (never your hand). No change is given; if you can't cover it, you hand over everything.
+8. Houses (+$3M) and hotels (+$4M) go on full sets, but not on railroads or utilities. Wildcards can be moved between colours on your turn for free.
+9. End your turn with no more than 7 cards in hand.
+
+**Scoring:** The first player with 3 full sets of different colours wins. Everyone else is ranked by how many full sets they have.
+
+**Ending & ties:** The game ends the moment someone owns the winning sets — even on someone else's turn.
+
+**House rules:** Speed deal — Only 2 full sets needed to win.
 
 ### Crazy Eights
 

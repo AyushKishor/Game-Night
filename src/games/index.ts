@@ -14,6 +14,7 @@ import { mostLikely } from "./most-likely";
 import { neverHaveIEver } from "./never-have-i-ever";
 import { oldMaid } from "./old-maid";
 import { president } from "./president";
+import { propertyDeal } from "./property-deal";
 import { quickCategories } from "./quick-categories";
 import { rankIt } from "./rank-it";
 import { secretSignal } from "./secret-signal";
@@ -39,6 +40,7 @@ export const GAMES: AnyGameModule[] = [
   rankIt,
   secretSignal,
   // Card games
+  propertyDeal,
   crazyEights,
   goFish,
   oldMaid,

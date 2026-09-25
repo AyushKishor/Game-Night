@@ -1,5 +1,6 @@
 import {
   ArrowUpDown,
+  Building2,
   Crown,
   EyeOff,
   Fish,
@@ -27,6 +28,7 @@ import { cn } from "@/lib/utils";
 
 const ICONS: Record<string, LucideIcon> = {
   ArrowUpDown,
+  Building2,
   Crown,
   EyeOff,
   Fish,

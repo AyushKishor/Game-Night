@@ -55,7 +55,7 @@ For a production setup with persistence and multiple instances, use **Vercel + S
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Rooms         | 6-character codes (no look-alike characters), QR code, share link, lock room, capacity (12 players + 20 spectators), spectators, idle expiry                                         |
 | Players       | Nicknames with duplicate handling (`Sam`, `Sam 2`), avatars, ready status, host removes players, host transfer, leave, bots                                                          |
-| Games         | 25 games, presets (Quick / Standard / Long), only relevant settings shown, house rules, rematch, change game, return to lobby                                                        |
+| Games         | 26 games (incl. Property Deal — Monopoly Deal rules), presets (Quick / Standard / Long), only relevant settings shown, house rules, rematch, change game, return to lobby            |
 | Real time     | Server-authoritative engine, version pings over Supabase Realtime or Server-Sent Events, polling fallback, timer wake-ups                                                            |
 | Reliability   | Reconnect by token, idempotent action IDs, row-locked mutations, stale-action rejection, autopilot for away players                                                                  |
 | Screens       | Shared **Table** view (public info only) and personal **My hand** view; one-time "continue on my phone" handoff link                                                                 |

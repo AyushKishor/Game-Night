@@ -18,6 +18,7 @@ import { ClueRushView } from "./clue-rush-view";
 import { MajorityView } from "./majority-view";
 import { MostLikelyView } from "./most-likely-view";
 import { NhieView } from "./nhie-view";
+import { PropertyDealView } from "./property-deal-view";
 import { QuickCategoriesView } from "./quick-categories-view";
 import { QuizView } from "./quiz-view";
 import { RankItView } from "./rank-it-view";
@@ -55,4 +56,5 @@ export const GAME_VIEWS: Record<string, AnyView> = {
   "quick-categories": QuickCategoriesView,
   "caption-clash": CaptionView,
   "clue-rush": ClueRushView,
+  "property-deal": PropertyDealView,
 };
