@@ -1,0 +1,8 @@
+{
+  "_note": "Small, family-friendly block list used for nicknames, answers and captions. Matching is whole-word and case-insensitive. Extend as needed.",
+  "blocked": [
+    "damn", "hell", "crap", "shit", "shitty", "fuck", "fucking", "fucker", "bitch", "bastard", "ass", "asshole",
+    "dick", "piss", "cock", "pussy", "slut", "whore", "wanker", "bollocks", "twat", "cunt", "nazi", "porn", "sex", "sexy",
+    "kill yourself", "kys", "retard", "idiot", "stupid", "loser"
+  ]
+}

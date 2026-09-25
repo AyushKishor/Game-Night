@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+@custom-variant hc (&:where([data-contrast="high"], [data-contrast="high"] *));
+
+:root {
+  color-scheme: dark;
+  --bg: #0b1020;
+  --bg-2: #0f1529;
+  --surface: #141b31;
+  --surface-2: #1b2440;
+  --surface-3: #232e52;
+  --border: #2c3860;
+  --text: #eef2ff;
+  --muted: #a3aed0;
+  --coral: #ff7a59;
+  --mint: #3ddc97;
+  --sky: #4cc9f0;
+  --amber: #ffc145;
+  --violet: #b69cff;
+  --rose: #ff7d91;
+  --card-face: #fdfcf7;
+  --card-red: #c8102e;
+  --card-black: #16181d;
+  --card-blue: #0b4fb3;
+  --card-green: #0a7a36;
+  --focus: #ffd166;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-coral: var(--coral);
+  --color-mint: var(--mint);
+  --color-sky: var(--sky);
+  --color-amber: var(--amber);
+  --color-violet: var(--violet);
+  --color-rose: var(--rose);
+  --color-card-face: var(--card-face);
+  --color-card-red: var(--card-red);
+  --color-card-black: var(--card-black);
+  --color-card-blue: var(--card-blue);
+  --color-card-green: var(--card-green);
+  --color-focus: var(--focus);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --shadow-soft: 0 10px 30px -12px rgb(0 0 0 / 0.55);
+  --shadow-card: 0 6px 16px -6px rgb(0 0 0 / 0.6), 0 1px 0 rgb(255 255 255 / 0.04) inset;
+}
+
+html {
+  font-size: clamp(15px, 0.55vw + 12.5px, 18px);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgb(76 201 240 / 0.08), transparent 60%),
+    radial-gradient(900px 500px at 110% 10%, rgb(255 122 89 / 0.07), transparent 60%),
+    var(--bg);
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: var(--font-sans);
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+::selection {
+  background: rgb(76 201 240 / 0.35);
+}
+
+[data-contrast="high"] {
+  --muted: #d3daf0;
+  --border: #6b7bb0;
+  --card-red: #b0001f;
+  --card-black: #000000;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+[data-motion="reduced"] *,
+[data-motion="reduced"] *::before,
+[data-motion="reduced"] *::after {
+  animation-duration: 0.01ms !important;
+  transition-duration: 0.01ms !important;
+}
+
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--surface-3) transparent;
+}
+
+.sr-only-focusable:not(:focus) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
