@@ -6,6 +6,7 @@ const GAMES = [
   { name: "Power Grab", phone: /Your cards/ },
   { name: "Code Words", phone: /Board/ },
   { name: "Texas Hold'em", phone: /Your hand/ },
+  { name: "Tycoon", phone: /Your properties/ },
 ];
 
 test("the classic games start with bots and show the right screens on phone and TV", async ({ browser }) => {

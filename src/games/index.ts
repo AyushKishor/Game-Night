@@ -28,6 +28,7 @@ import { switchGame } from "./switch";
 import { texasHoldem } from "./texas-holdem";
 import { trivia } from "./trivia";
 import { twentyOne } from "./twenty-one";
+import { tycoon } from "./tycoon";
 import { war } from "./war";
 
 /** Every fully playable game, in library order. */
@@ -45,6 +46,7 @@ export const GAMES: AnyGameModule[] = [
   rankIt,
   secretSignal,
   // Card games
+  tycoon,
   propertyDeal,
   colourClash,
   texasHoldem,

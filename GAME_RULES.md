@@ -2,7 +2,7 @@
 
 _Generated from the game modules by `npm run rules:generate`. The same rules are shown in the app._
 
-30 games are fully playable. Games marked **bots** can be filled with computer players.
+31 games are fully playable. Games marked **bots** can be filled with computer players.
 
 ## Party games
 
@@ -198,6 +198,25 @@ _Find the player who shares your secret symbol — one word at a time._ · 4–1
 **House rules:** Sip mode (adults only) — The screen calls out who takes a sip each round — any drink works. Please drink responsibly.
 
 ## Card games
+
+### Tycoon
+
+_Monopoly rules: buy the town, build hotels, bankrupt your friends._ · 2–6 players · 30–90 min · bots
+
+**Goal:** Be the last player standing — or the richest when time runs out.
+
+1. Everyone starts with $1500. Roll two dice and move; passing GO pays $200. Doubles roll again, but three doubles in a row sends you to Jail.
+2. Land on an unowned property to buy it. If you pass, it goes to a sealed-bid auction where everyone bids from their phone.
+3. Land on someone else's property and pay rent. Owning a full colour set doubles the rent, and houses and hotels make it huge. Stations and utilities pay more the more of them you own.
+4. On your turn you can build houses evenly on full sets (5 houses = hotel), sell buildings back for half, mortgage properties for half their price, and trade with other players.
+5. Chance and Treasure Chest cards can pay you, cost you, move you or throw you in Jail. In Jail: pay $50, use a Get Out of Jail Free card, or try to roll doubles (you pay and leave on the third try).
+6. Can't pay? Sell buildings and mortgage to raise the cash. If you still can't, you're bankrupt and your stuff goes to whoever you owed.
+
+**Scoring:** Net worth: cash plus property prices (half if mortgaged) plus what you paid for buildings.
+
+**Ending & ties:** The game ends when only one player is left, or after the set number of rounds — then the richest wins.
+
+**House rules:** Auctions — Unbought properties go to a sealed-bid auction.; Free Parking jackpot — Taxes and fines pile up in the middle — land on Free Parking to grab them.
 
 ### Property Deal
 

@@ -23,7 +23,7 @@ test("Property Deal: phones see their own hand, bank a card, play a property and
   const first = hostHand.getByRole("button").first();
   await first.click();
   const choice = host
-    .getByRole("button", { name: /^(Bank it|Brown|Light Blue|Pink|Orange|Red|Yellow|Green|Dark Blue|Railroad|Utility)/ })
+    .getByRole("button", { name: /^(Bank it|(Brown|Light Blue|Pink|Orange|Red|Yellow|Green|Dark Blue|Railroad|Utility) \(\d)/ })
     .first();
   await choice.click();
   await expect(host.getByText(/2 plays left/)).toBeVisible();

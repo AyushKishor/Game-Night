@@ -22,6 +22,7 @@ import { MajorityView } from "./majority-view";
 import { MostLikelyView } from "./most-likely-view";
 import { NhieView } from "./nhie-view";
 import { PowerGrabView } from "./power-grab-view";
+import { TycoonView } from "./tycoon-view";
 import { PropertyDealView } from "./property-deal-view";
 import { QuickCategoriesView } from "./quick-categories-view";
 import { QuizView } from "./quiz-view";
@@ -65,4 +66,5 @@ export const GAME_VIEWS: Record<string, AnyView> = {
   "power-grab": PowerGrabView,
   "code-words": CodeWordsView,
   "texas-holdem": HoldemView,
+  tycoon: TycoonView,
 };
