@@ -94,7 +94,7 @@ export const mostLikely: GameModule<MostLikelyState, Action> = {
   setup(players, ctx) {
     const classic = ctx.rng.shuffle(ctx.content.mostLikely.classic);
     const spicy = ctx.rng.shuffle(ctx.content.mostLikely.spicy);
-    const nSpicy = (ctx.config.houseRules.spicy ?? true) ? Math.min(spicy.length, Math.ceil((ctx.config.rounds * 2) / 3)) : 0;
+    const nSpicy = (ctx.config.houseRules.spicy ?? true) ? Math.min(spicy.length, ctx.config.rounds) : 0;
     const prompts = ctx.rng.shuffle([...spicy.slice(0, nSpicy), ...classic.slice(0, ctx.config.rounds - nSpicy)]);
     return {
       players,

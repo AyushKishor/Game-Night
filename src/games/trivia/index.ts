@@ -31,8 +31,8 @@ export const trivia = createQuizGame(
     const allowed = { easy: [1, 2], normal: [1, 2, 3], hard: [2, 3] }[ctx.config.difficulty];
     const general = ctx.rng.shuffle(ctx.content.trivia.questions.filter((q) => allowed.includes(q.d)));
     const spicy = ctx.rng.shuffle(ctx.content.triviaAfterDark.questions.filter((q) => allowed.includes(q.d)));
-    // Spicy on: about two thirds After Dark questions, the rest general knowledge.
-    const nSpicy = (ctx.config.houseRules.spicy ?? true) ? Math.min(spicy.length, Math.ceil((count * 2) / 3)) : 0;
+    // Spicy on: about three quarters After Dark questions, the rest general knowledge.
+    const nSpicy = (ctx.config.houseRules.spicy ?? true) ? Math.min(spicy.length, Math.ceil((count * 3) / 4)) : 0;
     const picked = ctx.rng.shuffle([...spicy.slice(0, nSpicy), ...general.slice(0, count - nSpicy)]);
     return picked.map((q): QuizQuestion => {
       const choices = ctx.rng.shuffle([q.a, ...q.w]);

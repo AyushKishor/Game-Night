@@ -232,10 +232,10 @@ All prompts are original and stored as JSON in `src/content/`, validated with Zo
 | `caption-clash.json`        | 102 scenarios                                        |
 | `trivia.json`               | 148 questions, 3 difficulty levels                   |
 | `trivia-after-dark.json`    | 81 adults-only questions (drinks, nightlife, dating) |
-| `never-have-i-ever.json`    | 96 prompts                                           |
-| `majority-rules-spicy.json` | 50 spicy would-you-rather questions                  |
+| `never-have-i-ever.json`    | 100 prompts                                          |
+| `majority-rules-spicy.json` | 60 spicy would-you-rather questions                  |
 | `emoji-movies.json`         | 86 emoji puzzles (films and phrases)                 |
-| `most-likely.json`          | 60 classic + 45 spicy prompts                        |
+| `most-likely.json`          | 100 spicy + 45 milder prompts                        |
 | `clue-rush.json`            | 120 word cards with forbidden words                  |
 | `secret-signal.json`        | 40 symbols with bot hints                            |
 | `moderation.json`           | optional word filter                                 |

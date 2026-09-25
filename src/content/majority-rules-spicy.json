@@ -1,254 +1,304 @@
 {
  "questions": [
   {
-   "q": "Would you rather\u2026",
-   "a": "Read your partner's texts",
-   "b": "Have them read yours"
+   "q": "Would you rather…",
+   "a": "Hook up with your ex",
+   "b": "Your ex's best friend"
   },
   {
-   "q": "Would you rather\u2026",
-   "a": "Always be 10% drunk",
+   "q": "Would you rather…",
+   "a": "Have your browser history made public",
+   "b": "Your camera roll"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Only hook up in the dark forever",
+   "b": "Only with the lights fully on"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Your parents read your texts",
+   "b": "Your ex reads your diary"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Date someone amazing in bed but boring",
+   "b": "Hilarious but bad in bed"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Walk of shame past your parents",
+   "b": "Past your boss"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Accidentally send a nude to your mum",
+   "b": "To your boss"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Kiss your worst ex again",
+   "b": "Your least attractive friend"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Never have sex again",
    "b": "Never drink again"
   },
   {
-   "q": "Better first date?",
-   "a": "Cocktail bar",
-   "b": "Mini golf"
+   "q": "Would you rather…",
+   "a": "Your partner's ex is way hotter than you",
+   "b": "Way richer"
   },
   {
-   "q": "Would you rather\u2026",
-   "a": "Date someone way hotter than you",
-   "b": "Date someone way funnier than you"
+   "q": "Would you rather…",
+   "a": "Be caught mid-hookup by your roommate",
+   "b": "Your parents"
   },
   {
-   "q": "Would you rather\u2026",
-   "a": "Your ex at your wedding",
-   "b": "Your boss on your honeymoon"
+   "q": "Would you rather…",
+   "a": "Only date people older than your parents",
+   "b": "People who still live with theirs"
   },
   {
-   "q": "Worse move?",
-   "a": "Drunk-texting your ex",
-   "b": "Drunk-texting your boss"
+   "q": "Would you rather…",
+   "a": "Your one-night stand turns out to be your new boss",
+   "b": "Your cousin's partner"
   },
   {
-   "q": "Would you rather\u2026",
-   "a": "Relive your worst hangover",
-   "b": "Relive your worst date"
-  },
-  {
-   "q": "Pregame drink of choice?",
-   "a": "Shots",
-   "b": "Cocktails"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Be the drunkest one at the party",
-   "b": "Be the only sober one"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Have your search history leaked",
-   "b": "Have your camera roll leaked"
-  },
-  {
-   "q": "Red flag or dealbreaker?",
-   "a": "Rude to waiters",
-   "b": "Never replies to texts"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Kiss a stranger at midnight",
-   "b": "Kiss no one at midnight"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Go on a date with your ex's best friend",
-   "b": "Your best friend dates your ex"
-  },
-  {
-   "q": "Worse?",
-   "a": "Showing up overdressed",
-   "b": "Showing up underdressed"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Have a terrible kisser",
-   "b": "Have a terrible texter"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Get a text from your ex at 2 a.m.",
-   "b": "Get no texts all night"
-  },
-  {
-   "q": "Better night out?",
-   "a": "Club till 5 a.m.",
-   "b": "House party with games"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Karaoke with a crowd",
-   "b": "Dance-off with your crush"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Always pay the bill",
-   "b": "Never be allowed to pay"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Date someone with no sense of humour",
-   "b": "Date someone with no ambition"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Wake up with a bad tattoo",
-   "b": "Wake up married in Vegas"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Your parents see your dating profile",
-   "b": "Your boss sees your dating profile"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Be terrible at flirting",
-   "b": "Be terrible at dancing"
-  },
-  {
-   "q": "Better hangover cure?",
-   "a": "Greasy breakfast",
-   "b": "Sleep all day"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Tell your crush you like them",
-   "b": "Never find out if they like you"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Give up alcohol for a year",
-   "b": "Give up dating apps for a year"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Have every drunk thought posted online",
-   "b": "Have every sober thought read aloud"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Always know when someone's lying",
-   "b": "Always get away with lying"
-  },
-  {
-   "q": "Worse first date?",
-   "a": "They bring their mum",
-   "b": "They bring their ex"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Hook up with your celebrity crush once",
-   "b": "Date a normal person you really like"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Get caught singing in the shower",
-   "b": "Get caught talking to yourself"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Lose your phone for a week",
-   "b": "Lose your wallet for a week"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Be famous for something embarrassing",
-   "b": "Never be famous"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Every ex shows up to your birthday",
-   "b": "No one shows up"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Always have to say what you think",
-   "b": "Never be able to speak your mind"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Win a dance-off",
-   "b": "Win a drinking game"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Relationship with no fights",
-   "b": "Relationship with amazing make-ups"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Tequila forever",
-   "b": "Vodka forever"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Your crush sees your worst photo",
-   "b": "Your crush hears your worst voice note"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Go out every night for a month",
-   "b": "Stay in every night for a month"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Slow-dance with your boss",
-   "b": "Twerk in front of your grandma"
-  },
-  {
-   "q": "Worse?",
-   "a": "Being left on read",
-   "b": "Getting a 'k' reply"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Marry for love and be broke",
-   "b": "Marry for money and be bored"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Always sneeze when you lie",
-   "b": "Always laugh when you're nervous"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Be set up by your mum",
-   "b": "Be set up by your worst friend"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Have the group chat roast you",
-   "b": "Roast the group chat"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Never be able to flirt again",
-   "b": "Never be able to use emojis again"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Take a shot of hot sauce",
-   "b": "Take a shot of pickle juice"
-  },
-  {
-   "q": "Would you rather\u2026",
-   "a": "Confess your biggest secret to this room",
+   "q": "Would you rather…",
+   "a": "Reveal your body count to this room",
    "b": "Take three shots"
   },
   {
-   "q": "Would you rather\u2026",
-   "a": "Relive your most awkward kiss",
-   "b": "Relive your most awkward breakup"
+   "q": "Would you rather…",
+   "a": "Have terrible chemistry with someone perfect",
+   "b": "Crazy chemistry with a red flag"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Be the side piece",
+   "b": "Have one"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Your kiss gets a rating on a public app",
+   "b": "Your texts get read out at your wedding"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Go on a date with your celebrity crush who's rude",
+   "b": "A nobody who's perfect"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Wake up hungover next to your ex",
+   "b": "Wake up in a stranger's bathtub"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Sleep with someone who sounds like a cartoon character",
+   "b": "Someone who narrates everything"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Your mum finds your \"toy\" drawer",
+   "b": "Your dad finds your dating profile"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Every ex shows up to your wedding",
+   "b": "Your wedding gets livestreamed"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Know every thought your date has",
+   "b": "Have them know yours"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Get friend-zoned by your crush",
+   "b": "Date them and it's awful"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Hook up at a wedding",
+   "b": "At a funeral reception"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Your first kiss was recorded",
+   "b": "Your first time was live-tweeted"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Date someone with no filter",
+   "b": "Someone with no secrets"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Have your drunk thoughts subtitled above your head",
+   "b": "Your sober ones"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Swap phones with the person on your left for an hour",
+   "b": "Do a shot every minute for five minutes"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Kiss someone in this room",
+   "b": "Read out your last five texts"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Your ex gets hotter every year",
+   "b": "You never get over them"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Only hook up on holiday",
+   "b": "Only on your birthday"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Always be too drunk to remember",
+   "b": "Always be too sober to forget"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Have a great first date and terrible sex",
+   "b": "A terrible first date and great sex"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Your partner stays friends with their ex",
+   "b": "You do"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Get caught sexting in a meeting",
+   "b": "Your ringtone is a moan in church"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Let your friends pick your next partner",
+   "b": "Let your parents"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Hook up with a famous person and never tell",
+   "b": "Lie that you did and everyone believes you"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Get a text from your ex at 3 a.m.",
+   "b": "A text from your boss at 3 a.m."
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Be terrible in bed and know it",
+   "b": "Terrible and have no idea"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Only kiss people with bad breath",
+   "b": "People who dribble"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Relive your worst hookup",
+   "b": "Your worst breakup"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Your entire search history is read aloud",
+   "b": "Your last hookup reviews you publicly"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Get stuck in a lift with your ex",
+   "b": "With your ex's new partner"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Have sex on a beach (the sand though)",
+   "b": "In a tent in the rain"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Date a DJ",
+   "b": "A footballer"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Your crush hears your worst voice note",
+   "b": "Sees your worst photo"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Accidentally like your ex's photo from 2016",
+   "b": "Accidentally video-call them"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Have a hickey on your forehead",
+   "b": "A love bite on your hand for a month"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Swap body counts with the person on your right",
+   "b": "Swap dating histories"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Tell the group your most embarrassing hookup",
+   "b": "Do a dare they pick"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Every kiss is on the big screen at a sports game",
+   "b": "Every text is read by your gran"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Your ex marries your best friend",
+   "b": "Your sibling"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Be in a throuple",
+   "b": "In an open relationship"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Get a matching tattoo with your partner",
+   "b": "With your best friend"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Be single forever with amazing friends",
+   "b": "In love with no friends"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Your one-night stand calls you \"mate\" after",
+   "b": "\"bro\""
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Take a shot of hot sauce",
+   "b": "Send \"I miss you\" to your last ex"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Everyone in this room knows your body count",
+   "b": "Your salary"
+  },
+  {
+   "q": "Would you rather…",
+   "a": "Leave this party now with a hot stranger",
+   "b": "Stay and finish the game"
   }
  ]
 }

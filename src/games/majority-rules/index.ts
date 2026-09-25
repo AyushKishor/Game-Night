@@ -95,7 +95,7 @@ export const majorityRules: GameModule<MajorityState, Action> = {
       const classic = ctx.rng.shuffle(ctx.content.majorityRules.questions);
       if (!(ctx.config.houseRules.spicy ?? true)) return classic.slice(0, ctx.config.rounds);
       const spicy = ctx.rng.shuffle(ctx.content.majoritySpicy.questions);
-      const nSpicy = Math.min(spicy.length, Math.ceil((ctx.config.rounds * 2) / 3));
+      const nSpicy = Math.min(spicy.length, ctx.config.rounds);
       return ctx.rng.shuffle([...spicy.slice(0, nSpicy), ...classic.slice(0, ctx.config.rounds - nSpicy)]);
     })(),
     round: 1,

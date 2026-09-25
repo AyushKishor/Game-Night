@@ -46,7 +46,7 @@ const triviaSchema = z.object({
     .min(100),
 });
 const emojiSchema = z.object({ puzzles: z.array(z.object({ cat: z.string(), e: z.string().min(1), a: z.string() })).min(60) });
-const mostLikelySchema = z.object({ classic: z.array(z.string()).min(50), spicy: z.array(z.string()).min(30) });
+const mostLikelySchema = z.object({ classic: z.array(z.string()).min(30), spicy: z.array(z.string()).min(80) });
 const clueRushSchema = z.object({ cards: z.array(z.object({ word: z.string(), taboo: z.array(z.string()).min(2) })).min(100) });
 const botCaptionsSchema = z.object({ captions: z.array(z.string()).min(10) });
 
