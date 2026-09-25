@@ -93,6 +93,8 @@ export interface RoundSummary {
   title: string;
   lines: string[];
   scores: Record<PlayerId, number>;
+  /** Sip mode: who takes a sip this round. Defaults to players who scored 0. */
+  sips?: PlayerId[];
 }
 
 export interface GameModule<S = unknown, A extends { type: string } = { type: string }> {

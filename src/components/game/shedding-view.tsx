@@ -139,12 +139,12 @@ export function SheddingView({ pub, priv, mode, room, game, me, names, send }: G
           <span className="font-semibold">Your hand · {priv.hand.length} cards</span>
           {myTurn && <span>Playable cards are underlined in green</span>}
         </div>
-        <div className="scrollbar-thin -mx-1 flex gap-2 overflow-x-auto px-1 pb-3 pt-4">
+        <div className="flex flex-wrap justify-center gap-2 pb-3 pt-4">
           {priv.hand.map((c) => (
             <PlayingCard
               key={c}
               card={c}
-              size="lg"
+              size="md"
               playable={myTurn && playable.has(c)}
               disabled={!myTurn || !playable.has(c)}
               hint={myTurn && playable.has(c) ? "playable" : undefined}

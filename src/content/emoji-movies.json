@@ -1,0 +1,435 @@
+{
+ "_note": "Emoji clues for well-known film titles and everyday phrases. Titles are referenced only as trivia answers.",
+ "puzzles": [
+  {
+   "cat": "Movie",
+   "e": "🦁👑",
+   "a": "The Lion King"
+  },
+  {
+   "cat": "Movie",
+   "e": "🚢🧊💔",
+   "a": "Titanic"
+  },
+  {
+   "cat": "Movie",
+   "e": "🦈🌊🏖️",
+   "a": "Jaws"
+  },
+  {
+   "cat": "Movie",
+   "e": "👽📞🏠",
+   "a": "E.T. the Extra-Terrestrial"
+  },
+  {
+   "cat": "Movie",
+   "e": "🦖🏝️🚙",
+   "a": "Jurassic Park"
+  },
+  {
+   "cat": "Movie",
+   "e": "🧊👸❄️",
+   "a": "Frozen"
+  },
+  {
+   "cat": "Movie",
+   "e": "🤠🚀🧸",
+   "a": "Toy Story"
+  },
+  {
+   "cat": "Movie",
+   "e": "🐠🔍",
+   "a": "Finding Nemo"
+  },
+  {
+   "cat": "Movie",
+   "e": "🏠🎈👴",
+   "a": "Up"
+  },
+  {
+   "cat": "Movie",
+   "e": "🤖🌱🚀",
+   "a": "WALL-E"
+  },
+  {
+   "cat": "Movie",
+   "e": "🐀👨‍🍳🇫🇷",
+   "a": "Ratatouille"
+  },
+  {
+   "cat": "Movie",
+   "e": "🧙‍♂️💍🌋",
+   "a": "The Lord of the Rings"
+  },
+  {
+   "cat": "Movie",
+   "e": "⚡👓🧹",
+   "a": "Harry Potter"
+  },
+  {
+   "cat": "Movie",
+   "e": "🕷️🧑",
+   "a": "Spider-Man"
+  },
+  {
+   "cat": "Movie",
+   "e": "🦇🧑‍🦱🌃",
+   "a": "Batman"
+  },
+  {
+   "cat": "Movie",
+   "e": "👻🚫🔫",
+   "a": "Ghostbusters"
+  },
+  {
+   "cat": "Movie",
+   "e": "⏰🚗⚡🔙",
+   "a": "Back to the Future"
+  },
+  {
+   "cat": "Movie",
+   "e": "🏴‍☠️🌊🦜",
+   "a": "Pirates of the Caribbean"
+  },
+  {
+   "cat": "Movie",
+   "e": "🧜‍♀️🐚🦀",
+   "a": "The Little Mermaid"
+  },
+  {
+   "cat": "Movie",
+   "e": "🌹👸🐻",
+   "a": "Beauty and the Beast"
+  },
+  {
+   "cat": "Movie",
+   "e": "🍫🏭🎫",
+   "a": "Charlie and the Chocolate Factory"
+  },
+  {
+   "cat": "Movie",
+   "e": "🕶️💊🐇",
+   "a": "The Matrix"
+  },
+  {
+   "cat": "Movie",
+   "e": "🏃‍♂️🍫🍤",
+   "a": "Forrest Gump"
+  },
+  {
+   "cat": "Movie",
+   "e": "👸🍎💤",
+   "a": "Snow White"
+  },
+  {
+   "cat": "Movie",
+   "e": "🐼🥋",
+   "a": "Kung Fu Panda"
+  },
+  {
+   "cat": "Movie",
+   "e": "🦸‍♂️🦸‍♀️🏠",
+   "a": "The Incredibles"
+  },
+  {
+   "cat": "Movie",
+   "e": "👹🏰🫏",
+   "a": "Shrek"
+  },
+  {
+   "cat": "Movie",
+   "e": "🐘👂🎪",
+   "a": "Dumbo"
+  },
+  {
+   "cat": "Movie",
+   "e": "🚗⚡🏁",
+   "a": "Cars"
+  },
+  {
+   "cat": "Movie",
+   "e": "🌌⚔️🌟",
+   "a": "Star Wars"
+  },
+  {
+   "cat": "Movie",
+   "e": "🦍🏙️✈️",
+   "a": "King Kong"
+  },
+  {
+   "cat": "Movie",
+   "e": "🧊🦣🐿️",
+   "a": "Ice Age"
+  },
+  {
+   "cat": "Movie",
+   "e": "😭😡😱🤢😊🧠",
+   "a": "Inside Out"
+  },
+  {
+   "cat": "Movie",
+   "e": "💀🎸🌼🇲🇽",
+   "a": "Coco"
+  },
+  {
+   "cat": "Movie",
+   "e": "🌊🛶🐓🌺",
+   "a": "Moana"
+  },
+  {
+   "cat": "Movie",
+   "e": "👨‍🚀🥔🔴",
+   "a": "The Martian"
+  },
+  {
+   "cat": "Movie",
+   "e": "🌪️🏠👠🦁",
+   "a": "The Wizard of Oz"
+  },
+  {
+   "cat": "Movie",
+   "e": "🎩🐇🃏👧",
+   "a": "Alice in Wonderland"
+  },
+  {
+   "cat": "Movie",
+   "e": "🧞‍♂️🪔🐒",
+   "a": "Aladdin"
+  },
+  {
+   "cat": "Movie",
+   "e": "👦🏻🏠🎄🚨",
+   "a": "Home Alone"
+  },
+  {
+   "cat": "Movie",
+   "e": "🥊🏃‍♂️🥚",
+   "a": "Rocky"
+  },
+  {
+   "cat": "Movie",
+   "e": "🌽👻⚾",
+   "a": "Field of Dreams"
+  },
+  {
+   "cat": "Movie",
+   "e": "🍝🐶💕",
+   "a": "Lady and the Tramp"
+  },
+  {
+   "cat": "Movie",
+   "e": "🦌👑🌲",
+   "a": "Bambi"
+  },
+  {
+   "cat": "Movie",
+   "e": "🤥🪵👃",
+   "a": "Pinocchio"
+  },
+  {
+   "cat": "Movie",
+   "e": "👩‍🚀🌌🕳️⏳",
+   "a": "Interstellar"
+  },
+  {
+   "cat": "Movie",
+   "e": "💤🌀🏙️",
+   "a": "Inception"
+  },
+  {
+   "cat": "Movie",
+   "e": "🐝🎬",
+   "a": "Bee Movie"
+  },
+  {
+   "cat": "Movie",
+   "e": "🍌💛👓",
+   "a": "Minions"
+  },
+  {
+   "cat": "Movie",
+   "e": "🦕🥚🏙️",
+   "a": "Godzilla"
+  },
+  {
+   "cat": "Movie",
+   "e": "👸🐸💋",
+   "a": "The Princess and the Frog"
+  },
+  {
+   "cat": "Movie",
+   "e": "🏹👧🔥",
+   "a": "The Hunger Games"
+  },
+  {
+   "cat": "Movie",
+   "e": "🧛‍♂️🌙🐺💘",
+   "a": "Twilight"
+  },
+  {
+   "cat": "Movie",
+   "e": "🎤👑🌈",
+   "a": "Bohemian Rhapsody"
+  },
+  {
+   "cat": "Movie",
+   "e": "🕺🌃🎶",
+   "a": "Saturday Night Fever"
+  },
+  {
+   "cat": "Movie",
+   "e": "👨‍👦🐠🐢",
+   "a": "Finding Dory"
+  },
+  {
+   "cat": "Movie",
+   "e": "🦖🦴⛺",
+   "a": "The Land Before Time"
+  },
+  {
+   "cat": "Movie",
+   "e": "🚀👨‍🚀🌕🆘",
+   "a": "Apollo 13"
+  },
+  {
+   "cat": "Phrase",
+   "e": "🍰🚶‍♂️",
+   "a": "Piece of cake"
+  },
+  {
+   "cat": "Phrase",
+   "e": "🐱👜🔓",
+   "a": "Let the cat out of the bag"
+  },
+  {
+   "cat": "Phrase",
+   "e": "🌧️🐱🐶",
+   "a": "Raining cats and dogs"
+  },
+  {
+   "cat": "Phrase",
+   "e": "🥚🧺1️⃣",
+   "a": "All your eggs in one basket"
+  },
+  {
+   "cat": "Phrase",
+   "e": "🐘🏠",
+   "a": "Elephant in the room"
+  },
+  {
+   "cat": "Phrase",
+   "e": "💔🧊",
+   "a": "Break the ice"
+  },
+  {
+   "cat": "Phrase",
+   "e": "🌙🔵",
+   "a": "Once in a blue moon"
+  },
+  {
+   "cat": "Phrase",
+   "e": "⏰💰",
+   "a": "Time is money"
+  },
+  {
+   "cat": "Phrase",
+   "e": "🐦🐦🪨1️⃣",
+   "a": "Kill two birds with one stone"
+  },
+  {
+   "cat": "Phrase",
+   "e": "🍎👁️",
+   "a": "Apple of my eye"
+  },
+  {
+   "cat": "Phrase",
+   "e": "🙊🙉🙈",
+   "a": "See no evil, hear no evil, speak no evil"
+  },
+  {
+   "cat": "Phrase",
+   "e": "🌳🐶🔊",
+   "a": "Barking up the wrong tree"
+  },
+  {
+   "cat": "Phrase",
+   "e": "🐎🐎🔒",
+   "a": "Hold your horses"
+  },
+  {
+   "cat": "Phrase",
+   "e": "🦵🦴💔🍀",
+   "a": "Break a leg"
+  },
+  {
+   "cat": "Phrase",
+   "e": "🥶🦶",
+   "a": "Cold feet"
+  },
+  {
+   "cat": "Phrase",
+   "e": "🤐💋",
+   "a": "Zip your lips"
+  },
+  {
+   "cat": "Phrase",
+   "e": "🔥🏠",
+   "a": "Get on like a house on fire"
+  },
+  {
+   "cat": "Phrase",
+   "e": "🧠⛈️",
+   "a": "Brainstorm"
+  },
+  {
+   "cat": "Phrase",
+   "e": "🥔🛋️",
+   "a": "Couch potato"
+  },
+  {
+   "cat": "Phrase",
+   "e": "🌊🛶🚫🏓",
+   "a": "Up the creek without a paddle"
+  },
+  {
+   "cat": "Phrase",
+   "e": "🐓🥚❓",
+   "a": "Chicken or the egg"
+  },
+  {
+   "cat": "Phrase",
+   "e": "👀🍭",
+   "a": "Eye candy"
+  },
+  {
+   "cat": "Phrase",
+   "e": "🍋🍋🥤",
+   "a": "When life gives you lemons, make lemonade"
+  },
+  {
+   "cat": "Phrase",
+   "e": "🐟🌊🚫",
+   "a": "A fish out of water"
+  },
+  {
+   "cat": "Phrase",
+   "e": "💤🐕🐕",
+   "a": "Let sleeping dogs lie"
+  },
+  {
+   "cat": "Phrase",
+   "e": "🧈🪰",
+   "a": "Butterflies in your stomach"
+  },
+  {
+   "cat": "Phrase",
+   "e": "🍞🧈",
+   "a": "Bread and butter"
+  },
+  {
+   "cat": "Phrase",
+   "e": "🥧🌌",
+   "a": "Pie in the sky"
+  }
+ ]
+}

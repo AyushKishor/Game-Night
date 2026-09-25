@@ -1,9 +1,58 @@
 import type { AnyGameModule } from "@/lib/engine/types";
+import { bluff } from "./bluff";
+import { captionClash } from "./caption-clash";
+import { clueRush } from "./clue-rush";
 import { crazyEights } from "./crazy-eights";
+import { emojiMovies } from "./emoji-movies";
+import { goFish } from "./go-fish";
+import { golf } from "./golf";
+import { hearts } from "./hearts";
+import { higherLower } from "./higher-lower";
+import { majorityRules } from "./majority-rules";
+import { memory } from "./memory";
+import { mostLikely } from "./most-likely";
+import { oldMaid } from "./old-maid";
+import { president } from "./president";
+import { quickCategories } from "./quick-categories";
+import { rankIt } from "./rank-it";
+import { secretSignal } from "./secret-signal";
+import { sevens } from "./sevens";
+import { snap } from "./snap";
+import { spades } from "./spades";
 import { switchGame } from "./switch";
+import { trivia } from "./trivia";
+import { twentyOne } from "./twenty-one";
+import { war } from "./war";
 
-/** Every fully playable game. Order is the library order. */
-export const GAMES: AnyGameModule[] = [crazyEights, switchGame];
+/** Every fully playable game, in library order. */
+export const GAMES: AnyGameModule[] = [
+  // Party games
+  trivia,
+  emojiMovies,
+  mostLikely,
+  clueRush,
+  majorityRules,
+  quickCategories,
+  captionClash,
+  rankIt,
+  secretSignal,
+  // Card games
+  crazyEights,
+  goFish,
+  oldMaid,
+  war,
+  snap,
+  memory,
+  hearts,
+  spades,
+  president,
+  bluff,
+  sevens,
+  golf,
+  higherLower,
+  twentyOne,
+  switchGame,
+];
 
 /** Planned games that are not playable yet. Never offered as startable. */
 export const COMING_SOON: { id: string; name: string; tagline: string; category: "card" | "party" }[] = [];

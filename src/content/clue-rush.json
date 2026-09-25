@@ -1,0 +1,1083 @@
+{
+ "cards": [
+  {
+   "word": "Pizza",
+   "taboo": [
+    "cheese",
+    "Italy",
+    "slice",
+    "oven"
+   ]
+  },
+  {
+   "word": "Beach",
+   "taboo": [
+    "sand",
+    "sea",
+    "sun",
+    "waves"
+   ]
+  },
+  {
+   "word": "Guitar",
+   "taboo": [
+    "strings",
+    "music",
+    "play",
+    "rock"
+   ]
+  },
+  {
+   "word": "Birthday",
+   "taboo": [
+    "cake",
+    "party",
+    "candles",
+    "age"
+   ]
+  },
+  {
+   "word": "Elephant",
+   "taboo": [
+    "trunk",
+    "big",
+    "grey",
+    "ears"
+   ]
+  },
+  {
+   "word": "Airport",
+   "taboo": [
+    "plane",
+    "fly",
+    "travel",
+    "gate"
+   ]
+  },
+  {
+   "word": "Snowman",
+   "taboo": [
+    "snow",
+    "winter",
+    "carrot",
+    "cold"
+   ]
+  },
+  {
+   "word": "Doctor",
+   "taboo": [
+    "hospital",
+    "sick",
+    "nurse",
+    "medicine"
+   ]
+  },
+  {
+   "word": "Rainbow",
+   "taboo": [
+    "colours",
+    "rain",
+    "sky",
+    "arc"
+   ]
+  },
+  {
+   "word": "Coffee",
+   "taboo": [
+    "drink",
+    "cup",
+    "caffeine",
+    "morning"
+   ]
+  },
+  {
+   "word": "Football",
+   "taboo": [
+    "ball",
+    "goal",
+    "kick",
+    "team"
+   ]
+  },
+  {
+   "word": "Library",
+   "taboo": [
+    "books",
+    "read",
+    "quiet",
+    "borrow"
+   ]
+  },
+  {
+   "word": "Volcano",
+   "taboo": [
+    "lava",
+    "erupt",
+    "mountain",
+    "hot"
+   ]
+  },
+  {
+   "word": "Pirate",
+   "taboo": [
+    "ship",
+    "treasure",
+    "parrot",
+    "sea"
+   ]
+  },
+  {
+   "word": "Dentist",
+   "taboo": [
+    "teeth",
+    "drill",
+    "mouth",
+    "clean"
+   ]
+  },
+  {
+   "word": "Wedding",
+   "taboo": [
+    "bride",
+    "marry",
+    "ring",
+    "groom"
+   ]
+  },
+  {
+   "word": "Camping",
+   "taboo": [
+    "tent",
+    "outdoors",
+    "fire",
+    "sleep"
+   ]
+  },
+  {
+   "word": "Penguin",
+   "taboo": [
+    "bird",
+    "ice",
+    "black",
+    "waddle"
+   ]
+  },
+  {
+   "word": "Umbrella",
+   "taboo": [
+    "rain",
+    "wet",
+    "open",
+    "cover"
+   ]
+  },
+  {
+   "word": "Rollercoaster",
+   "taboo": [
+    "ride",
+    "theme park",
+    "fast",
+    "loop"
+   ]
+  },
+  {
+   "word": "Chocolate",
+   "taboo": [
+    "sweet",
+    "cocoa",
+    "bar",
+    "brown"
+   ]
+  },
+  {
+   "word": "Moon",
+   "taboo": [
+    "night",
+    "space",
+    "sky",
+    "crater"
+   ]
+  },
+  {
+   "word": "Sandwich",
+   "taboo": [
+    "bread",
+    "filling",
+    "lunch",
+    "slice"
+   ]
+  },
+  {
+   "word": "Karaoke",
+   "taboo": [
+    "sing",
+    "microphone",
+    "song",
+    "bar"
+   ]
+  },
+  {
+   "word": "Selfie",
+   "taboo": [
+    "photo",
+    "phone",
+    "camera",
+    "face"
+   ]
+  },
+  {
+   "word": "Hangover",
+   "taboo": [
+    "headache",
+    "drink",
+    "morning",
+    "sick"
+   ]
+  },
+  {
+   "word": "Toothbrush",
+   "taboo": [
+    "teeth",
+    "paste",
+    "brush",
+    "bathroom"
+   ]
+  },
+  {
+   "word": "Ghost",
+   "taboo": [
+    "spooky",
+    "haunt",
+    "sheet",
+    "boo"
+   ]
+  },
+  {
+   "word": "Zombie",
+   "taboo": [
+    "dead",
+    "brains",
+    "walk",
+    "undead"
+   ]
+  },
+  {
+   "word": "Dragon",
+   "taboo": [
+    "fire",
+    "wings",
+    "fly",
+    "myth"
+   ]
+  },
+  {
+   "word": "Robot",
+   "taboo": [
+    "machine",
+    "metal",
+    "computer",
+    "beep"
+   ]
+  },
+  {
+   "word": "Magician",
+   "taboo": [
+    "trick",
+    "rabbit",
+    "hat",
+    "wand"
+   ]
+  },
+  {
+   "word": "Astronaut",
+   "taboo": [
+    "space",
+    "rocket",
+    "moon",
+    "helmet"
+   ]
+  },
+  {
+   "word": "Fireworks",
+   "taboo": [
+    "bang",
+    "sky",
+    "night",
+    "colours"
+   ]
+  },
+  {
+   "word": "Picnic",
+   "taboo": [
+    "basket",
+    "park",
+    "blanket",
+    "food"
+   ]
+  },
+  {
+   "word": "Barbecue",
+   "taboo": [
+    "grill",
+    "meat",
+    "summer",
+    "sausage"
+   ]
+  },
+  {
+   "word": "Treadmill",
+   "taboo": [
+    "run",
+    "gym",
+    "machine",
+    "exercise"
+   ]
+  },
+  {
+   "word": "Detective",
+   "taboo": [
+    "crime",
+    "clue",
+    "solve",
+    "police"
+   ]
+  },
+  {
+   "word": "Lighthouse",
+   "taboo": [
+    "light",
+    "sea",
+    "ships",
+    "tower"
+   ]
+  },
+  {
+   "word": "Hamster",
+   "taboo": [
+    "pet",
+    "wheel",
+    "small",
+    "rodent"
+   ]
+  },
+  {
+   "word": "Waterfall",
+   "taboo": [
+    "water",
+    "fall",
+    "river",
+    "cliff"
+   ]
+  },
+  {
+   "word": "Sunglasses",
+   "taboo": [
+    "eyes",
+    "sun",
+    "dark",
+    "wear"
+   ]
+  },
+  {
+   "word": "Passport",
+   "taboo": [
+    "travel",
+    "country",
+    "photo",
+    "border"
+   ]
+  },
+  {
+   "word": "Tattoo",
+   "taboo": [
+    "ink",
+    "skin",
+    "needle",
+    "design"
+   ]
+  },
+  {
+   "word": "Bicycle",
+   "taboo": [
+    "pedal",
+    "wheels",
+    "ride",
+    "bike"
+   ]
+  },
+  {
+   "word": "Microwave",
+   "taboo": [
+    "heat",
+    "kitchen",
+    "food",
+    "oven"
+   ]
+  },
+  {
+   "word": "Hotdog",
+   "taboo": [
+    "sausage",
+    "bun",
+    "mustard",
+    "dog"
+   ]
+  },
+  {
+   "word": "Popcorn",
+   "taboo": [
+    "cinema",
+    "corn",
+    "butter",
+    "pop"
+   ]
+  },
+  {
+   "word": "Alarm clock",
+   "taboo": [
+    "wake",
+    "morning",
+    "ring",
+    "time"
+   ]
+  },
+  {
+   "word": "Jellyfish",
+   "taboo": [
+    "sea",
+    "sting",
+    "tentacles"
+   ]
+  },
+  {
+   "word": "Superhero",
+   "taboo": [
+    "powers",
+    "cape",
+    "save",
+    "villain"
+   ]
+  },
+  {
+   "word": "Pillow fight",
+   "taboo": [
+    "feathers",
+    "bed",
+    "hit",
+    "sleepover"
+   ]
+  },
+  {
+   "word": "Traffic jam",
+   "taboo": [
+    "cars",
+    "stuck",
+    "road",
+    "slow"
+   ]
+  },
+  {
+   "word": "Blind date",
+   "taboo": [
+    "meet",
+    "stranger",
+    "romance",
+    "dinner"
+   ]
+  },
+  {
+   "word": "Group chat",
+   "taboo": [
+    "message",
+    "friends",
+    "phone",
+    "text"
+   ]
+  },
+  {
+   "word": "Sunburn",
+   "taboo": [
+    "red",
+    "skin",
+    "sun",
+    "burn"
+   ]
+  },
+  {
+   "word": "Bungee jump",
+   "taboo": [
+    "rope",
+    "fall",
+    "bridge",
+    "bounce"
+   ]
+  },
+  {
+   "word": "Vampire",
+   "taboo": [
+    "blood",
+    "bite",
+    "night",
+    "fangs"
+   ]
+  },
+  {
+   "word": "Pancake",
+   "taboo": [
+    "flip",
+    "syrup",
+    "breakfast",
+    "batter"
+   ]
+  },
+  {
+   "word": "Escalator",
+   "taboo": [
+    "stairs",
+    "moving",
+    "shop",
+    "up"
+   ]
+  },
+  {
+   "word": "Scarecrow",
+   "taboo": [
+    "field",
+    "crows",
+    "straw",
+    "farm"
+   ]
+  },
+  {
+   "word": "Mermaid",
+   "taboo": [
+    "tail",
+    "sea",
+    "fish",
+    "swim"
+   ]
+  },
+  {
+   "word": "Headphones",
+   "taboo": [
+    "music",
+    "ears",
+    "listen",
+    "sound"
+   ]
+  },
+  {
+   "word": "Snorkel",
+   "taboo": [
+    "swim",
+    "breathe",
+    "underwater",
+    "mask"
+   ]
+  },
+  {
+   "word": "Bouncer",
+   "taboo": [
+    "club",
+    "door",
+    "security",
+    "entry"
+   ]
+  },
+  {
+   "word": "Tequila",
+   "taboo": [
+    "shot",
+    "drink",
+    "lime",
+    "salt"
+   ]
+  },
+  {
+   "word": "Cocktail",
+   "taboo": [
+    "drink",
+    "glass",
+    "mix",
+    "bar"
+   ]
+  },
+  {
+   "word": "Hot tub",
+   "taboo": [
+    "water",
+    "bubbles",
+    "warm",
+    "relax"
+   ]
+  },
+  {
+   "word": "Last orders",
+   "taboo": [
+    "pub",
+    "bell",
+    "drink",
+    "closing"
+   ]
+  },
+  {
+   "word": "Kebab",
+   "taboo": [
+    "meat",
+    "late",
+    "skewer",
+    "night"
+   ]
+  },
+  {
+   "word": "Dance floor",
+   "taboo": [
+    "club",
+    "move",
+    "music",
+    "party"
+   ]
+  },
+  {
+   "word": "Tan lines",
+   "taboo": [
+    "sun",
+    "skin",
+    "swimsuit",
+    "beach"
+   ]
+  },
+  {
+   "word": "Speed dating",
+   "taboo": [
+    "minutes",
+    "single",
+    "meet",
+    "romance"
+   ]
+  },
+  {
+   "word": "Rom-com",
+   "taboo": [
+    "film",
+    "love",
+    "funny",
+    "romance"
+   ]
+  },
+  {
+   "word": "Ex",
+   "taboo": [
+    "former",
+    "partner",
+    "dated",
+    "break-up"
+   ]
+  },
+  {
+   "word": "Crush",
+   "taboo": [
+    "like",
+    "secret",
+    "love",
+    "fancy"
+   ]
+  },
+  {
+   "word": "Nightclub",
+   "taboo": [
+    "dance",
+    "music",
+    "bouncer",
+    "late"
+   ]
+  },
+  {
+   "word": "Wine",
+   "taboo": [
+    "grape",
+    "red",
+    "white",
+    "glass"
+   ]
+  },
+  {
+   "word": "Beer",
+   "taboo": [
+    "pint",
+    "pub",
+    "drink",
+    "hops"
+   ]
+  },
+  {
+   "word": "Sleepover",
+   "taboo": [
+    "night",
+    "friends",
+    "pillow",
+    "pyjamas"
+   ]
+  },
+  {
+   "word": "Snowball",
+   "taboo": [
+    "throw",
+    "snow",
+    "cold",
+    "fight"
+   ]
+  },
+  {
+   "word": "Skyscraper",
+   "taboo": [
+    "tall",
+    "building",
+    "city",
+    "floors"
+   ]
+  },
+  {
+   "word": "Cactus",
+   "taboo": [
+    "desert",
+    "spiky",
+    "plant",
+    "water"
+   ]
+  },
+  {
+   "word": "Octopus",
+   "taboo": [
+    "tentacles",
+    "sea",
+    "ink",
+    "eight"
+   ]
+  },
+  {
+   "word": "Unicorn",
+   "taboo": [
+    "horn",
+    "horse",
+    "magic",
+    "rainbow"
+   ]
+  },
+  {
+   "word": "Marathon",
+   "taboo": [
+    "run",
+    "miles",
+    "race",
+    "long"
+   ]
+  },
+  {
+   "word": "Referee",
+   "taboo": [
+    "whistle",
+    "game",
+    "rules",
+    "foul"
+   ]
+  },
+  {
+   "word": "Tennis",
+   "taboo": [
+    "racket",
+    "ball",
+    "net",
+    "court"
+   ]
+  },
+  {
+   "word": "Chess",
+   "taboo": [
+    "king",
+    "queen",
+    "board",
+    "checkmate"
+   ]
+  },
+  {
+   "word": "Jigsaw",
+   "taboo": [
+    "puzzle",
+    "pieces",
+    "picture",
+    "fit"
+   ]
+  },
+  {
+   "word": "Piggy bank",
+   "taboo": [
+    "save",
+    "money",
+    "coins",
+    "pig"
+   ]
+  },
+  {
+   "word": "Treasure map",
+   "taboo": [
+    "X",
+    "pirate",
+    "gold",
+    "island"
+   ]
+  },
+  {
+   "word": "Hot air balloon",
+   "taboo": [
+    "basket",
+    "fly",
+    "float",
+    "fire"
+   ]
+  },
+  {
+   "word": "Time machine",
+   "taboo": [
+    "past",
+    "future",
+    "travel",
+    "clock"
+   ]
+  },
+  {
+   "word": "Haunted house",
+   "taboo": [
+    "ghost",
+    "scary",
+    "spooky",
+    "house"
+   ]
+  },
+  {
+   "word": "Wi-Fi",
+   "taboo": [
+    "internet",
+    "password",
+    "wireless",
+    "connect"
+   ]
+  },
+  {
+   "word": "Charger",
+   "taboo": [
+    "phone",
+    "battery",
+    "plug",
+    "cable"
+   ]
+  },
+  {
+   "word": "Emoji",
+   "taboo": [
+    "face",
+    "text",
+    "smiley",
+    "icon"
+   ]
+  },
+  {
+   "word": "Password",
+   "taboo": [
+    "secret",
+    "login",
+    "letters",
+    "account"
+   ]
+  },
+  {
+   "word": "Podcast",
+   "taboo": [
+    "listen",
+    "episode",
+    "talk",
+    "audio"
+   ]
+  },
+  {
+   "word": "Influencer",
+   "taboo": [
+    "social media",
+    "followers",
+    "post",
+    "brand"
+   ]
+  },
+  {
+   "word": "Paparazzi",
+   "taboo": [
+    "photographers",
+    "celebrity",
+    "cameras",
+    "follow"
+   ]
+  },
+  {
+   "word": "Red carpet",
+   "taboo": [
+    "celebrity",
+    "premiere",
+    "walk",
+    "stars"
+   ]
+  },
+  {
+   "word": "Hiccups",
+   "taboo": [
+    "breath",
+    "jump",
+    "noise",
+    "stop"
+   ]
+  },
+  {
+   "word": "Yawn",
+   "taboo": [
+    "tired",
+    "mouth",
+    "sleep",
+    "bored"
+   ]
+  },
+  {
+   "word": "Sneeze",
+   "taboo": [
+    "nose",
+    "achoo",
+    "cold",
+    "bless"
+   ]
+  },
+  {
+   "word": "Tickle",
+   "taboo": [
+    "laugh",
+    "fingers",
+    "funny",
+    "feet"
+   ]
+  },
+  {
+   "word": "Wink",
+   "taboo": [
+    "eye",
+    "blink",
+    "flirt",
+    "one"
+   ]
+  },
+  {
+   "word": "Handshake",
+   "taboo": [
+    "hands",
+    "greet",
+    "meet",
+    "shake"
+   ]
+  },
+  {
+   "word": "High five",
+   "taboo": [
+    "hand",
+    "slap",
+    "celebrate",
+    "palm"
+   ]
+  },
+  {
+   "word": "Pyjamas",
+   "taboo": [
+    "sleep",
+    "night",
+    "wear",
+    "bed"
+   ]
+  },
+  {
+   "word": "Flip-flops",
+   "taboo": [
+    "shoes",
+    "beach",
+    "feet",
+    "summer"
+   ]
+  },
+  {
+   "word": "Lipstick",
+   "taboo": [
+    "lips",
+    "makeup",
+    "red",
+    "kiss"
+   ]
+  },
+  {
+   "word": "Moustache",
+   "taboo": [
+    "hair",
+    "face",
+    "upper lip",
+    "beard"
+   ]
+  },
+  {
+   "word": "Spaghetti",
+   "taboo": [
+    "pasta",
+    "Italy",
+    "long",
+    "sauce"
+   ]
+  },
+  {
+   "word": "Sushi",
+   "taboo": [
+    "rice",
+    "fish",
+    "Japan",
+    "raw"
+   ]
+  },
+  {
+   "word": "Taco",
+   "taboo": [
+    "Mexico",
+    "shell",
+    "meat",
+    "cheese"
+   ]
+  },
+  {
+   "word": "Doughnut",
+   "taboo": [
+    "ring",
+    "sweet",
+    "hole",
+    "sugar"
+   ]
+  },
+  {
+   "word": "Avocado",
+   "taboo": [
+    "green",
+    "toast",
+    "guacamole",
+    "fruit"
+   ]
+  },
+  {
+   "word": "Garlic",
+   "taboo": [
+    "breath",
+    "vampire",
+    "clove",
+    "smell"
+   ]
+  }
+ ]
+}

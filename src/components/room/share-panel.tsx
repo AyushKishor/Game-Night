@@ -22,7 +22,7 @@ export function SharePanel({ code, large }: { code: string; large?: boolean }) {
   const [copied, setCopied] = useState(false);
   return (
     <Panel className={cn("p-5", large && "lg:p-7")}>
-      <div className={cn("grid items-center gap-5", large ? "sm:grid-cols-[1fr_auto]" : "grid-cols-[1fr_auto]")}>
+      <div className={cn("flex flex-wrap items-center justify-between gap-5", large && "sm:flex-nowrap")}>
         <div>
           <p className="text-sm font-bold uppercase tracking-wider text-muted">Join at {origin.replace(/^https?:\/\//, "") || "this site"}</p>
           <p

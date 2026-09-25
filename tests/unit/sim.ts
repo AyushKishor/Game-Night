@@ -52,7 +52,14 @@ export function simulate(
   module: AnyGameModule,
   n: number,
   config: Partial<GameConfig> = {},
-  opts: { seed?: string; checkPrivacy?: boolean; maxSteps?: number; onStep?: (e: GameEnvelope) => void } = {},
+  opts: {
+    seed?: string;
+    checkPrivacy?: boolean;
+    maxSteps?: number;
+    onStep?: (e: GameEnvelope) => void;
+    /** Cards that were legitimately revealed to everyone (e.g. after a Bluff challenge). */
+    knownPublic?: (state: unknown) => string[];
+  } = {},
 ) {
   const { players, env, envelope: first } = start(module, n, config, opts.seed);
   let envelope = first;
@@ -74,17 +81,17 @@ export function simulate(
     }
     steps++;
     opts.onStep?.(envelope);
-    if (opts.checkPrivacy) assertPrivacy(module, envelope, { ...env, now });
+    if (opts.checkPrivacy) assertPrivacy(module, envelope, { ...env, now }, opts.knownPublic?.(envelope.state) ?? []);
   }
   return { players, envelope, env: { ...env, now }, steps };
 }
 
-export function assertPrivacy(module: AnyGameModule, envelope: GameEnvelope, env: RunnerEnv) {
+export function assertPrivacy(module: AnyGameModule, envelope: GameEnvelope, env: RunnerEnv, known: string[] = []) {
   const ctx = viewCtx(envelope, env);
   const pub = JSON.stringify(module.publicView(envelope.state, ctx));
   for (const owner of envelope.players) {
     const secret = privateCards(module.privateView(envelope.state, owner, ctx));
-    for (const card of secret) {
+    for (const card of secret.filter((c) => !known.includes(c))) {
       if (pub.includes(`"${card}"`)) throw new Error(`Public view leaks ${owner}'s card ${card}`);
       for (const other of envelope.players) {
         if (other === owner) continue;

@@ -7,7 +7,7 @@ export const DEFAULT_CONFIG: GameConfig = {
   roundSeconds: 45,
   difficulty: "normal",
   teamMode: false,
-  familyFriendly: true,
+  familyFriendly: false,
   allowJoinInProgress: false,
   houseRules: {},
 };
