@@ -1,4 +1,4 @@
-# Render blueprint for a standalone copy of this folder (the repo-root render.yaml sets rootDir: game-night).
+# Render blueprint: New → Blueprint → pick this repo.
 # Runs Game Night as a single long-lived Node server. Works without a database
 # (rooms live in memory and reset on redeploy); add DATABASE_URL for persistence.
 services:

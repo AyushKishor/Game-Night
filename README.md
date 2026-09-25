@@ -17,7 +17,7 @@ Full rules for every game: [GAME_RULES.md](./GAME_RULES.md) (also shown in the a
 The fastest way to get a public URL is **Render's free tier**. It runs one long-lived Node server, so no database is needed (rooms live in memory and reset when the service restarts).
 
 1. Sign in at <https://render.com> with GitHub.
-2. **New → Blueprint** → pick this repository and the branch that contains `game-night/`. Render reads `render.yaml` at the repo root.
+2. **New → Blueprint** → pick the `Game-Night` repository (branch `main`). Render reads `render.yaml` at the repo root.
 3. Click **Apply** and wait for the build (about 3–5 minutes). You get `https://game-night-xxxx.onrender.com`.
 4. On the Fire TV, open **Silk Browser** (or Firefox), type the URL, and click **Host a game**. The TV becomes the table.
 5. On your phone, scan the QR code on the TV. As the host, you can also press **Play from my phone** to move your own hand onto your phone.
@@ -88,7 +88,8 @@ flowchart LR
 Requirements: Node.js ≥ 20.9 (22 recommended), npm. Postgres is optional.
 
 ```bash
-cd game-night
+git clone https://github.com/AyushKishor/Game-Night.git
+cd Game-Night
 npm install
 cp .env.example .env.local      # optional: leave DATABASE_URL empty for the in-memory store
 npm run dev                      # http://localhost:3000
@@ -153,9 +154,9 @@ What's covered:
 ## Deploying to Vercel + Supabase
 
 1. **Supabase**: create a project. Under **Project Settings → Database → Connection string → Transaction pooler**, copy the URI (port 6543).
-2. Apply the schema, either with `DATABASE_URL=<that URI> npm run db:migrate` from `game-night/`, or by pasting `supabase/migrations/*.sql` into the SQL editor.
+2. Apply the schema, either with `DATABASE_URL=<that URI> npm run db:migrate` from the repo folder, or by pasting `supabase/migrations/*.sql` into the SQL editor.
 3. (Optional, for instant updates) In **Project Settings → API**, copy the project URL, the `anon` key and the `service_role` key.
-4. **Vercel**: **Add New → Project** → import this repo and set **Root Directory** to `game-night`.
+4. **Vercel**: **Add New → Project** → import the `Game-Night` repo (no root directory change needed).
 5. Add environment variables: `DATABASE_URL`, `CRON_SECRET` (any long random string), and optionally `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
 6. Deploy. `vercel.json` schedules `/api/cron/cleanup` hourly to remove idle rooms. Vercel sends `Authorization: Bearer $CRON_SECRET` automatically.
 
