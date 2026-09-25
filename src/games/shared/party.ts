@@ -14,7 +14,12 @@ export function sipsEnabled(config: GameConfig): boolean {
 }
 
 export function sippersOf(summary: RoundSummary): PlayerId[] {
-  return summary.sips ?? Object.entries(summary.scores).filter(([, s]) => s <= 0).map(([p]) => p);
+  return (
+    summary.sips ??
+    Object.entries(summary.scores)
+      .filter(([, s]) => s <= 0)
+      .map(([p]) => p)
+  );
 }
 
 /**
@@ -26,7 +31,8 @@ export function checkText(raw: string, max: number, config: GameConfig): { text:
   const text = cleanText(raw, max + 1);
   if (!text) return { error: "Type something first." };
   if (text.length > max) return { error: `Keep it under ${max} characters.` };
-  if (config.familyFriendly && containsBlockedWord(text)) return { error: "Let's keep it family-friendly — try different words." };
+  if (config.familyFriendly && containsBlockedWord(text))
+    return { error: "Let's keep it family-friendly — try different words." };
   return { text };
 }
 

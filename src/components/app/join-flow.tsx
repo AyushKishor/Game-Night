@@ -61,10 +61,10 @@ export function JoinFlow() {
 
   if (!code) {
     return (
-      <div className="mt-10 rounded-3xl border border-border bg-surface p-6 shadow-soft sm:p-8">
+      <div className="border-border bg-surface shadow-soft mt-10 rounded-3xl border p-6 sm:p-8">
         <h1 className="font-display text-3xl font-extrabold">Join a game</h1>
         {rawCode && (
-          <p role="alert" className="mt-2 font-medium text-rose">
+          <p role="alert" className="text-rose mt-2 font-medium">
             “{rawCode.slice(0, 12)}” isn&apos;t a valid room code.
           </p>
         )}
@@ -75,7 +75,7 @@ export function JoinFlow() {
 
   if (load.kind === "loading") {
     return (
-      <div className="mt-10 flex items-center gap-3 rounded-3xl border border-border bg-surface p-8 text-muted" role="status">
+      <div className="border-border bg-surface text-muted mt-10 flex items-center gap-3 rounded-3xl border p-8" role="status">
         <Loader2 className="animate-spin" aria-hidden /> Finding room {code}…
       </div>
     );
@@ -83,16 +83,20 @@ export function JoinFlow() {
 
   if (load.kind === "error") {
     return (
-      <div className="mt-10 rounded-3xl border border-rose/50 bg-surface p-6 shadow-soft sm:p-8" role="alert">
-        <AlertTriangle className="size-8 text-rose" aria-hidden />
-        <h1 className="mt-3 font-display text-2xl font-extrabold">
-          {load.code === "room_expired" ? "That room has closed" : load.code === "room_not_found" ? "Room not found" : "Can't join right now"}
+      <div className="border-rose/50 bg-surface shadow-soft mt-10 rounded-3xl border p-6 sm:p-8" role="alert">
+        <AlertTriangle className="text-rose size-8" aria-hidden />
+        <h1 className="font-display mt-3 text-2xl font-extrabold">
+          {load.code === "room_expired"
+            ? "That room has closed"
+            : load.code === "room_not_found"
+              ? "Room not found"
+              : "Can't join right now"}
         </h1>
-        <p className="mt-2 text-muted">{load.message}</p>
+        <p className="text-muted mt-2">{load.message}</p>
         <JoinCodeForm className="mt-6" />
-        <p className="mt-6 text-sm text-muted">
+        <p className="text-muted mt-6 text-sm">
           Or{" "}
-          <Link className="font-semibold text-sky hover:underline" href="/host">
+          <Link className="text-sky font-semibold hover:underline" href="/host">
             host your own game
           </Link>
           .
@@ -107,10 +111,10 @@ export function JoinFlow() {
   const asSpectator = mustSpectate || spectator;
 
   return (
-    <div className="mt-10 rounded-3xl border border-border bg-surface p-6 shadow-soft sm:p-8">
-      <p className="font-mono text-sm font-bold tracking-[0.3em] text-sky">ROOM {preview.code}</p>
-      <h1 className="mt-1 font-display text-3xl font-extrabold">Join {preview.hostName}&apos;s game night</h1>
-      <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-muted">
+    <div className="border-border bg-surface shadow-soft mt-10 rounded-3xl border p-6 sm:p-8">
+      <p className="text-sky font-mono text-sm font-bold tracking-[0.3em]">ROOM {preview.code}</p>
+      <h1 className="font-display mt-1 text-3xl font-extrabold">Join {preview.hostName}&apos;s game night</h1>
+      <p className="text-muted mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
         <span className="inline-flex items-center gap-1">
           <Users className="size-4" aria-hidden /> {preview.playerCount} {preview.playerCount === 1 ? "player" : "players"}
         </span>
@@ -119,11 +123,11 @@ export function JoinFlow() {
       </p>
 
       {preview.locked ? (
-        <p role="alert" className="mt-6 flex items-center gap-2 rounded-xl bg-amber/10 p-4 font-medium text-amber">
+        <p role="alert" className="bg-amber/10 text-amber mt-6 flex items-center gap-2 rounded-xl p-4 font-medium">
           <Lock className="size-5 shrink-0" aria-hidden /> The host has locked this room. Ask them to unlock it.
         </p>
       ) : mustSpectate && !preview.allowSpectators ? (
-        <p role="alert" className="mt-6 rounded-xl bg-rose/10 p-4 font-medium text-rose">
+        <p role="alert" className="bg-rose/10 text-rose mt-6 rounded-xl p-4 font-medium">
           This room is full and spectators are turned off.
         </p>
       ) : null}
@@ -165,22 +169,22 @@ export function JoinFlow() {
             />
           </div>
           <div>
-            <span className="text-sm font-semibold text-muted">Avatar (optional)</span>
+            <span className="text-muted text-sm font-semibold">Avatar (optional)</span>
             <div className="mt-1.5">
               <AvatarPicker value={avatar} onChange={setAvatar} />
             </div>
           </div>
           {preview.allowSpectators && (
-            <div className="flex items-center justify-between gap-3 rounded-xl bg-bg-2 p-3">
-              <Label htmlFor="spectate" className="flex items-center gap-2 text-base text-text">
-                <Eye className="size-5 text-muted" aria-hidden />
+            <div className="bg-bg-2 flex items-center justify-between gap-3 rounded-xl p-3">
+              <Label htmlFor="spectate" className="text-text flex items-center gap-2 text-base">
+                <Eye className="text-muted size-5" aria-hidden />
                 {mustSpectate ? "The room is full — join as a spectator" : "Just watch (spectator)"}
               </Label>
               <Switch id="spectate" checked={asSpectator} disabled={mustSpectate} onCheckedChange={setSpectator} />
             </div>
           )}
           {error && (
-            <p id="join-error" role="alert" className="text-sm font-medium text-rose">
+            <p id="join-error" role="alert" className="text-rose text-sm font-medium">
               {error}
             </p>
           )}

@@ -8,9 +8,9 @@ export default function HostPage() {
   return (
     <main id="main" className="mx-auto flex w-full max-w-lg flex-1 flex-col px-4 py-6">
       <Brand />
-      <div className="mt-10 rounded-3xl border border-border bg-surface p-6 shadow-soft sm:p-8">
+      <div className="border-border bg-surface shadow-soft mt-10 rounded-3xl border p-6 sm:p-8">
         <h1 className="font-display text-3xl font-extrabold">Host a game</h1>
-        <p className="mt-1 text-muted">
+        <p className="text-muted mt-1">
           You&apos;ll get a room code and QR code to share. Keep this screen where everyone can see it.
         </p>
         <HostForm />

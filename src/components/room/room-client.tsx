@@ -43,7 +43,7 @@ export function RoomClient({ code }: { code: string }) {
   const send = useSend(code);
   useRoomSounds(data);
 
-  const isWide = typeof window !== "undefined" && window.matchMedia?.("(min-width: 1024px)").matches;
+  const isWide = typeof window !== "undefined" && window.matchMedia?.("(min-width: 900px)").matches;
   const [mode, setMode] = useViewMode(code, data?.me.isHost && isWide ? "table" : "hand");
 
   useEffect(() => {
@@ -69,10 +69,10 @@ export function RoomClient({ code }: { code: string }) {
     return (
       <main id="main" className="mx-auto flex w-full max-w-lg flex-1 flex-col px-4 py-6">
         <Brand />
-        <div className="mt-10 rounded-3xl border border-border bg-surface p-8 shadow-soft" role="alert">
-          <AlertTriangle className="size-8 text-amber" aria-hidden />
-          <h1 className="mt-3 font-display text-2xl font-extrabold">{title}</h1>
-          <p className="mt-2 text-muted">
+        <div className="border-border bg-surface shadow-soft mt-10 rounded-3xl border p-8" role="alert">
+          <AlertTriangle className="text-amber size-8" aria-hidden />
+          <h1 className="font-display mt-3 text-2xl font-extrabold">{title}</h1>
+          <p className="text-muted mt-2">
             {fatal.code === "unauthorized" || fatal.code === "not_in_room"
               ? "Your session ended — the host may have removed you, or it expired."
               : fatal.message}
@@ -94,7 +94,7 @@ export function RoomClient({ code }: { code: string }) {
 
   if (!data) {
     return (
-      <main id="main" className="flex flex-1 items-center justify-center gap-3 text-muted" role="status">
+      <main id="main" className="text-muted flex flex-1 items-center justify-center gap-3" role="status">
         <Loader2 className="animate-spin" aria-hidden /> Connecting to room {code}…
       </main>
     );
@@ -106,10 +106,13 @@ export function RoomClient({ code }: { code: string }) {
 
   return (
     <div className={cn("flex min-h-dvh flex-col", effectiveMode === "table" && "lg:text-[1.06rem]")}>
-      <header className="sticky top-0 z-40 border-b border-border/70 bg-bg/90 backdrop-blur supports-[backdrop-filter]:bg-bg/75">
+      <header className="border-border/70 bg-bg/90 supports-[backdrop-filter]:bg-bg/75 sticky top-0 z-40 border-b backdrop-blur">
         <div className="mx-auto flex w-full max-w-7xl items-center gap-2 px-3 py-2 sm:px-5">
           <Brand className="hidden sm:inline-flex" />
-          <span className="rounded-lg bg-surface-2 px-2.5 py-1 font-mono text-sm font-bold tracking-[0.25em]" aria-label={`Room code ${room.code.split("").join(" ")}`}>
+          <span
+            className="bg-surface-2 rounded-lg px-2.5 py-1 font-mono text-sm font-bold tracking-[0.25em]"
+            aria-label={`Room code ${room.code.split("").join(" ")}`}
+          >
             {room.code}
           </span>
           <ConnectionBadge />
@@ -159,7 +162,7 @@ export function RoomClient({ code }: { code: string }) {
       </header>
       <main id="main" className="mx-auto w-full max-w-7xl flex-1 px-3 py-4 sm:px-5 sm:py-6">
         {me.isSpectator && (
-          <p className="mb-4 rounded-xl bg-violet/10 px-4 py-2 text-sm font-medium text-violet" role="status">
+          <p className="bg-violet/10 text-violet mb-4 rounded-xl px-4 py-2 text-sm font-medium" role="status">
             You&apos;re watching as a spectator.
           </p>
         )}

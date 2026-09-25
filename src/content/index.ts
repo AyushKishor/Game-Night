@@ -20,9 +20,7 @@ const quickCategoriesSchema = z.object({
   categories: z.array(z.string().min(2).max(60)).min(100),
 });
 const majorityRulesSchema = z.object({
-  questions: z
-    .array(z.object({ q: z.string().min(3), a: z.string().min(1), b: z.string().min(1) }))
-    .min(100),
+  questions: z.array(z.object({ q: z.string().min(3), a: z.string().min(1), b: z.string().min(1) })).min(100),
 });
 const rankItSchema = z.object({
   sets: z.array(z.object({ prompt: z.string().min(3), items: z.array(z.string().min(1)).length(5) })).min(100),
@@ -33,7 +31,15 @@ const secretSignalSchema = z.object({
 });
 const triviaSchema = z.object({
   questions: z
-    .array(z.object({ cat: z.string(), d: z.number().int().min(1).max(3), q: z.string().min(5), a: z.string(), w: z.array(z.string()).length(3) }))
+    .array(
+      z.object({
+        cat: z.string(),
+        d: z.number().int().min(1).max(3),
+        q: z.string().min(5),
+        a: z.string(),
+        w: z.array(z.string()).length(3),
+      }),
+    )
     .min(100),
 });
 const emojiSchema = z.object({ puzzles: z.array(z.object({ cat: z.string(), e: z.string().min(1), a: z.string() })).min(60) });

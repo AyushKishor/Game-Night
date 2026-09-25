@@ -75,10 +75,7 @@ export function zeroScores(players: PlayerId[]): Record<PlayerId, number> {
   return Object.fromEntries(players.map((p) => [p, 0]));
 }
 
-export function addScores(
-  a: Record<PlayerId, number>,
-  b: Record<PlayerId, number>,
-): Record<PlayerId, number> {
+export function addScores(a: Record<PlayerId, number>, b: Record<PlayerId, number>): Record<PlayerId, number> {
   const out = { ...a };
   for (const [k, v] of Object.entries(b)) out[k] = (out[k] ?? 0) + v;
   return out;

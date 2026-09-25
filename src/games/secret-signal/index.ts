@@ -15,7 +15,12 @@ export interface SecretSignalState {
   clues: Record<PlayerId, string>;
   guesses: Record<PlayerId, PlayerId>;
   scores: Record<PlayerId, number>;
-  last: { symbols: Record<PlayerId, string>; partners: Record<PlayerId, PlayerId | null>; guesses: Record<PlayerId, PlayerId>; gained: Record<PlayerId, number> } | null;
+  last: {
+    symbols: Record<PlayerId, string>;
+    partners: Record<PlayerId, PlayerId | null>;
+    guesses: Record<PlayerId, PlayerId>;
+    gained: Record<PlayerId, number>;
+  } | null;
   summaries: RoundSummary[];
   deadline: number | null;
   log: string[];
@@ -46,7 +51,16 @@ function deal(state: SecretSignalState, round: number, ctx: GameContext): Secret
     symbolOf[loner] = symbols[symbols.length - 1]!;
     partnerOf[loner] = null;
   }
-  return { ...state, round, phase: "clue", symbolOf, partnerOf, clues: {}, guesses: {}, deadline: deadlineFrom(ctx.now, ctx.config.roundSeconds) };
+  return {
+    ...state,
+    round,
+    phase: "clue",
+    symbolOf,
+    partnerOf,
+    clues: {},
+    guesses: {},
+    deadline: deadlineFrom(ctx.now, ctx.config.roundSeconds),
+  };
 }
 
 function reveal(state: SecretSignalState, ctx: GameContext): SecretSignalState {
@@ -66,7 +80,9 @@ function reveal(state: SecretSignalState, ctx: GameContext): SecretSignalState {
   const summary: RoundSummary = {
     round: state.round,
     title: `Signals revealed`,
-    lines: state.players.map((p) => `${nameOf(ctx, p)} — ${state.symbolOf[p]}${state.partnerOf[p] ? "" : " (loner)"}: +${gained[p]}`),
+    lines: state.players.map(
+      (p) => `${nameOf(ctx, p)} — ${state.symbolOf[p]}${state.partnerOf[p] ? "" : " (loner)"}: +${gained[p]}`,
+    ),
     scores: gained,
   };
   return {
@@ -113,12 +129,30 @@ export const secretSignal: GameModule<SecretSignalState, Action> = {
   },
   settings: ["rounds", "roundSeconds"],
   houseRules: [SIP_RULE],
-  presets: { quick: { rounds: 2, roundSeconds: 45 }, standard: { rounds: 4, roundSeconds: 60 }, long: { rounds: 6, roundSeconds: 75 } },
+  presets: {
+    quick: { rounds: 2, roundSeconds: 45 },
+    standard: { rounds: 4, roundSeconds: 60 },
+    long: { rounds: 6, roundSeconds: 75 },
+  },
   actionSchema,
 
   setup: (players, ctx) =>
     deal(
-      { players, round: 1, rounds: ctx.config.rounds, phase: "clue", symbolOf: {}, partnerOf: {}, clues: {}, guesses: {}, scores: zeroScores(players), last: null, summaries: [], deadline: null, log: [] },
+      {
+        players,
+        round: 1,
+        rounds: ctx.config.rounds,
+        phase: "clue",
+        symbolOf: {},
+        partnerOf: {},
+        clues: {},
+        guesses: {},
+        scores: zeroScores(players),
+        last: null,
+        summaries: [],
+        deadline: null,
+        log: [],
+      },
       1,
       ctx,
     ),
@@ -168,7 +202,8 @@ export const secretSignal: GameModule<SecretSignalState, Action> = {
   },
   botAction(state, player, ctx) {
     const symbol = ctx.content.secretSignal.symbols.find((s) => s.name === state.symbolOf[player]);
-    if (state.phase === "clue" && !state.clues[player]) return { type: "clue", text: symbol ? ctx.rng.pick(symbol.hints) : "thing" };
+    if (state.phase === "clue" && !state.clues[player])
+      return { type: "clue", text: symbol ? ctx.rng.pick(symbol.hints) : "thing" };
     if (state.phase === "guess" && state.partnerOf[player] && !state.guesses[player]) {
       const hints = (symbol?.hints ?? []).map((h) => h.toLowerCase());
       const others = state.players.filter((p) => p !== player);

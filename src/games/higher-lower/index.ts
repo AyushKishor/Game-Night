@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { type CardId, cardLabel, rankValue, shuffledDeck } from "@/lib/engine/cards";
-import { REVEAL_SECONDS, deadlineFrom, nameOf, pushLog, resultsFromScores, zeroScores } from "@/lib/engine/helpers";
+import { deadlineFrom, nameOf, pushLog, resultsFromScores, zeroScores } from "@/lib/engine/helpers";
 import type { GameContext, GameModule, PlayerId, RoundSummary } from "@/lib/engine/types";
 import { SIP_RULE } from "../shared/party";
 
@@ -56,7 +56,13 @@ function reveal(state: HigherLowerState, ctx: GameContext): HigherLowerState {
 
 function nextRound(state: HigherLowerState, ctx: GameContext): HigherLowerState {
   if (state.round >= ctx.config.rounds) return { ...state, phase: "over", deadline: null };
-  return { ...state, phase: "guess", guesses: {}, round: state.round + 1, deadline: deadlineFrom(ctx.now, ctx.config.roundSeconds) };
+  return {
+    ...state,
+    phase: "guess",
+    guesses: {},
+    round: state.round + 1,
+    deadline: deadlineFrom(ctx.now, ctx.config.roundSeconds),
+  };
 }
 
 export const higherLower: GameModule<HigherLowerState, Action> = {
@@ -131,7 +137,9 @@ export const higherLower: GameModule<HigherLowerState, Action> = {
   deadline: (state) => (state.phase === "over" ? null : state.deadline),
   onTimeout: (state, ctx) => (state.phase === "guess" ? reveal(state, ctx) : nextRound(state, ctx)),
   botAction: (state, player) =>
-    state.phase === "guess" && !state.guesses[player] ? { type: "guess", guess: rankValue(state.current, true) <= 8 ? "higher" : "lower" } : null,
+    state.phase === "guess" && !state.guesses[player]
+      ? { type: "guess", guess: rankValue(state.current, true) <= 8 ? "higher" : "lower" }
+      : null,
 
   isOver: (state) => state.phase === "over",
   results: (state, ctx) => resultsFromScores(state.scores, ctx, { order: state.players }),

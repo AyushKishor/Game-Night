@@ -28,7 +28,7 @@ export function CardFace({ card, size = "md", className }: { card: CardId; size?
   return (
     <span
       className={cn(
-        "relative flex shrink-0 select-none flex-col bg-card-face font-display font-extrabold leading-none shadow-card ring-1 ring-black/10",
+        "bg-card-face font-display shadow-card relative flex shrink-0 flex-col leading-none font-extrabold ring-1 ring-black/10 select-none",
         SIZES[size],
         suitColor(card, highContrast),
         highContrast && "ring-2 ring-black",
@@ -36,12 +36,12 @@ export function CardFace({ card, size = "md", className }: { card: CardId; size?
       )}
       aria-hidden
     >
-      <span className="absolute left-[8%] top-[6%] flex flex-col items-center">
+      <span className="absolute top-[6%] left-[8%] flex flex-col items-center">
         <span>{rank}</span>
         <span className="text-[0.85em]">{sym}</span>
       </span>
       <span className="m-auto text-[1.9em]">{sym}</span>
-      <span className="absolute bottom-[6%] right-[8%] flex rotate-180 flex-col items-center">
+      <span className="absolute right-[8%] bottom-[6%] flex rotate-180 flex-col items-center">
         <span>{rank}</span>
         <span className="text-[0.85em]">{sym}</span>
       </span>
@@ -56,13 +56,13 @@ export function CardBack({ size = "md", className, label }: { size?: CardSize; c
       aria-label={label}
       aria-hidden={label ? undefined : true}
       className={cn(
-        "relative flex shrink-0 items-center justify-center overflow-hidden border-2 border-card-face/90 bg-[#28356a] shadow-card",
+        "border-card-face/90 shadow-card relative flex shrink-0 items-center justify-center overflow-hidden border-2 bg-[#28356a]",
         "bg-[repeating-linear-gradient(45deg,rgb(255_255_255/0.07)_0_6px,transparent_6px_12px)]",
         SIZES[size],
         className,
       )}
     >
-      <span className="size-[45%] rounded-full border-2 border-amber/70" />
+      <span className="border-amber/70 size-[45%] rounded-full border-2" />
     </span>
   );
 }
@@ -102,13 +102,13 @@ export function PlayingCard({ card, size = "md", selected, playable, disabled, o
       aria-label={label}
       className={cn(
         "relative shrink-0 rounded-xl disabled:cursor-not-allowed",
-        playable && !disabled && "after:absolute after:inset-x-2 after:-bottom-2 after:h-1 after:rounded-full after:bg-mint",
+        playable && !disabled && "after:bg-mint after:absolute after:inset-x-2 after:-bottom-2 after:h-1 after:rounded-full",
         disabled && "opacity-55 saturate-50",
         selected && "drop-shadow-[0_0_10px_rgba(76,201,240,0.75)]",
         className,
       )}
     >
-      <CardFace card={card} size={size} className={selected ? "ring-4 ring-sky" : undefined} />
+      <CardFace card={card} size={size} className={selected ? "ring-sky ring-4" : undefined} />
     </motion.button>
   );
 }
@@ -119,17 +119,17 @@ export function DeckPile({ count, size = "md", label = "Draw pile" }: { count: n
     <div className="flex flex-col items-center gap-1.5">
       {count > 0 ? (
         <span className="relative">
-          {count > 2 && <CardBack size={size} className="absolute left-1 top-1 opacity-60" />}
+          {count > 2 && <CardBack size={size} className="absolute top-1 left-1 opacity-60" />}
           <CardBack size={size} label={`${label}, ${count} cards`} />
         </span>
       ) : (
         <span
-          className={cn("flex items-center justify-center border-2 border-dashed border-border text-xs text-muted", SIZES[size])}
+          className={cn("border-border text-muted flex items-center justify-center border-2 border-dashed text-xs", SIZES[size])}
         >
           Empty
         </span>
       )}
-      <span className="text-xs font-semibold text-muted">
+      <span className="text-muted text-xs font-semibold">
         {label} · {count}
       </span>
     </div>

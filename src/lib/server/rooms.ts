@@ -153,7 +153,8 @@ export class RoomService {
     const code = rawCode.toUpperCase();
     const room = await this.store.getRoom(code);
     const now = this.now();
-    if (!room) throw new RoomError("room_not_found", "We couldn't find a room with that code. Check the code and try again.", 404);
+    if (!room)
+      throw new RoomError("room_not_found", "We couldn't find a room with that code. Check the code and try again.", 404);
     if (this.isExpired(room, now)) {
       await this.expire(code);
       throw new RoomError("room_expired", "That room has expired. Ask the host to start a new one.", 410);
@@ -214,9 +215,11 @@ export class RoomService {
         }
       }
       this.touch(room, now);
+      room.version += 1;
       return { room, result: "ok" as const, changed: true };
     });
-    if (!res.found) throw new RoomError("room_not_found", "We couldn't find a room with that code. Check the code and try again.", 404);
+    if (!res.found)
+      throw new RoomError("room_not_found", "We couldn't find a room with that code. Check the code and try again.", 404);
     if (res.result === "expired" || !res.room) {
       throw new RoomError("room_expired", "That room has expired. Ask the host to start a new one.", 410);
     }
@@ -503,7 +506,12 @@ export class RoomService {
       );
     }
     const env = this.runnerEnv(room, now);
-    room.game = startGame(game, seated.map((p) => p.id), room.config, env);
+    room.game = startGame(
+      game,
+      seated.map((p) => p.id),
+      room.config,
+      env,
+    );
     room.recordedRounds = 0;
     room.phase = "playing";
     room.lastResults = null;
@@ -552,11 +560,7 @@ export class RoomService {
         if (room.phase === "playing") throw new RoomError("wrong_phase", "A game is already running.", 409);
         const notReady = room.players.filter((p) => !p.isSpectator && !p.isBot && !p.ready && p.id !== room.hostId);
         if (notReady.length) {
-          throw new RoomError(
-            "not_ready",
-            `Waiting for ${notReady.map((p) => p.name).join(", ")} to get ready.`,
-            409,
-          );
+          throw new RoomError("not_ready", `Waiting for ${notReady.map((p) => p.name).join(", ")} to get ready.`, 409);
         }
         this.startSelectedGame(room, now);
         return;

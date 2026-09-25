@@ -57,13 +57,13 @@ export function HostForm() {
         />
       </div>
       <div>
-        <span className="text-sm font-semibold text-muted">Avatar</span>
+        <span className="text-muted text-sm font-semibold">Avatar</span>
         <div className="mt-1.5">
           <AvatarPicker value={avatar} onChange={setAvatar} />
         </div>
       </div>
       {error && (
-        <p id="host-error" role="alert" className="text-sm font-medium text-rose">
+        <p id="host-error" role="alert" className="text-rose text-sm font-medium">
           {error}
         </p>
       )}

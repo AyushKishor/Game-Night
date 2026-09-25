@@ -90,7 +90,7 @@ export const war: GameModule<WarState, Action> = {
     // During a war, up to three cards go face down into the pot first (keeping one to flip).
     const faceDown = state.atWar ? pile.slice(0, Math.min(3, pile.length - 1)) : [];
     const rest = pile.slice(faceDown.length);
-    let s: WarState = {
+    const s: WarState = {
       ...state,
       piles: { ...state.piles, [player]: rest.slice(1) },
       flips: { ...state.flips, [player]: rest[0]! },
@@ -143,7 +143,8 @@ export const war: GameModule<WarState, Action> = {
   pending: (state) => (state.over ? [] : state.contenders.filter((p) => !state.flips[p])),
   deadline: (state) => (state.over ? null : state.deadline),
   onTimeout: (state, ctx) => autoPlayPending(war, state, ctx),
-  botAction: (state, player) => (!state.over && state.contenders.includes(player) && !state.flips[player] ? { type: "flip" } : null),
+  botAction: (state, player) =>
+    !state.over && state.contenders.includes(player) && !state.flips[player] ? { type: "flip" } : null,
 
   isOver: (state) => state.over,
   results: (state, ctx) =>

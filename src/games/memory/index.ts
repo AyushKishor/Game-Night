@@ -105,7 +105,10 @@ export const memory: GameModule<MemoryState, Action> = {
         matchedBy,
         scores,
         deadline: done ? null : deadlineFrom(ctx.now, ctx.config.turnSeconds),
-        log: pushLog(state.log, `${nameOf(ctx, player)} found a pair of ${cardLabel(state.cards[a]!)} & ${cardLabel(state.cards[b]!)}!`),
+        log: pushLog(
+          state.log,
+          `${nameOf(ctx, player)} found a pair of ${cardLabel(state.cards[a]!)} & ${cardLabel(state.cards[b]!)}!`,
+        ),
       };
     }
     return {

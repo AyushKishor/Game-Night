@@ -71,7 +71,10 @@ export interface RoomStore {
    * an exclusive lock (row lock in Postgres), so concurrent actions can never
    * interleave. Returning `room: null` deletes the room.
    */
-  mutateRoom<T>(code: string, fn: (room: RoomDoc) => MutateResult<T>): Promise<{ found: false } | { found: true; result: T; room: RoomDoc | null; changed: boolean }>;
+  mutateRoom<T>(
+    code: string,
+    fn: (room: RoomDoc) => MutateResult<T>,
+  ): Promise<{ found: false } | { found: true; result: T; room: RoomDoc | null; changed: boolean }>;
   insertSession(session: SessionRecord): Promise<void>;
   getSession(tokenHash: string): Promise<SessionRecord | null>;
   deleteSessions(roomId: string, playerId: PlayerId): Promise<void>;

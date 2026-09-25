@@ -12,7 +12,7 @@ import type { GameViewProps } from "./types";
 
 function ActiveSuit({ suit }: { suit: Suit }) {
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-3 px-3 py-1 text-sm font-bold">
+    <span className="bg-surface-3 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-bold">
       Suit to match: <span className="text-lg">{SUIT_SYMBOLS[suit]}</span> {SUIT_NAMES[suit]}
     </span>
   );
@@ -35,19 +35,21 @@ function Table({ pub, size = "lg" }: { pub: SheddingPublic; size?: "md" | "lg" |
             </motion.div>
           )}
         </AnimatePresence>
-        <span className="text-xs font-semibold text-muted">Discard pile · {pub.discardCount}</span>
+        <span className="text-muted text-xs font-semibold">Discard pile · {pub.discardCount}</span>
       </div>
       <div className="flex flex-col items-start gap-2">
         <ActiveSuit suit={pub.activeSuit} />
         {pub.pendingDraw > 0 && (
-          <span className="rounded-full bg-rose/15 px-3 py-1 text-sm font-bold text-rose">Next player draws {pub.pendingDraw}</span>
+          <span className="bg-rose/15 text-rose rounded-full px-3 py-1 text-sm font-bold">
+            Next player draws {pub.pendingDraw}
+          </span>
         )}
         {pub.rules.reverseRank && (
-          <span className="inline-flex items-center gap-1 text-sm text-muted">
+          <span className="text-muted inline-flex items-center gap-1 text-sm">
             <ArrowLeftRight className="size-4" aria-hidden /> Direction: {pub.direction === 1 ? "clockwise" : "counter-clockwise"}
           </span>
         )}
-        <span className="text-sm text-muted">Round {pub.round}</span>
+        <span className="text-muted text-sm">Round {pub.round}</span>
       </div>
     </div>
   );
@@ -129,17 +131,17 @@ export function SheddingView({ pub, priv, mode, room, game, me, names, send }: G
         {pub.topCard && <CardFace card={pub.topCard} size="md" />}
         <div className="flex flex-col gap-1 text-sm">
           <ActiveSuit suit={pub.activeSuit} />
-          {pub.pendingDraw > 0 && <span className="font-bold text-rose">Draw {pub.pendingDraw} pending</span>}
+          {pub.pendingDraw > 0 && <span className="text-rose font-bold">Draw {pub.pendingDraw} pending</span>}
         </div>
       </div>
       {shared}
 
-      <section aria-label="Your hand" className="rounded-2xl border border-border bg-surface-2/70 p-3">
-        <div className="mb-2 flex items-center justify-between text-sm text-muted">
+      <section aria-label="Your hand" className="border-border bg-surface-2/70 rounded-2xl border p-3">
+        <div className="text-muted mb-2 flex items-center justify-between text-sm">
           <span className="font-semibold">Your hand · {priv.hand.length} cards</span>
           {myTurn && <span>Playable cards are underlined in green</span>}
         </div>
-        <div className="flex flex-wrap justify-center gap-2 pb-3 pt-4">
+        <div className="flex flex-wrap justify-center gap-2 pt-4 pb-3">
           {priv.hand.map((c) => (
             <PlayingCard
               key={c}
@@ -159,7 +161,7 @@ export function SheddingView({ pub, priv, mode, room, game, me, names, send }: G
       </section>
 
       {choosingSuit && selectedCard && (
-        <div className="rounded-2xl border border-sky/50 bg-sky/10 p-3" role="group" aria-label="Choose the next suit">
+        <div className="border-sky/50 bg-sky/10 rounded-2xl border p-3" role="group" aria-label="Choose the next suit">
           <p className="mb-2 font-semibold">Choose the next suit</p>
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
             {SUITS.map((s) => (

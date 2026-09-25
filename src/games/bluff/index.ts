@@ -41,7 +41,13 @@ function nextTurn(s: BluffState, after: PlayerId): PlayerId {
 function endChallenge(s: BluffState, now: number, turnSeconds: number): BluffState {
   const lp = s.lastPlay!;
   if (s.hands[lp.player]!.length === 0) {
-    return { ...s, phase: "over", winner: lp.player, deadline: null, log: pushLog(s.log, "Nobody called it — and that was their last card!") };
+    return {
+      ...s,
+      phase: "over",
+      winner: lp.player,
+      deadline: null,
+      log: pushLog(s.log, "Nobody called it — and that was their last card!"),
+    };
   }
   return {
     ...s,
@@ -107,7 +113,8 @@ export const bluff: GameModule<BluffState, Action> = {
       if (state.phase !== "play") return "Wait for the challenge to finish.";
       if (state.turn !== player) return "It's not your turn.";
       const hand = state.hands[player]!;
-      if (new Set(action.cards).size !== action.cards.length || !action.cards.every((c) => hand.includes(c))) return "You don't have those cards.";
+      if (new Set(action.cards).size !== action.cards.length || !action.cards.every((c) => hand.includes(c)))
+        return "You don't have those cards.";
       return null;
     }
     if (state.phase !== "challenge") return "There's nothing to challenge right now.";
@@ -133,7 +140,9 @@ export const bluff: GameModule<BluffState, Action> = {
     if (action.type === "accept") {
       const responses = [...state.responses, player];
       const s = { ...state, responses };
-      return responses.length >= others(state, state.lastPlay!.player).length ? endChallenge(s, ctx.now, ctx.config.turnSeconds) : s;
+      return responses.length >= others(state, state.lastPlay!.player).length
+        ? endChallenge(s, ctx.now, ctx.config.turnSeconds)
+        : s;
     }
     // Bluff called
     const lp = state.lastPlay!;
@@ -207,7 +216,9 @@ export const bluff: GameModule<BluffState, Action> = {
       turn: state.turn,
       required: state.required,
       phase: state.phase,
-      lastPlay: state.lastPlay ? { player: state.lastPlay.player, count: state.lastPlay.cards.length, claim: state.lastPlay.claim } : null,
+      lastPlay: state.lastPlay
+        ? { player: state.lastPlay.player, count: state.lastPlay.cards.length, claim: state.lastPlay.claim }
+        : null,
       responded: state.responses,
       reveal: state.reveal,
       winner: state.winner,

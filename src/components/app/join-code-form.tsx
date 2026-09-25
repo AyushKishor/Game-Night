@@ -44,14 +44,14 @@ export function JoinCodeForm({ className }: { className?: string }) {
           placeholder="K7P4XM"
           aria-invalid={!!error}
           aria-describedby={error ? "room-code-error" : undefined}
-          className="h-14 font-mono text-2xl font-bold uppercase tracking-[0.3em]"
+          className="h-14 font-mono text-2xl font-bold tracking-[0.3em] uppercase"
         />
         <Button type="submit" size="lg" className="h-14" aria-label="Join room">
           Join <ArrowRight aria-hidden />
         </Button>
       </div>
       {error && (
-        <p id="room-code-error" className="mt-2 text-sm font-medium text-rose" role="alert">
+        <p id="room-code-error" className="text-rose mt-2 text-sm font-medium" role="alert">
           {error}
         </p>
       )}

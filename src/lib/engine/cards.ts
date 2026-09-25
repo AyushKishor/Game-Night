@@ -98,11 +98,7 @@ export function shuffledDeck(rng: Rng, filter?: (c: CardId) => boolean): CardId[
  * Deal `count` cards to each of `players` hands from the top of `deck`.
  * Pass `count = "all"` to deal the whole deck round-robin (uneven hands allowed).
  */
-export function deal(
-  deck: CardId[],
-  players: number,
-  count: number | "all",
-): { hands: CardId[][]; rest: CardId[] } {
+export function deal(deck: CardId[], players: number, count: number | "all"): { hands: CardId[][]; rest: CardId[] } {
   const hands: CardId[][] = Array.from({ length: players }, () => []);
   const pile = deck.slice();
   if (count === "all") {
@@ -125,11 +121,7 @@ export function draw(pile: CardId[], n = 1): { drawn: CardId[]; pile: CardId[] }
 /**
  * Refill an empty draw pile from a discard pile, keeping the top discard in place.
  */
-export function recycleDiscards(
-  drawPile: CardId[],
-  discard: CardId[],
-  rng: Rng,
-): { drawPile: CardId[]; discard: CardId[] } {
+export function recycleDiscards(drawPile: CardId[], discard: CardId[], rng: Rng): { drawPile: CardId[]; discard: CardId[] } {
   if (drawPile.length > 0 || discard.length <= 1) return { drawPile, discard };
   const top = discard[discard.length - 1]!;
   return { drawPile: rng.shuffle(discard.slice(0, -1)), discard: [top] };

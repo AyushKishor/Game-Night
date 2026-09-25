@@ -4,7 +4,7 @@ import { Bot, Check, Clock, Crown, Eye, Plus, UserMinus, WifiOff } from "lucide-
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Panel, PanelBody, PanelHeader, PanelTitle } from "@/components/ui/panel";
-import type { Command, PublicPlayer, RoomSnapshot, CommandInput } from "@/lib/shared/protocol";
+import type { PublicPlayer, RoomSnapshot, CommandInput } from "@/lib/shared/protocol";
 import { MAX_PLAYERS } from "@/lib/shared/protocol";
 
 type Send = (c: CommandInput) => Promise<boolean>;
@@ -17,7 +17,7 @@ function PlayerRow({ p, room, meId, send }: { p: PublicPlayer; room: RoomSnapsho
       initial={{ opacity: 0, x: -12 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: 12 }}
-      className="flex items-center gap-3 rounded-xl bg-surface-2 px-3 py-2.5"
+      className="bg-surface-2 flex items-center gap-3 rounded-xl px-3 py-2.5"
     >
       <span className="text-3xl" aria-hidden>
         {p.avatar}
@@ -25,29 +25,29 @@ function PlayerRow({ p, room, meId, send }: { p: PublicPlayer; room: RoomSnapsho
       <div className="min-w-0 flex-1">
         <p className="flex items-center gap-1.5 truncate text-lg font-semibold">
           {p.name}
-          {p.id === meId && <span className="text-base font-normal text-muted">(you)</span>}
-          {p.isHost && <Crown className="size-4 shrink-0 text-amber" aria-label="Host" />}
+          {p.id === meId && <span className="text-muted text-base font-normal">(you)</span>}
+          {p.isHost && <Crown className="text-amber size-4 shrink-0" aria-label="Host" />}
         </p>
         <p className="flex flex-wrap items-center gap-x-2 text-sm">
           {p.isSpectator ? (
-            <span className="inline-flex items-center gap-1 text-violet">
+            <span className="text-violet inline-flex items-center gap-1">
               <Eye className="size-3.5" aria-hidden /> Spectating
             </span>
           ) : p.isBot ? (
-            <span className="inline-flex items-center gap-1 text-sky">
+            <span className="text-sky inline-flex items-center gap-1">
               <Bot className="size-3.5" aria-hidden /> Computer player
             </span>
           ) : p.ready || p.isHost ? (
-            <span className="inline-flex items-center gap-1 font-semibold text-mint">
+            <span className="text-mint inline-flex items-center gap-1 font-semibold">
               <Check className="size-3.5" aria-hidden /> {p.isHost ? "Host" : "Ready"}
             </span>
           ) : (
-            <span className="inline-flex items-center gap-1 text-muted">
+            <span className="text-muted inline-flex items-center gap-1">
               <Clock className="size-3.5" aria-hidden /> Not ready
             </span>
           )}
           {!p.connected && (
-            <span className="inline-flex items-center gap-1 text-rose">
+            <span className="text-rose inline-flex items-center gap-1">
               <WifiOff className="size-3.5" aria-hidden /> Away
             </span>
           )}
@@ -57,12 +57,22 @@ function PlayerRow({ p, room, meId, send }: { p: PublicPlayer; room: RoomSnapsho
       {isHost && p.id !== meId && (
         <div className="flex gap-1">
           {!p.isBot && !p.isSpectator && (
-            <Button variant="ghost" size="sm" onClick={() => send({ kind: "transferHost", playerId: p.id })} aria-label={`Make ${p.name} the host`}>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => send({ kind: "transferHost", playerId: p.id })}
+              aria-label={`Make ${p.name} the host`}
+            >
               <Crown aria-hidden />
             </Button>
           )}
           {p.isBot ? (
-            <Button variant="ghost" size="sm" onClick={() => send({ kind: "removeBot", playerId: p.id })} aria-label={`Remove ${p.name}`}>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => send({ kind: "removeBot", playerId: p.id })}
+              aria-label={`Remove ${p.name}`}
+            >
               <UserMinus aria-hidden />
             </Button>
           ) : (
@@ -74,7 +84,9 @@ function PlayerRow({ p, room, meId, send }: { p: PublicPlayer; room: RoomSnapsho
               </DialogTrigger>
               <DialogContent>
                 <DialogTitle>Remove {p.name}?</DialogTitle>
-                <DialogDescription>They&apos;ll be signed out of this room. If a game is running, the computer plays their seat.</DialogDescription>
+                <DialogDescription>
+                  They&apos;ll be signed out of this room. If a game is running, the computer plays their seat.
+                </DialogDescription>
                 <div className="mt-6 flex justify-end gap-2">
                   <DialogClose asChild>
                     <Button variant="secondary">Cancel</Button>
@@ -102,7 +114,8 @@ export function PlayerList({ room, meId, send }: { room: RoomSnapshot; meId: str
     <Panel>
       <PanelHeader>
         <PanelTitle>
-          Players <span className="text-muted">
+          Players{" "}
+          <span className="text-muted">
             {seated.length}/{MAX_PLAYERS}
           </span>
         </PanelTitle>
@@ -120,10 +133,12 @@ export function PlayerList({ room, meId, send }: { room: RoomSnapshot; meId: str
             ))}
           </AnimatePresence>
         </ul>
-        {seated.length < 2 && <p className="mt-3 text-sm text-muted">Waiting for friends to join… Share the code or add a bot.</p>}
+        {seated.length < 2 && (
+          <p className="text-muted mt-3 text-sm">Waiting for friends to join… Share the code or add a bot.</p>
+        )}
         {spectators.length > 0 && (
           <>
-            <h3 className="mb-2 mt-4 text-sm font-bold uppercase tracking-wider text-muted">Spectators</h3>
+            <h3 className="text-muted mt-4 mb-2 text-sm font-bold tracking-wider uppercase">Spectators</h3>
             <ul className="space-y-2">
               {spectators.map((p) => (
                 <PlayerRow key={p.id} p={p} room={room} meId={meId} send={send} />

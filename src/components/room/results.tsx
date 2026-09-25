@@ -5,13 +5,23 @@ import { Button } from "@/components/ui/button";
 import { Panel, PanelBody, PanelHeader, PanelTitle } from "@/components/ui/panel";
 import type { ViewMode } from "@/components/game/types";
 import { getGame } from "@/games";
-import type { Command, StateResponse, CommandInput } from "@/lib/shared/protocol";
+import type { StateResponse, CommandInput } from "@/lib/shared/protocol";
 import { cn } from "@/lib/utils";
 import { Leaderboard } from "./leaderboard";
 
 type Send = (c: CommandInput) => Promise<boolean>;
 
-export function Results({ data, send, names, mode }: { data: StateResponse; send: Send; names: Record<string, string>; mode: ViewMode }) {
+export function Results({
+  data,
+  send,
+  names,
+  mode,
+}: {
+  data: StateResponse;
+  send: Send;
+  names: Record<string, string>;
+  mode: ViewMode;
+}) {
   const { room, me } = data;
   const res = room.lastResults;
   const game = getGame(res?.gameId ?? room.selectedGameId);
@@ -19,20 +29,20 @@ export function Results({ data, send, names, mode }: { data: StateResponse; send
   const mine = res.standings.find((s) => s.playerId === me.playerId);
   const winners = res.standings.filter((s) => s.place === 1);
   return (
-    <div className={cn("grid gap-5", mode === "table" && "lg:grid-cols-[1.2fr_1fr]")}>
+    <div className={cn("grid gap-5", mode === "table" && "md:grid-cols-[1.2fr_1fr]")}>
       <div className="space-y-5">
         <motion.div
           initial={{ scale: 0.92, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          className="rounded-3xl border border-amber/50 bg-gradient-to-br from-amber/15 to-coral/10 p-6 text-center shadow-soft sm:p-8"
+          className="border-amber/50 from-amber/15 to-coral/10 shadow-soft rounded-3xl border bg-gradient-to-br p-6 text-center sm:p-8"
         >
-          <Trophy className="mx-auto size-12 text-amber" aria-hidden />
-          <p className="mt-2 text-sm font-bold uppercase tracking-wider text-muted">{game?.meta.name} · final result</p>
-          <h1 className="mt-1 font-display text-3xl font-extrabold sm:text-5xl" role="status">
+          <Trophy className="text-amber mx-auto size-12" aria-hidden />
+          <p className="text-muted mt-2 text-sm font-bold tracking-wider uppercase">{game?.meta.name} · final result</p>
+          <h1 className="font-display mt-1 text-3xl font-extrabold sm:text-5xl" aria-live="polite">
             {res.summary}
           </h1>
           {mine && (
-            <p className="mt-3 text-lg text-muted">
+            <p className="text-muted mt-3 text-lg">
               You finished {mine.place === 1 ? (winners.length > 1 ? "tied for first" : "first") : `#${mine.place}`} and earned{" "}
               <strong className="text-text">+{res.awarded[me.playerId] ?? 0}</strong> Game Night points.
             </p>
@@ -48,7 +58,10 @@ export function Results({ data, send, names, mode }: { data: StateResponse; send
               {res.standings.map((s) => (
                 <li
                   key={s.playerId}
-                  className={cn("flex items-center gap-3 rounded-xl bg-surface-2 px-3 py-2.5", s.place === 1 && "ring-2 ring-amber/60")}
+                  className={cn(
+                    "bg-surface-2 flex items-center gap-3 rounded-xl px-3 py-2.5",
+                    s.place === 1 && "ring-amber/60 ring-2",
+                  )}
                 >
                   <span className="w-8 text-center font-mono text-xl font-bold" aria-label={`Place ${s.place}`}>
                     {s.place}
@@ -57,10 +70,12 @@ export function Results({ data, send, names, mode }: { data: StateResponse; send
                     {names[s.playerId] ?? "Player"}
                     {s.playerId === me.playerId && <span className="text-muted"> (you)</span>}
                   </span>
-                  <span className="text-sm text-muted">
-                    {game?.meta.lowerIsBetter ? "Penalty" : "Score"} <strong className="font-mono text-text">{s.score}</strong>
+                  <span className="text-muted text-sm">
+                    {game?.meta.lowerIsBetter ? "Penalty" : "Score"} <strong className="text-text font-mono">{s.score}</strong>
                   </span>
-                  <span className="rounded-lg bg-mint/15 px-2 py-1 font-mono text-sm font-bold text-mint">+{res.awarded[s.playerId] ?? 0}</span>
+                  <span className="bg-mint/15 text-mint rounded-lg px-2 py-1 font-mono text-sm font-bold">
+                    +{res.awarded[s.playerId] ?? 0}
+                  </span>
                 </li>
               ))}
             </ol>
@@ -80,7 +95,7 @@ export function Results({ data, send, names, mode }: { data: StateResponse; send
             </Button>
           </div>
         ) : (
-          <p className="rounded-xl bg-surface-2 p-4 text-center text-muted" role="status">
+          <p className="bg-surface-2 text-muted rounded-xl p-4 text-center" role="status">
             Waiting for the host to pick what&apos;s next…
           </p>
         )}
@@ -88,14 +103,14 @@ export function Results({ data, send, names, mode }: { data: StateResponse; send
       <Panel>
         <PanelHeader>
           <PanelTitle className="flex items-center gap-2">
-            <Trophy className="size-5 text-amber" aria-hidden /> Game Night leaderboard
+            <Trophy className="text-amber size-5" aria-hidden /> Game Night leaderboard
           </PanelTitle>
         </PanelHeader>
         <PanelBody>
           <Leaderboard players={room.players} meId={me.playerId} />
           {room.history.length > 0 && (
             <>
-              <h3 className="mt-5 text-sm font-bold uppercase tracking-wider text-muted">Games played tonight</h3>
+              <h3 className="text-muted mt-5 text-sm font-bold tracking-wider uppercase">Games played tonight</h3>
               <ol className="mt-2 space-y-1 text-sm">
                 {room.history
                   .slice()

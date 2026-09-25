@@ -168,7 +168,8 @@ export const goFish: GameModule<GoFishState, Action> = {
     for (const c of hand) counts.set(rankOf(c), (counts.get(rankOf(c)) ?? 0) + 1);
     const rank = [...counts.entries()].sort((a, b) => b[1] - a[1])[0]![0];
     // Remember who asked for this rank recently (public information).
-    const hint = state.lastAsk && state.lastAsk.rank === rank && state.lastAsk.asker !== player && opts.includes(state.lastAsk.asker);
+    const hint =
+      state.lastAsk && state.lastAsk.rank === rank && state.lastAsk.asker !== player && opts.includes(state.lastAsk.asker);
     return { type: "ask", target: hint ? state.lastAsk!.asker : ctx.rng.pick(opts), rank };
   },
 

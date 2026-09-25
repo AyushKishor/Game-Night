@@ -29,9 +29,8 @@ import { advance, submitAction, type GameEnvelope } from "@/lib/engine/runner";
 import type { AnyGameModule } from "@/lib/engine/types";
 import { act, start } from "./sim";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const st = <T,>(e: GameEnvelope) => e.state as T;
-const withState = <T,>(e: GameEnvelope, patch: Partial<T>): GameEnvelope => ({ ...e, state: { ...(e.state as T), ...patch } });
+const st = <T>(e: GameEnvelope) => e.state as T;
+const withState = <T>(e: GameEnvelope, patch: Partial<T>): GameEnvelope => ({ ...e, state: { ...(e.state as T), ...patch } });
 const rejects = (g: AnyGameModule, e: GameEnvelope, p: string, a: unknown, env: Parameters<typeof submitAction>[4]) =>
   expect(submitAction(g, e, p, a, env).ok).toBe(false);
 
@@ -85,7 +84,12 @@ describe("Go Fish", () => {
   it("passes the turn after Go Fish unless the drawn card matches", () => {
     const { envelope, env, players } = start(goFish, 2);
     const [a, b] = players as [string, string];
-    const e = withState<GoFishState>(envelope, { turn: a, hands: { [a]: ["3H"], [b]: ["9C"] }, deck: ["5D", "6D"], books: { [a]: [], [b]: [] } });
+    const e = withState<GoFishState>(envelope, {
+      turn: a,
+      hands: { [a]: ["3H"], [b]: ["9C"] },
+      deck: ["5D", "6D"],
+      books: { [a]: [], [b]: [] },
+    });
     expect(st<GoFishState>(act(goFish, e, a, { type: "ask", target: b, rank: "3" }, env)).turn).toBe(b);
   });
 });
@@ -113,7 +117,9 @@ describe("War", () => {
   it("awards the pot to the highest card and starts a war on ties", () => {
     const { envelope, env, players } = start(war, 2);
     const [a, b] = players as [string, string];
-    const e = withState<WarState>(envelope, { piles: { [a]: ["KH", "2C", "3C", "4C", "5C"], [b]: ["KS", "2D", "3D", "4D", "AD"] } });
+    const e = withState<WarState>(envelope, {
+      piles: { [a]: ["KH", "2C", "3C", "4C", "5C"], [b]: ["KS", "2D", "3D", "4D", "AD"] },
+    });
     const e1 = act(war, act(war, e, a, { type: "flip" }, env), b, { type: "flip" }, env);
     expect(st<WarState>(e1).atWar).toBe(true);
     const half = act(war, e1, a, { type: "flip" }, env);
@@ -196,7 +202,13 @@ describe("Hearts", () => {
       taken: { [a]: allPoints, [b]: [], [c]: [], [d]: [] },
     });
     let cur = e;
-    for (const [p, card] of [[a, "AC"], [b, "2C"], [c, "3C"], [d, "4C"]] as const) cur = act(hearts, cur, p, { type: "play", card }, env);
+    for (const [p, card] of [
+      [a, "AC"],
+      [b, "2C"],
+      [c, "3C"],
+      [d, "4C"],
+    ] as const)
+      cur = act(hearts, cur, p, { type: "play", card }, env);
     const s = st<HeartsState>(cur);
     expect(s.scores[a]).toBe(0);
     expect(s.scores[b]).toBe(26);
@@ -205,8 +217,24 @@ describe("Hearts", () => {
 
 describe("Spades", () => {
   it("treats spades as trump", () => {
-    expect(trickWinner([{ player: "a", card: "AH" }, { player: "b", card: "2S" }], "S").player).toBe("b");
-    expect(trickWinner([{ player: "a", card: "AH" }, { player: "b", card: "KD" }], "S").player).toBe("a");
+    expect(
+      trickWinner(
+        [
+          { player: "a", card: "AH" },
+          { player: "b", card: "2S" },
+        ],
+        "S",
+      ).player,
+    ).toBe("b");
+    expect(
+      trickWinner(
+        [
+          { player: "a", card: "AH" },
+          { player: "b", card: "KD" },
+        ],
+        "S",
+      ).player,
+    ).toBe("a");
   });
   it("scores bids, bags and failed contracts", () => {
     const { envelope } = start(spades, 4, { teamMode: true });
@@ -257,7 +285,13 @@ describe("Bluff", () => {
   });
   it("closes the challenge window on timeout", () => {
     const { envelope, env, players } = start(bluff, 3);
-    const e1 = act(bluff, envelope, players[0]!, { type: "play", cards: [st<BluffState>(envelope).hands[players[0]!]![0]!] }, env);
+    const e1 = act(
+      bluff,
+      envelope,
+      players[0]!,
+      { type: "play", cards: [st<BluffState>(envelope).hands[players[0]!]![0]!] },
+      env,
+    );
     const later = advance(bluff, e1, { ...env, autopilot: new Set(), now: env.now + 13_000 });
     expect(st<BluffState>(later).phase).toBe("play");
   });
@@ -301,7 +335,13 @@ describe("Higher or Lower", () => {
     const { envelope, env, players } = start(higherLower, 2);
     const [a, b] = players as [string, string];
     const e = withState<HigherLowerState>(envelope, { current: "5H", deck: ["9C", "2D"] });
-    const e1 = act(higherLower, act(higherLower, e, a, { type: "guess", guess: "higher" }, env), b, { type: "guess", guess: "lower" }, env);
+    const e1 = act(
+      higherLower,
+      act(higherLower, e, a, { type: "guess", guess: "higher" }, env),
+      b,
+      { type: "guess", guess: "lower" },
+      env,
+    );
     expect(st<HigherLowerState>(e1).scores).toEqual({ [a]: 1, [b]: 0 });
     rejects(higherLower, e1, a, { type: "guess", guess: "higher" }, env);
   });
@@ -330,8 +370,16 @@ describe("Majority Rules", () => {
     const { envelope, env, players } = start(majorityRules, 3);
     const [a, b, c] = players as [string, string, string];
     const e1 = act(majorityRules, envelope, a, { type: "vote", side: "a" }, env);
-    expect(JSON.stringify(majorityRules.publicView(st<MajorityState>(e1), { ...env, config: e1.config }))).not.toContain('"votes":{');
-    const e2 = act(majorityRules, act(majorityRules, e1, b, { type: "vote", side: "a" }, env), c, { type: "vote", side: "b" }, env);
+    expect(JSON.stringify(majorityRules.publicView(st<MajorityState>(e1), { ...env, config: e1.config }))).not.toContain(
+      '"votes":{',
+    );
+    const e2 = act(
+      majorityRules,
+      act(majorityRules, e1, b, { type: "vote", side: "a" }, env),
+      c,
+      { type: "vote", side: "b" },
+      env,
+    );
     expect(st<MajorityState>(e2).scores).toEqual({ [a]: 1, [b]: 1, [c]: 0 });
   });
 });

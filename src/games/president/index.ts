@@ -141,7 +141,8 @@ function finishRound(state: PresidentState, ctx: GameContext): PresidentState {
 function canBeat(state: PresidentState, cards: CardId[]): string | null {
   if (new Set(cards.map(rankOf)).size !== 1) return "All cards you play must be the same rank.";
   if (!state.pile) return null;
-  if (cards.length !== state.pile.cards.length) return `Play exactly ${state.pile.cards.length} card${state.pile.cards.length > 1 ? "s" : ""}.`;
+  if (cards.length !== state.pile.cards.length)
+    return `Play exactly ${state.pile.cards.length} card${state.pile.cards.length > 1 ? "s" : ""}.`;
   if (presRank(cards[0]!) <= presRank(state.pile.cards[0]!)) return "Your cards must be higher than the pile.";
   return null;
 }
@@ -183,7 +184,8 @@ export const president: GameModule<PresidentState, Action> = {
         "Players drop out as their hands empty. Titles go from President down to Scum.",
         "Next round, the Scum gives their best card to the President, gets back the President's worst, and leads.",
       ],
-      scoring: "Each round, first out scores one less than the number of players, second out one less again, and so on down to 0.",
+      scoring:
+        "Each round, first out scores one less than the number of players, second out one less again, and so on down to 0.",
       ending: "Highest total after the set number of rounds wins; ties share the win.",
     },
   },
@@ -215,7 +217,11 @@ export const president: GameModule<PresidentState, Action> = {
   apply(state, player, action, ctx) {
     if (action.type === "next") return dealRound(state.players, state.round + 1, ctx, state);
     if (action.type === "pass") {
-      return advanceTurn({ ...state, passed: [...state.passed, player], log: pushLog(state.log, `${nameOf(ctx, player)} passed.`) }, player, ctx);
+      return advanceTurn(
+        { ...state, passed: [...state.passed, player], log: pushLog(state.log, `${nameOf(ctx, player)} passed.`) },
+        player,
+        ctx,
+      );
     }
     const hand = state.hands[player]!.filter((c) => !action.cards.includes(c));
     let s: PresidentState = {
@@ -246,7 +252,9 @@ export const president: GameModule<PresidentState, Action> = {
     if (!options.length) return { type: "pass" };
     if (!state.pile) return { type: "play", cards: options[0]! };
     // Don't waste 2s early unless it goes out.
-    const pick = options.find((o) => rankOf(o[0]!) !== "2") ?? (state.hands[player]!.length <= options[0]!.length + 1 ? options[0] : undefined);
+    const pick =
+      options.find((o) => rankOf(o[0]!) !== "2") ??
+      (state.hands[player]!.length <= options[0]!.length + 1 ? options[0] : undefined);
     return pick ? { type: "play", cards: pick } : { type: "pass" };
   },
 
@@ -273,7 +281,10 @@ export const president: GameModule<PresidentState, Action> = {
   privateView(state, player): PresidentPrivate | null {
     const hand = state.hands[player];
     if (!hand) return null;
-    return { hand: sortPres(hand), options: state.turn === player && state.phase === "play" ? presidentOptions(state, player) : [] };
+    return {
+      hand: sortPres(hand),
+      options: state.turn === player && state.phase === "play" ? presidentOptions(state, player) : [],
+    };
   },
 };
 

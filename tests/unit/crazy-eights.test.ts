@@ -93,14 +93,19 @@ describe("Crazy Eights", () => {
   });
 
   it("deduplicates nothing itself but stays consistent: card count is conserved", () => {
-    simulate(crazyEights, 4, { rounds: 2 }, {
-      onStep: (e) => {
-        const s = S(e);
-        if (s.phase !== "play") return;
-        const total = s.drawPile.length + s.discard.length + Object.values(s.hands).reduce((n, h) => n + h.length, 0);
-        expect(total).toBe(52);
+    simulate(
+      crazyEights,
+      4,
+      { rounds: 2 },
+      {
+        onStep: (e) => {
+          const s = S(e);
+          if (s.phase !== "play") return;
+          const total = s.drawPile.length + s.discard.length + Object.values(s.hands).reduce((n, h) => n + h.length, 0);
+          expect(total).toBe(52);
+        },
       },
-    });
+    );
   });
 
   it.each([2, 3, 5, 7])("completes a full simulated match with %i players and keeps hands private", (n) => {

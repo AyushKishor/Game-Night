@@ -32,7 +32,13 @@ const canVote = (s: CaptionState, p: PlayerId) => s.ballot.some((b) => b.author 
 function toVote(state: CaptionState, ctx: GameContext): CaptionState {
   const authors = ctx.rng.shuffle(Object.keys(state.captions));
   const ballot = authors.map((author, i) => ({ id: `c${i + 1}`, author }));
-  const s = { ...state, ballot, votes: {}, phase: "vote" as const, deadline: deadlineFrom(ctx.now, Math.max(20, ctx.config.roundSeconds / 2)) };
+  const s = {
+    ...state,
+    ballot,
+    votes: {},
+    phase: "vote" as const,
+    deadline: deadlineFrom(ctx.now, Math.max(20, ctx.config.roundSeconds / 2)),
+  };
   return ballot.length < 2 ? reveal(s, ctx) : s;
 }
 
@@ -47,7 +53,9 @@ function reveal(state: CaptionState, ctx: GameContext): CaptionState {
   const winners = entries.filter((e) => top > 0 && e.votes === top);
   const summary: RoundSummary = {
     round: state.round,
-    title: winners.length ? `Best caption: “${winners[0]!.text}” — ${winners.map((w) => nameOf(ctx, w.author)).join(" & ")}` : "No votes this round",
+    title: winners.length
+      ? `Best caption: “${winners[0]!.text}” — ${winners.map((w) => nameOf(ctx, w.author)).join(" & ")}`
+      : "No votes this round",
     lines: entries.map((e) => `${nameOf(ctx, e.author)}: ${e.votes} vote${e.votes === 1 ? "" : "s"}`),
     scores: gained,
   };
@@ -64,7 +72,15 @@ function reveal(state: CaptionState, ctx: GameContext): CaptionState {
 
 function next(state: CaptionState, ctx: GameContext): CaptionState {
   if (state.round >= state.scenarios.length) return { ...state, phase: "over", deadline: null };
-  return { ...state, round: state.round + 1, phase: "write", captions: {}, ballot: [], votes: {}, deadline: deadlineFrom(ctx.now, ctx.config.roundSeconds) };
+  return {
+    ...state,
+    round: state.round + 1,
+    phase: "write",
+    captions: {},
+    ballot: [],
+    votes: {},
+    deadline: deadlineFrom(ctx.now, ctx.config.roundSeconds),
+  };
 }
 
 export const captionClash: GameModule<CaptionState, Action> = {
@@ -93,7 +109,11 @@ export const captionClash: GameModule<CaptionState, Action> = {
   },
   settings: ["rounds", "roundSeconds", "familyFriendly"],
   houseRules: [SIP_RULE],
-  presets: { quick: { rounds: 3, roundSeconds: 60 }, standard: { rounds: 5, roundSeconds: 75 }, long: { rounds: 8, roundSeconds: 90 } },
+  presets: {
+    quick: { rounds: 3, roundSeconds: 60 },
+    standard: { rounds: 5, roundSeconds: 75 },
+    long: { rounds: 8, roundSeconds: 90 },
+  },
   actionSchema,
 
   setup: (players, ctx) => ({
@@ -151,7 +171,8 @@ export const captionClash: GameModule<CaptionState, Action> = {
     return next(state, ctx);
   },
   botAction(state, player, ctx) {
-    if (state.phase === "write" && !state.captions[player]) return { type: "caption", text: ctx.rng.pick(ctx.content.botCaptions.captions) };
+    if (state.phase === "write" && !state.captions[player])
+      return { type: "caption", text: ctx.rng.pick(ctx.content.botCaptions.captions) };
     if (state.phase === "vote" && !state.votes[player]) {
       const options = state.ballot.filter((b) => b.author !== player);
       return options.length ? { type: "vote", id: ctx.rng.pick(options).id } : null;

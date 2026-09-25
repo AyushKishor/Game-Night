@@ -3,11 +3,14 @@ import { cn } from "@/lib/utils";
 
 export function Brand({ className, size = "md" }: { className?: string; size?: "md" | "lg" }) {
   return (
-    <Link href="/" className={cn("inline-flex items-center gap-2 rounded-lg font-display font-extrabold tracking-tight", className)}>
+    <Link
+      href="/"
+      className={cn("font-display inline-flex items-center gap-2 rounded-lg font-extrabold tracking-tight", className)}
+    >
       <span
         aria-hidden
         className={cn(
-          "grid place-items-center rounded-xl bg-coral text-[#1a0d08] shadow-soft",
+          "bg-coral shadow-soft grid place-items-center rounded-xl text-[#1a0d08]",
           size === "lg" ? "size-12 text-2xl" : "size-9 text-lg",
         )}
       >

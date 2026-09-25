@@ -29,7 +29,9 @@ const dir = join(process.cwd(), "supabase", "migrations");
 async function main() {
   await sql`create table if not exists gn_schema_migrations (name text primary key, applied_at timestamptz not null default now())`;
   const applied = new Set((await sql<{ name: string }[]>`select name from gn_schema_migrations`).map((r) => r.name));
-  const files = readdirSync(dir).filter((f) => f.endsWith(".sql")).sort();
+  const files = readdirSync(dir)
+    .filter((f) => f.endsWith(".sql"))
+    .sort();
   for (const file of files) {
     if (applied.has(file)) {
       console.log(`✓ ${file} (already applied)`);

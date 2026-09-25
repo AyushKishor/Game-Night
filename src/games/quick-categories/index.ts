@@ -57,7 +57,9 @@ function score(state: QuickCatState, ctx: GameContext): QuickCatState {
   const summary: RoundSummary = {
     round: state.round,
     title: `${cat} — ${state.letters[state.round - 1]}`,
-    lines: state.players.map((p) => `${nameOf(ctx, p)}: ${state.answers[p] ?? "—"} ${valid[p] ? `(+${gained[p]})` : "(no points)"}`),
+    lines: state.players.map(
+      (p) => `${nameOf(ctx, p)}: ${state.answers[p] ?? "—"} ${valid[p] ? `(+${gained[p]})` : "(no points)"}`,
+    ),
     scores: gained,
   };
   return {
@@ -74,11 +76,25 @@ function score(state: QuickCatState, ctx: GameContext): QuickCatState {
 const toReview = (state: QuickCatState, ctx: GameContext): QuickCatState =>
   Object.keys(state.answers).length === 0
     ? score(state, ctx)
-    : { ...state, phase: "review", flags: {}, done: [], deadline: deadlineFrom(ctx.now, Math.max(20, Math.round(ctx.config.roundSeconds / 2))) };
+    : {
+        ...state,
+        phase: "review",
+        flags: {},
+        done: [],
+        deadline: deadlineFrom(ctx.now, Math.max(20, Math.round(ctx.config.roundSeconds / 2))),
+      };
 
 function next(state: QuickCatState, ctx: GameContext): QuickCatState {
   if (state.round >= state.categories.length) return { ...state, phase: "over", deadline: null };
-  return { ...state, round: state.round + 1, phase: "answer", answers: {}, flags: {}, done: [], deadline: deadlineFrom(ctx.now, ctx.config.roundSeconds) };
+  return {
+    ...state,
+    round: state.round + 1,
+    phase: "answer",
+    answers: {},
+    flags: {},
+    done: [],
+    deadline: deadlineFrom(ctx.now, ctx.config.roundSeconds),
+  };
 }
 
 export const quickCategories: GameModule<QuickCatState, Action> = {
@@ -226,14 +242,19 @@ export const quickCategories: GameModule<QuickCatState, Action> = {
       flagCounts:
         state.phase === "answer"
           ? null
-          : Object.fromEntries(state.players.map((a) => [a, state.players.filter((f) => (state.flags[f] ?? []).includes(a)).length])),
+          : Object.fromEntries(
+              state.players.map((a) => [a, state.players.filter((f) => (state.flags[f] ?? []).includes(a)).length]),
+            ),
       done: state.done,
       last: state.phase === "reveal" || state.phase === "over" ? state.last : null,
       scores: state.scores,
       log: state.log,
     };
   },
-  privateView: (state, player): QuickCatPrivate => ({ answer: state.answers[player] ?? null, flagged: state.flags[player] ?? [] }),
+  privateView: (state, player): QuickCatPrivate => ({
+    answer: state.answers[player] ?? null,
+    flagged: state.flags[player] ?? [],
+  }),
 };
 
 export interface QuickCatPublic {

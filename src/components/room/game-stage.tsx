@@ -6,7 +6,7 @@ import { Panel, PanelBody, PanelHeader, PanelTitle } from "@/components/ui/panel
 import { GAME_VIEWS } from "@/components/game/registry";
 import type { ViewMode } from "@/components/game/types";
 import { getGame } from "@/games";
-import type { Command, StateResponse, CommandInput } from "@/lib/shared/protocol";
+import type { StateResponse, CommandInput } from "@/lib/shared/protocol";
 import { GameIcon } from "./game-icon";
 import { Leaderboard } from "./leaderboard";
 import { RulesCard } from "./rules-card";
@@ -64,7 +64,9 @@ export function GameStage({
                 </DialogTrigger>
                 <DialogContent>
                   <DialogTitle>End this game?</DialogTitle>
-                  <DialogDescription>Everyone returns to the lobby. No Game Night points are awarded for an unfinished game.</DialogDescription>
+                  <DialogDescription>
+                    Everyone returns to the lobby. No Game Night points are awarded for an unfinished game.
+                  </DialogDescription>
                   <div className="mt-6 flex justify-end gap-2">
                     <DialogClose asChild>
                       <Button variant="secondary">Keep playing</Button>
@@ -85,13 +87,13 @@ export function GameStage({
           <button
             type="button"
             onClick={onSwitchToHand}
-            className="flex w-full items-center justify-center gap-2 rounded-xl border border-amber/60 bg-amber/10 px-4 py-2 font-semibold text-amber"
+            className="border-amber/60 bg-amber/10 text-amber flex w-full items-center justify-center gap-2 rounded-xl border px-4 py-2 font-semibold"
           >
-            <Smartphone className="size-4" aria-hidden /> It&apos;s your turn — open your hand privately (or use your phone)
+            <Smartphone className="size-4" aria-hidden /> You&apos;re up — switch to My hand, or play from your phone
           </button>
         )}
         {!inGame && !me.isSpectator && (
-          <p className="rounded-xl bg-surface-2 px-4 py-2 text-sm text-muted" role="status">
+          <p className="bg-surface-2 text-muted rounded-xl px-4 py-2 text-sm" role="status">
             You joined mid-game — you&apos;ll be dealt in next game. Enjoy the show!
           </p>
         )}
@@ -116,7 +118,7 @@ export function GameStage({
           <Panel>
             <PanelHeader>
               <PanelTitle className="flex items-center gap-2">
-                <Trophy className="size-5 text-amber" aria-hidden /> Leaderboard
+                <Trophy className="text-amber size-5" aria-hidden /> Leaderboard
               </PanelTitle>
             </PanelHeader>
             <PanelBody>

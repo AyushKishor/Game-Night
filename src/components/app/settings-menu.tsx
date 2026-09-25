@@ -8,14 +8,26 @@ import { Switch } from "@/components/ui/switch";
 import { useSettings } from "@/lib/client/settings";
 import { play } from "@/lib/client/sound";
 
-function Row({ id, label, hint, checked, onChange }: { id: string; label: string; hint: string; checked: boolean; onChange: (v: boolean) => void }) {
+function Row({
+  id,
+  label,
+  hint,
+  checked,
+  onChange,
+}: {
+  id: string;
+  label: string;
+  hint: string;
+  checked: boolean;
+  onChange: (v: boolean) => void;
+}) {
   return (
     <div className="flex items-start justify-between gap-4 py-3">
       <div>
-        <Label htmlFor={id} className="text-base text-text">
+        <Label htmlFor={id} className="text-text text-base">
           {label}
         </Label>
-        <p className="text-sm text-muted">{hint}</p>
+        <p className="text-muted text-sm">{hint}</p>
       </div>
       <Switch id={id} checked={checked} onCheckedChange={onChange} />
     </div>
@@ -50,10 +62,16 @@ export function SettingsMenu() {
       <DialogContent>
         <DialogTitle>Settings</DialogTitle>
         <DialogDescription>These apply to this device only.</DialogDescription>
-        <div className="mt-4 divide-y divide-border">
-          <Row id="sound" label="Sound effects" hint="Subtle cues for turns, dealing and wins." checked={s.soundOn} onChange={(v) => s.set({ soundOn: v })} />
+        <div className="divide-border mt-4 divide-y">
+          <Row
+            id="sound"
+            label="Sound effects"
+            hint="Subtle cues for turns, dealing and wins."
+            checked={s.soundOn}
+            onChange={(v) => s.set({ soundOn: v })}
+          />
           <div className="py-3">
-            <Label htmlFor="volume" className="text-base text-text">
+            <Label htmlFor="volume" className="text-text text-base">
               Volume
             </Label>
             <Slider
@@ -76,7 +94,13 @@ export function SettingsMenu() {
             checked={s.reducedSensory}
             onChange={(v) => s.set({ reducedSensory: v })}
           />
-          <Row id="motion" label="Reduce motion" hint="Turns off card and screen animations." checked={s.reducedMotion} onChange={(v) => s.set({ reducedMotion: v })} />
+          <Row
+            id="motion"
+            label="Reduce motion"
+            hint="Turns off card and screen animations."
+            checked={s.reducedMotion}
+            onChange={(v) => s.set({ reducedMotion: v })}
+          />
           <Row
             id="contrast"
             label="High-contrast cards"

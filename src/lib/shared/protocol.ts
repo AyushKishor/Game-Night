@@ -8,9 +8,7 @@ export const ROOM_CODE_LENGTH = 6;
 export const MAX_PLAYERS = 12;
 export const MAX_SPECTATORS = 20;
 
-export const AVATARS = [
-  "🦊", "🦉", "🐱", "🐶", "🐼", "🐸", "🐙", "🦄", "🐢", "🐧", "🚀", "⭐", "🌵", "🍩", "🎸", "🎈",
-] as const;
+export const AVATARS = ["🦊", "🦉", "🐱", "🐶", "🐼", "🐸", "🐙", "🦄", "🐢", "🐧", "🚀", "⭐", "🌵", "🍩", "🎸", "🎈"] as const;
 
 export const roomCodeSchema = z
   .string()

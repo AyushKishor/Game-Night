@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { PRESET_LABELS } from "@/lib/engine/helpers";
 import type { AnyGameModule, GameConfig, PresetId, SettingKey } from "@/lib/engine/types";
-import type { Command, RoomSnapshot, CommandInput } from "@/lib/shared/protocol";
+import type { RoomSnapshot, CommandInput } from "@/lib/shared/protocol";
 import { cn } from "@/lib/utils";
 
 type Send = (c: CommandInput) => Promise<boolean>;
@@ -31,7 +31,7 @@ function Choice<T extends string | number>({
 }) {
   return (
     <div role="radiogroup" aria-labelledby={id}>
-      <p id={id} className="text-sm font-semibold text-muted">
+      <p id={id} className="text-muted text-sm font-semibold">
         {label}
       </p>
       <div className="mt-1.5 flex flex-wrap gap-1.5">
@@ -55,14 +55,26 @@ function Choice<T extends string | number>({
   );
 }
 
-function Toggle({ id, label, hint, checked, onChange }: { id: string; label: string; hint?: string; checked: boolean; onChange: (v: boolean) => void }) {
+function Toggle({
+  id,
+  label,
+  hint,
+  checked,
+  onChange,
+}: {
+  id: string;
+  label: string;
+  hint?: string;
+  checked: boolean;
+  onChange: (v: boolean) => void;
+}) {
   return (
     <div className="flex items-center justify-between gap-3">
       <div>
-        <Label htmlFor={id} className="text-base text-text">
+        <Label htmlFor={id} className="text-text text-base">
           {label}
         </Label>
-        {hint && <p className="text-sm text-muted">{hint}</p>}
+        {hint && <p className="text-muted text-sm">{hint}</p>}
       </div>
       <Switch id={id} checked={checked} onCheckedChange={onChange} />
     </div>
@@ -82,7 +94,7 @@ export function GameSettings({ room, game, send }: { room: RoomSnapshot; game: A
   return (
     <div className="space-y-5">
       <div role="radiogroup" aria-label="Preset">
-        <p className="text-sm font-semibold text-muted">Preset</p>
+        <p className="text-muted text-sm font-semibold">Preset</p>
         <div className="mt-1.5 grid grid-cols-3 gap-1.5">
           {(Object.keys(PRESET_LABELS) as PresetId[]).map((p) => (
             <button
@@ -100,22 +112,32 @@ export function GameSettings({ room, game, send }: { room: RoomSnapshot; game: A
             </button>
           ))}
         </div>
-        {room.preset === "custom" && <p className="mt-1 text-xs text-muted">Custom settings</p>}
+        {room.preset === "custom" && <p className="text-muted mt-1 text-xs">Custom settings</p>}
       </div>
 
       {has("rounds") && (
         <div>
-          <p id="rounds-label" className="text-sm font-semibold text-muted">
+          <p id="rounds-label" className="text-muted text-sm font-semibold">
             Rounds
           </p>
           <div className="mt-1.5 flex items-center gap-2" role="group" aria-labelledby="rounds-label">
-            <Button variant="secondary" size="icon" aria-label="Fewer rounds" onClick={() => set({ rounds: Math.max(1, c.rounds - 1) })}>
+            <Button
+              variant="secondary"
+              size="icon"
+              aria-label="Fewer rounds"
+              onClick={() => set({ rounds: Math.max(1, c.rounds - 1) })}
+            >
               <Minus />
             </Button>
             <span className="w-10 text-center font-mono text-xl font-bold" aria-live="polite">
               {c.rounds}
             </span>
-            <Button variant="secondary" size="icon" aria-label="More rounds" onClick={() => set({ rounds: Math.min(30, c.rounds + 1) })}>
+            <Button
+              variant="secondary"
+              size="icon"
+              aria-label="More rounds"
+              onClick={() => set({ rounds: Math.min(30, c.rounds + 1) })}
+            >
               <Plus />
             </Button>
           </div>
@@ -126,7 +148,9 @@ export function GameSettings({ room, game, send }: { room: RoomSnapshot; game: A
           id="target"
           label={game.meta.lowerIsBetter ? "Game ends when someone reaches" : "Target score"}
           value={c.targetScore}
-          options={TARGET_OPTIONS.includes(c.targetScore) ? TARGET_OPTIONS : [...TARGET_OPTIONS, c.targetScore].sort((a, b) => a - b)}
+          options={
+            TARGET_OPTIONS.includes(c.targetScore) ? TARGET_OPTIONS : [...TARGET_OPTIONS, c.targetScore].sort((a, b) => a - b)
+          }
           format={(v) => String(v)}
           onChange={(v) => set({ targetScore: v })}
         />
@@ -146,7 +170,9 @@ export function GameSettings({ room, game, send }: { room: RoomSnapshot; game: A
           id="round"
           label="Round timer"
           value={c.roundSeconds}
-          options={ROUND_OPTIONS.includes(c.roundSeconds) ? ROUND_OPTIONS : [...ROUND_OPTIONS, c.roundSeconds].sort((a, b) => a - b)}
+          options={
+            ROUND_OPTIONS.includes(c.roundSeconds) ? ROUND_OPTIONS : [...ROUND_OPTIONS, c.roundSeconds].sort((a, b) => a - b)
+          }
           format={(v) => (v === 0 ? "Off" : `${v}s`)}
           onChange={(v) => set({ roundSeconds: v })}
         />
@@ -161,11 +187,16 @@ export function GameSettings({ room, game, send }: { room: RoomSnapshot; game: A
           onChange={(v) => set({ difficulty: v })}
         />
       )}
-      {(["teamMode", "familyFriendly", "allowJoinInProgress"] as const)
-        .filter(has)
-        .map((k) => (
-          <Toggle key={k} id={k} label={TOGGLE_LABELS[k]!.label} hint={TOGGLE_LABELS[k]!.hint} checked={Boolean(c[k])} onChange={(v) => set({ [k]: v })} />
-        ))}
+      {(["teamMode", "familyFriendly", "allowJoinInProgress"] as const).filter(has).map((k) => (
+        <Toggle
+          key={k}
+          id={k}
+          label={TOGGLE_LABELS[k]!.label}
+          hint={TOGGLE_LABELS[k]!.hint}
+          checked={Boolean(c[k])}
+          onChange={(v) => set({ [k]: v })}
+        />
+      ))}
       {(game.houseRules ?? []).map((r) => (
         <Toggle
           key={r.key}

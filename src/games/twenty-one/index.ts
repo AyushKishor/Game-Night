@@ -52,7 +52,10 @@ function dealRound(players: PlayerId[], round: number, ctx: GameContext, prev?: 
   const hands: Record<PlayerId, CardId[]> = {};
   players.forEach((p, i) => (hands[p] = [deck[i * 2]!, deck[i * 2 + 1]!]));
   const used = players.length * 2;
-  const status = Object.fromEntries(players.map((p) => [p, handTotal(hands[p]!) === 21 ? "twentyone" : "playing"])) as Record<PlayerId, Status>;
+  const status = Object.fromEntries(players.map((p) => [p, handTotal(hands[p]!) === 21 ? "twentyone" : "playing"])) as Record<
+    PlayerId,
+    Status
+  >;
   const s: TwentyOneState = {
     players,
     deck: deck.slice(used + 2),
@@ -140,7 +143,11 @@ export const twentyOne: GameModule<TwentyOneState, Action> = {
   },
   settings: ["rounds", "roundSeconds"],
   houseRules: [SIP_RULE],
-  presets: { quick: { rounds: 3, roundSeconds: 30 }, standard: { rounds: 6, roundSeconds: 45 }, long: { rounds: 10, roundSeconds: 60 } },
+  presets: {
+    quick: { rounds: 3, roundSeconds: 30 },
+    standard: { rounds: 6, roundSeconds: 45 },
+    long: { rounds: 10, roundSeconds: 60 },
+  },
   actionSchema,
 
   setup: (players, ctx) => dealRound(players, 1, ctx),
@@ -157,7 +164,9 @@ export const twentyOne: GameModule<TwentyOneState, Action> = {
 
   apply(state, player, action, ctx) {
     if (action.type === "next") {
-      return state.round >= ctx.config.rounds ? { ...state, phase: "over", deadline: null } : dealRound(state.players, state.round + 1, ctx, state);
+      return state.round >= ctx.config.rounds
+        ? { ...state, phase: "over", deadline: null }
+        : dealRound(state.players, state.round + 1, ctx, state);
     }
     let s = state;
     if (action.type === "hit") {
@@ -181,7 +190,9 @@ export const twentyOne: GameModule<TwentyOneState, Action> = {
   onTimeout(state, ctx) {
     if (state.phase === "reveal") return twentyOne.apply(state, ctx.hostId, { type: "next" }, ctx);
     // Anyone still deciding stands.
-    const status = Object.fromEntries(state.players.map((p) => [p, state.status[p] === "playing" ? "stood" : state.status[p]!])) as Record<PlayerId, Status>;
+    const status = Object.fromEntries(
+      state.players.map((p) => [p, state.status[p] === "playing" ? "stood" : state.status[p]!]),
+    ) as Record<PlayerId, Status>;
     return settle({ ...state, status }, ctx);
   },
   botAction(state, player, ctx) {

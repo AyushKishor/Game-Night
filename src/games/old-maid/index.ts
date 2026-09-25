@@ -60,7 +60,12 @@ function markSafe(state: OldMaidState, ctx: GameContext): OldMaidState {
   const left = active(s);
   if (left.length <= 1) {
     const loser = left[0] ?? null;
-    return { ...s, loser, deadline: null, log: pushLog(s.log, loser ? `${nameOf(ctx, loser)} is left holding the Old Maid!` : "Everyone's safe!") };
+    return {
+      ...s,
+      loser,
+      deadline: null,
+      log: pushLog(s.log, loser ? `${nameOf(ctx, loser)} is left holding the Old Maid!` : "Everyone's safe!"),
+    };
   }
   return s;
 }
@@ -116,7 +121,9 @@ export const oldMaid: GameModule<OldMaidState, Action> = {
       log: ["Pairs discarded. Let's find the Old Maid!"],
     };
     const settled = markSafe(s, ctx);
-    return settled.loser !== null || active(settled).length <= 1 ? settled : { ...settled, turn: nextActive(settled, players[players.length - 1]!) };
+    return settled.loser !== null || active(settled).length <= 1
+      ? settled
+      : { ...settled, turn: nextActive(settled, players[players.length - 1]!) };
   },
 
   validate(state, player, action) {
@@ -137,7 +144,10 @@ export const oldMaid: GameModule<OldMaidState, Action> = {
       hands: { ...state.hands, [from]: ctx.rng.shuffle(fromHand), [player]: ctx.rng.shuffle(hand) },
       discarded: state.discarded + removed,
       lastDraw: { from, to: player, paired: removed > 0 },
-      log: pushLog(state.log, `${nameOf(ctx, player)} took a card from ${nameOf(ctx, from)}${removed ? " and made a pair" : ""}.`),
+      log: pushLog(
+        state.log,
+        `${nameOf(ctx, player)} took a card from ${nameOf(ctx, from)}${removed ? " and made a pair" : ""}.`,
+      ),
     };
     s = markSafe(s, ctx);
     if (s.loser !== null || active(s).length <= 1) return s;
@@ -155,7 +165,9 @@ export const oldMaid: GameModule<OldMaidState, Action> = {
 
   isOver: (state) => state.loser !== null || active(state).length <= 1,
   results: (state, ctx) =>
-    resultsFromScores(Object.fromEntries(state.players.map((p) => [p, p === state.loser ? 0 : 1])), ctx, { order: state.players }),
+    resultsFromScores(Object.fromEntries(state.players.map((p) => [p, p === state.loser ? 0 : 1])), ctx, {
+      order: state.players,
+    }),
   roundSummaries: () => [],
 
   publicView(state): OldMaidPublic {

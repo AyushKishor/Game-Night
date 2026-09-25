@@ -72,7 +72,10 @@ function dealRound(players: PlayerId[], round: number, ctx: GameContext, prev?: 
     scores: prev?.scores ?? zeroScores(players),
     summaries: prev?.summaries ?? [],
     deadline: null,
-    log: pushLog(prev?.log ?? [], `Round ${round}: ${passDir === "none" ? "no passing this round" : `pass three cards ${passDir}`}.`),
+    log: pushLog(
+      prev?.log ?? [],
+      `Round ${round}: ${passDir === "none" ? "no passing this round" : `pass three cards ${passDir}`}.`,
+    ),
   };
   const seconds = ctx.config.turnSeconds;
   base.deadline = deadlineFrom(ctx.now, base.phase === "pass" ? Math.max(seconds * 2, seconds && 30) : seconds);
@@ -98,9 +101,7 @@ function legal(state: HeartsState, player: PlayerId): CardId[] {
 function finishRound(state: HeartsState, ctx: GameContext): HeartsState {
   const pts = Object.fromEntries(state.players.map((p) => [p, state.taken[p]!.reduce((s, c) => s + pointsOf(c), 0)]));
   const shooter = state.players.find((p) => pts[p] === 26);
-  const roundScores = shooter
-    ? Object.fromEntries(state.players.map((p) => [p, p === shooter ? 0 : 26]))
-    : pts;
+  const roundScores = shooter ? Object.fromEntries(state.players.map((p) => [p, p === shooter ? 0 : 26])) : pts;
   const scores = Object.fromEntries(state.players.map((p) => [p, (state.scores[p] ?? 0) + roundScores[p]!]));
   const summary: RoundSummary = {
     round: state.round,
@@ -142,7 +143,8 @@ export const hearts: GameModule<HeartsState, Action> = {
         "You can't lead hearts until a heart has been played (unless you only have hearts).",
         "Point cards can't be played on the very first trick unless you have nothing else.",
       ],
-      scoring: "Each heart is 1 point and the Queen of Spades is 13. Take all 26 (“shoot the moon”) and everyone else gets 26 instead.",
+      scoring:
+        "Each heart is 1 point and the Queen of Spades is 13. Take all 26 (“shoot the moon”) and everyone else gets 26 instead.",
       ending:
         "The game ends after the set number of rounds or when anyone reaches the limit. Lowest total wins; equal totals share the win.",
     },
@@ -166,7 +168,8 @@ export const hearts: GameModule<HeartsState, Action> = {
       if (state.phase !== "pass") return "It's not time to pass cards.";
       if (state.passes[player]) return "You've already passed your cards.";
       const hand = state.hands[player] ?? [];
-      if (new Set(action.cards).size !== 3 || !action.cards.every((c) => hand.includes(c))) return "Pick three of your own cards.";
+      if (new Set(action.cards).size !== 3 || !action.cards.every((c) => hand.includes(c)))
+        return "Pick three of your own cards.";
       return null;
     }
     if (state.phase !== "play") return "Wait for the round to start.";
@@ -248,8 +251,15 @@ export const hearts: GameModule<HeartsState, Action> = {
     const hand = state.hands[player] ?? [];
     if (state.phase === "pass") {
       if (state.passes[player]) return null;
-      const danger = (c: CardId) => (c === "QS" ? 100 : c === "AS" || c === "KS" ? 90 : 0) + (suitOf(c) === "H" ? 20 : 0) + rankValue(c, true);
-      return { type: "pass", cards: hand.slice().sort((a, b) => danger(b) - danger(a)).slice(0, 3) };
+      const danger = (c: CardId) =>
+        (c === "QS" ? 100 : c === "AS" || c === "KS" ? 90 : 0) + (suitOf(c) === "H" ? 20 : 0) + rankValue(c, true);
+      return {
+        type: "pass",
+        cards: hand
+          .slice()
+          .sort((a, b) => danger(b) - danger(a))
+          .slice(0, 3),
+      };
     }
     if (state.phase !== "play" || state.turn !== player) return null;
     const options = legal(state, player);
@@ -259,7 +269,14 @@ export const hearts: GameModule<HeartsState, Action> = {
     if (following) {
       const winners = new Set(winningOptions(options, state.trick, null, player));
       const safe = options.filter((c) => !winners.has(c));
-      return { type: "play", card: safe.length ? highest(safe) : state.trick.length === 3 && !state.trick.some((t) => pointsOf(t.card)) ? highest(options) : lowest(options) };
+      return {
+        type: "play",
+        card: safe.length
+          ? highest(safe)
+          : state.trick.length === 3 && !state.trick.some((t) => pointsOf(t.card))
+            ? highest(options)
+            : lowest(options),
+      };
     }
     if (options.includes("QS")) return { type: "play", card: "QS" };
     const heartsHeld = options.filter((c) => suitOf(c) === "H");

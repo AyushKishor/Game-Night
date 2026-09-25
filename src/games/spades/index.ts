@@ -35,7 +35,13 @@ const actionSchema = z.discriminatedUnion("type", [
 ]);
 type Action = z.infer<typeof actionSchema>;
 
-function dealRound(state: Omit<SpadesState, "hands" | "phase" | "bids" | "trick" | "lastTrick" | "turn" | "tricksWon" | "spadesBroken" | "deadline">, ctx: GameContext): SpadesState {
+function dealRound(
+  state: Omit<
+    SpadesState,
+    "hands" | "phase" | "bids" | "trick" | "lastTrick" | "turn" | "tricksWon" | "spadesBroken" | "deadline"
+  >,
+  ctx: GameContext,
+): SpadesState {
   const { hands } = deal(shuffledDeck(ctx.rng), 4, 13);
   const first = state.players[(state.dealer + 1) % 4]!;
   return {
@@ -123,7 +129,8 @@ export const spades: GameModule<SpadesState, Action> = {
       ],
       scoring:
         "Make your side's combined bid: +10 per bid trick and +1 per extra trick (a “bag”). Miss it: −10 per bid trick. Every 10 bags costs 100. Nil bids score +100 if you take no tricks, −100 if you do.",
-      ending: "The game ends when a side reaches the target score or after the set number of rounds. Highest score wins; ties share the win.",
+      ending:
+        "The game ends when a side reaches the target score or after the set number of rounds. Highest score wins; ties share the win.",
     },
   },
   settings: ["rounds", "targetScore", "turnSeconds", "teamMode"],

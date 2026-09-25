@@ -24,17 +24,23 @@ export function Toaster() {
             exit={{ y: 30, opacity: 0 }}
             role="alert"
             className={cn(
-              "pointer-events-auto flex max-w-md items-start gap-3 rounded-xl border px-4 py-3 shadow-soft",
-              toast.tone === "error" && "border-rose/60 bg-[#2a1220] text-text",
-              toast.tone === "success" && "border-mint/60 bg-[#0f2a22] text-text",
-              toast.tone === "info" && "border-sky/60 bg-[#0f2230] text-text",
+              "shadow-soft pointer-events-auto flex max-w-md items-start gap-3 rounded-xl border px-4 py-3",
+              toast.tone === "error" && "border-rose/60 text-text bg-[#2a1220]",
+              toast.tone === "success" && "border-mint/60 text-text bg-[#0f2a22]",
+              toast.tone === "info" && "border-sky/60 text-text bg-[#0f2230]",
             )}
           >
-            <Icon className={cn("mt-0.5 size-5 shrink-0", toast.tone === "error" ? "text-rose" : toast.tone === "success" ? "text-mint" : "text-sky")} aria-hidden />
+            <Icon
+              className={cn(
+                "mt-0.5 size-5 shrink-0",
+                toast.tone === "error" ? "text-rose" : toast.tone === "success" ? "text-mint" : "text-sky",
+              )}
+              aria-hidden
+            />
             <p className="text-sm font-medium">{toast.message}</p>
             <button
               type="button"
-              className="-m-1 rounded p-1 text-muted hover:text-text"
+              className="text-muted hover:text-text -m-1 rounded p-1"
               onClick={() => useRoomStore.setState({ toast: null })}
               aria-label="Dismiss message"
             >

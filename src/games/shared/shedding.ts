@@ -13,24 +13,8 @@ import {
   sortHand,
   suitOf,
 } from "@/lib/engine/cards";
-import {
-  REVEAL_SECONDS,
-  deadlineFrom,
-  nameOf,
-  nextPlayer,
-  pushLog,
-  resultsFromScores,
-  zeroScores,
-} from "@/lib/engine/helpers";
-import type {
-  GameContext,
-  GameMeta,
-  GameModule,
-  PlayerId,
-  PresetId,
-  GameConfig,
-  RoundSummary,
-} from "@/lib/engine/types";
+import { REVEAL_SECONDS, deadlineFrom, nameOf, nextPlayer, pushLog, resultsFromScores, zeroScores } from "@/lib/engine/helpers";
+import type { GameContext, GameMeta, GameModule, PlayerId, PresetId, GameConfig, RoundSummary } from "@/lib/engine/types";
 import { cardSchema, suitSchema } from "./schemas";
 
 /**
@@ -113,7 +97,13 @@ function drawCards(state: SheddingState, n: number, rng: GameContext["rng"]) {
   return { drawn, drawPile, discard };
 }
 
-function dealRound(players: PlayerId[], round: number, rules: SheddingRules, ctx: GameContext, prev?: SheddingState): SheddingState {
+function dealRound(
+  players: PlayerId[],
+  round: number,
+  rules: SheddingRules,
+  ctx: GameContext,
+  prev?: SheddingState,
+): SheddingState {
   const deck = shuffledDeck(ctx.rng);
   const { hands, rest } = deal(deck, players.length, rules.handSize(players.length));
   // Start the discard pile with a plain (non-special) card.
@@ -165,8 +155,7 @@ function finishRound(state: SheddingState, winner: PlayerId, rules: SheddingRule
     lines,
     scores: Object.fromEntries(state.players.map((p) => [p, p === winner ? gained : 0])),
   };
-  const over =
-    state.round >= ctx.config.rounds || Object.values(scores).some((s) => s >= ctx.config.targetScore);
+  const over = state.round >= ctx.config.rounds || Object.values(scores).some((s) => s >= ctx.config.targetScore);
   return {
     ...state,
     scores,
@@ -184,7 +173,7 @@ export function createSheddingGame(
   rules: SheddingRules,
   presets: Record<PresetId, Partial<GameConfig>>,
 ): GameModule<SheddingState, SheddingAction> {
-  const module: GameModule<SheddingState, SheddingAction> = {
+  const game: GameModule<SheddingState, SheddingAction> = {
     meta,
     settings: ["rounds", "targetScore", "turnSeconds"],
     presets,
@@ -276,9 +265,9 @@ export function createSheddingGame(
       let current = state;
       const who = state.turn;
       for (let i = 0; i < 4 && current.phase === "play" && current.turn === who; i++) {
-        const action = module.botAction(current, who, ctx);
-        if (!action || module.validate(current, who, action, ctx)) break;
-        current = module.apply(current, who, action, ctx);
+        const action = game.botAction(current, who, ctx);
+        if (!action || game.validate(current, who, action, ctx)) break;
+        current = game.apply(current, who, action, ctx);
       }
       if (current.phase === "play" && current.turn === who) return endTurn(current, ctx);
       return current;
@@ -343,7 +332,7 @@ export function createSheddingGame(
       };
     },
   };
-  return module;
+  return game;
 }
 
 export interface SheddingPublic {

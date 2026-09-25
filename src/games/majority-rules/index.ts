@@ -118,7 +118,8 @@ export const majorityRules: GameModule<MajorityState, Action> = {
   pending: (state) => (state.phase === "vote" ? state.players.filter((p) => !state.votes[p]) : []),
   deadline: (state) => (state.phase === "over" ? null : state.deadline),
   onTimeout: (state, ctx) => (state.phase === "vote" ? reveal(state, ctx) : next(state, ctx)),
-  botAction: (state, player, ctx) => (state.phase === "vote" && !state.votes[player] ? { type: "vote", side: ctx.rng.next() < 0.5 ? "a" : "b" } : null),
+  botAction: (state, player, ctx) =>
+    state.phase === "vote" && !state.votes[player] ? { type: "vote", side: ctx.rng.next() < 0.5 ? "a" : "b" } : null,
   isOver: (state) => state.phase === "over",
   results: (state, ctx) => resultsFromScores(state.scores, ctx, { order: state.players }),
   roundSummaries: (state) => state.summaries,

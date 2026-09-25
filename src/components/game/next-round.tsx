@@ -26,7 +26,7 @@ export function NextRoundButton({
           {label} <ChevronRight aria-hidden />
         </Button>
       ) : (
-        <span className="text-sm text-muted">Waiting for the host to continue…</span>
+        <span className="text-muted text-sm">Waiting for the host to continue…</span>
       )}
       <Countdown deadline={deadline} label="Continues automatically in" className="w-48" />
     </div>

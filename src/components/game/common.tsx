@@ -28,19 +28,27 @@ export function Countdown({
     const t = setInterval(() => setNow(serverNow()), 250);
     return () => clearInterval(t);
   }, [deadline]);
+  const warnNow = !!deadline && forMe && deadline - now <= 5000 && deadline - now > 0;
+  useEffect(() => {
+    if (warnNow && warned.current !== deadline) {
+      warned.current = deadline;
+      play("warning");
+    }
+  }, [warnNow, deadline]);
   if (!deadline) return null;
   const remaining = Math.max(0, deadline - now);
   const secs = Math.ceil(remaining / 1000);
   const fraction = total ? Math.min(1, remaining / (total * 1000)) : 1;
-  if (forMe && secs <= 5 && secs > 0 && warned.current !== deadline) {
-    warned.current = deadline;
-    play("warning");
-  }
   const urgent = secs <= 5;
   return (
-    <div className={cn("flex min-w-28 items-center gap-2", className)} role="timer" aria-live="off" aria-label={`${label}: ${secs} seconds`}>
+    <div
+      className={cn("flex min-w-28 items-center gap-2", className)}
+      role="timer"
+      aria-live="off"
+      aria-label={`${label}: ${secs} seconds`}
+    >
       <Hourglass className={cn("size-4 shrink-0", urgent ? "text-rose" : "text-muted")} aria-hidden />
-      <div className="h-2 flex-1 overflow-hidden rounded-full bg-surface-3">
+      <div className="bg-surface-3 h-2 flex-1 overflow-hidden rounded-full">
         <div
           className={cn("h-full rounded-full transition-[width] duration-300", urgent ? "bg-rose" : "bg-sky")}
           style={{ width: `${fraction * 100}%` }}
@@ -79,7 +87,14 @@ export function Seats({
 }) {
   const byId = new Map(players.map((p) => [p.id, p]));
   return (
-    <ul className={cn("grid gap-2", compact ? "grid-cols-2 sm:grid-cols-3" : "grid-cols-2 md:grid-cols-3 xl:grid-cols-4", className)} aria-label="Players">
+    <ul
+      className={cn(
+        "grid gap-2",
+        compact ? "grid-cols-2 sm:grid-cols-3" : "grid-cols-2 md:grid-cols-3 xl:grid-cols-4",
+        className,
+      )}
+      aria-label="Players"
+    >
       {seats.map((s) => {
         const p = byId.get(s.id);
         const away = p ? !p.connected : true;
@@ -89,7 +104,7 @@ export function Seats({
             layout
             key={s.id}
             className={cn(
-              "relative flex items-center gap-2.5 rounded-xl border bg-surface-2 px-3 py-2 transition-colors",
+              "bg-surface-2 relative flex items-center gap-2.5 rounded-xl border px-3 py-2 transition-colors",
               s.active ? "border-amber shadow-[0_0_0_2px_rgba(255,193,69,0.35)]" : "border-border",
               s.out && "opacity-60",
             )}
@@ -103,11 +118,11 @@ export function Seats({
                   {names[s.id] ?? "Player"}
                   {s.id === meId && <span className="text-muted"> (you)</span>}
                 </span>
-                {p?.isHost && <Crown className="size-3.5 shrink-0 text-amber" aria-label="Host" />}
+                {p?.isHost && <Crown className="text-amber size-3.5 shrink-0" aria-label="Host" />}
               </div>
-              <div className="flex flex-wrap items-center gap-x-2 text-xs text-muted">
-                {s.active && <span className="font-bold text-amber">▶ Turn</span>}
-                {s.done && <span className="font-bold text-mint">✓ Done</span>}
+              <div className="text-muted flex flex-wrap items-center gap-x-2 text-xs">
+                {s.active && <span className="text-amber font-bold">▶ Turn</span>}
+                {s.done && <span className="text-mint font-bold">✓ Done</span>}
                 {s.detail}
                 {auto && (
                   <span className="inline-flex items-center gap-0.5">
@@ -115,14 +130,17 @@ export function Seats({
                   </span>
                 )}
                 {away && !p?.isBot && (
-                  <span className="inline-flex items-center gap-0.5 text-rose">
+                  <span className="text-rose inline-flex items-center gap-0.5">
                     <WifiOff className="size-3" aria-hidden /> Away
                   </span>
                 )}
               </div>
             </div>
             {s.score !== undefined && (
-              <span className="rounded-lg bg-bg-2 px-2 py-1 font-mono text-sm font-bold tabular-nums" aria-label={`Score ${s.score}`}>
+              <span
+                className="bg-bg-2 rounded-lg px-2 py-1 font-mono text-sm font-bold tabular-nums"
+                aria-label={`Score ${s.score}`}
+              >
                 {s.score}
               </span>
             )}
@@ -133,13 +151,19 @@ export function Seats({
   );
 }
 
-export function StatusBanner({ tone = "neutral", children }: { tone?: "turn" | "wait" | "neutral" | "done"; children: React.ReactNode }) {
+export function StatusBanner({
+  tone = "neutral",
+  children,
+}: {
+  tone?: "turn" | "wait" | "neutral" | "done";
+  children: React.ReactNode;
+}) {
   return (
     <div
       role="status"
       aria-live="polite"
       className={cn(
-        "rounded-xl px-4 py-3 text-center font-display text-lg font-bold",
+        "font-display rounded-xl px-4 py-3 text-center text-lg font-bold",
         tone === "turn" && "bg-amber text-[#2a1c00]",
         tone === "wait" && "bg-surface-2 text-muted",
         tone === "neutral" && "bg-surface-2 text-text",
@@ -155,8 +179,8 @@ export function EventLog({ entries, className }: { entries: string[]; className?
   const recent = entries.slice(-6).reverse();
   if (!recent.length) return null;
   return (
-    <div className={cn("rounded-xl border border-border bg-bg-2/70 p-3", className)}>
-      <h3 className="mb-1.5 text-xs font-bold uppercase tracking-wider text-muted">What happened</h3>
+    <div className={cn("border-border bg-bg-2/70 rounded-xl border p-3", className)}>
+      <h3 className="text-muted mb-1.5 text-xs font-bold tracking-wider uppercase">What happened</h3>
       <ol className="space-y-1 text-sm" aria-live="polite">
         {recent.map((e, i) => (
           <li key={`${recent.length - i}-${e}`} className={cn(i === 0 ? "text-text" : "text-muted")}>
@@ -172,19 +196,22 @@ export function RoundSummaries({ summaries, names }: { summaries: RoundSummary[]
   const last = summaries[summaries.length - 1];
   if (!last) return null;
   return (
-    <div className="rounded-xl border border-mint/40 bg-mint/10 p-4">
+    <div className="border-mint/40 bg-mint/10 rounded-xl border p-4">
       <h3 className="font-display text-lg font-bold">
         Round {last.round}: {last.title}
       </h3>
       {last.lines.length > 0 && (
-        <ul className="mt-2 space-y-0.5 text-sm text-muted">
+        <ul className="text-muted mt-2 space-y-0.5 text-sm">
           {last.lines.map((l, i) => (
             <li key={i}>{l}</li>
           ))}
         </ul>
       )}
       <p className="sr-only">
-        Round points: {Object.entries(last.scores).map(([id, s]) => `${names[id] ?? "Player"} ${s}`).join(", ")}
+        Round points:{" "}
+        {Object.entries(last.scores)
+          .map(([id, s]) => `${names[id] ?? "Player"} ${s}`)
+          .join(", ")}
       </p>
     </div>
   );

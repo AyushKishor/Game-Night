@@ -10,24 +10,24 @@ export default function Home() {
   const card = GAMES.filter((g) => g.meta.category === "card");
   const party = GAMES.filter((g) => g.meta.category === "party");
   return (
-    <main id="main" className="mx-auto w-full max-w-6xl flex-1 px-4 pb-16 pt-6 sm:px-6">
+    <main id="main" className="mx-auto w-full max-w-6xl flex-1 px-4 pt-6 pb-16 sm:px-6">
       <header className="flex items-center justify-between">
         <Brand />
-        <Link href="/rules" className="rounded-lg px-3 py-2 font-semibold text-muted hover:text-text">
+        <Link href="/rules" className="text-muted hover:text-text rounded-lg px-3 py-2 font-semibold">
           How to play
         </Link>
       </header>
 
       <section className="grid items-center gap-10 py-10 md:grid-cols-[1.1fr_0.9fr] md:py-16">
         <div>
-          <h1 className="font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl">
+          <h1 className="font-display text-4xl leading-[1.05] font-extrabold tracking-tight sm:text-6xl">
             Put the games on the big screen.
             <br />
             <span className="text-coral">Keep your cards on your phone.</span>
           </h1>
-          <p className="mt-5 max-w-xl text-lg text-muted">
-            Open a room on your laptop or TV. Friends scan the QR code or type a six-letter code. Everyone&apos;s cards stay on their
-            own device, and scores add up across the whole night.
+          <p className="text-muted mt-5 max-w-xl text-lg">
+            Open a room on your laptop or TV. Friends scan the QR code or type a six-letter code. Everyone&apos;s cards stay on
+            their own device, and scores add up across the whole night.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild size="xl">
@@ -37,9 +37,9 @@ export default function Home() {
             </Button>
           </div>
         </div>
-        <div className="rounded-3xl border border-border bg-surface p-6 shadow-soft">
+        <div className="border-border bg-surface shadow-soft rounded-3xl border p-6">
           <h2 className="font-display text-2xl font-bold">Join a game</h2>
-          <p className="mt-1 text-muted">Enter the code on the host&apos;s screen.</p>
+          <p className="text-muted mt-1">Enter the code on the host&apos;s screen.</p>
           <JoinCodeForm className="mt-5" />
         </div>
       </section>
@@ -53,9 +53,9 @@ export default function Home() {
           { icon: QrCode, title: "Join in seconds", text: "Scan, pick a nickname and an avatar. No accounts." },
           { icon: Trophy, title: "A night-long leaderboard", text: "Switch games without losing anyone's points." },
         ].map(({ icon: Icon, title, text }) => (
-          <div key={title} className="rounded-2xl border border-border bg-surface/70 p-5">
-            <Icon className="size-7 text-sky" aria-hidden />
-            <h3 className="mt-3 font-display text-lg font-bold">{title}</h3>
+          <div key={title} className="border-border bg-surface/70 rounded-2xl border p-5">
+            <Icon className="text-sky size-7" aria-hidden />
+            <h3 className="font-display mt-3 text-lg font-bold">{title}</h3>
             <p className="text-muted">{text}</p>
           </div>
         ))}
@@ -66,7 +66,7 @@ export default function Home() {
           <h2 id="library" className="font-display text-3xl font-extrabold">
             {GAMES.length} games ready to play
           </h2>
-          <Link href="/rules" className="font-semibold text-sky hover:underline">
+          <Link href="/rules" className="text-sky font-semibold hover:underline">
             Read all rules
           </Link>
         </div>
@@ -76,16 +76,17 @@ export default function Home() {
         ].map(({ title, list }) =>
           list.length ? (
             <div key={title} className="mt-6">
-              <h3 className="mb-3 text-sm font-bold uppercase tracking-wider text-muted">{title}</h3>
+              <h3 className="text-muted mb-3 text-sm font-bold tracking-wider uppercase">{title}</h3>
               <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {list.map((g) => (
-                  <li key={g.meta.id} className="flex items-start gap-3 rounded-2xl border border-border bg-surface/70 p-4">
+                  <li key={g.meta.id} className="border-border bg-surface/70 flex items-start gap-3 rounded-2xl border p-4">
                     <GameIcon game={g.meta} />
                     <div>
                       <p className="font-display text-lg font-bold">{g.meta.name}</p>
-                      <p className="text-sm text-muted">{g.meta.tagline}</p>
-                      <p className="mt-1 flex items-center gap-1 text-xs text-muted">
-                        <Users className="size-3.5" aria-hidden /> {g.meta.minPlayers}–{g.meta.maxPlayers} players · {g.meta.duration}
+                      <p className="text-muted text-sm">{g.meta.tagline}</p>
+                      <p className="text-muted mt-1 flex items-center gap-1 text-xs">
+                        <Users className="size-3.5" aria-hidden /> {g.meta.minPlayers}–{g.meta.maxPlayers} players ·{" "}
+                        {g.meta.duration}
                       </p>
                     </div>
                   </li>
@@ -95,7 +96,7 @@ export default function Home() {
           ) : null,
         )}
         {COMING_SOON.length > 0 && (
-          <p className="mt-6 text-sm text-muted">Coming soon: {COMING_SOON.map((g) => g.name).join(", ")}.</p>
+          <p className="text-muted mt-6 text-sm">Coming soon: {COMING_SOON.map((g) => g.name).join(", ")}.</p>
         )}
       </section>
     </main>

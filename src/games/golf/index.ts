@@ -82,7 +82,12 @@ const upCount = (s: GolfState, p: PlayerId) => s.up[p]!.filter(Boolean).length;
 function endTurn(state: GolfState, player: PlayerId, ctx: GameContext): GolfState {
   let s = { ...state, holding: null };
   if (!s.closer && upCount(s, player) === 6) {
-    s = { ...s, closer: player, finalTurnsLeft: s.players.length - 1, log: pushLog(s.log, `${nameOf(ctx, player)} has turned every card — one last turn each!`) };
+    s = {
+      ...s,
+      closer: player,
+      finalTurnsLeft: s.players.length - 1,
+      log: pushLog(s.log, `${nameOf(ctx, player)} has turned every card — one last turn each!`),
+    };
   } else if (s.closer) {
     s = { ...s, finalTurnsLeft: s.finalTurnsLeft - 1 };
   }
@@ -138,7 +143,11 @@ export const golf: GameModule<GolfState, Action> = {
     },
   },
   settings: ["rounds", "turnSeconds"],
-  presets: { quick: { rounds: 2, turnSeconds: 20 }, standard: { rounds: 6, turnSeconds: 30 }, long: { rounds: 9, turnSeconds: 45 } },
+  presets: {
+    quick: { rounds: 2, turnSeconds: 20 },
+    standard: { rounds: 6, turnSeconds: 30 },
+    long: { rounds: 9, turnSeconds: 45 },
+  },
   actionSchema,
 
   setup: (players, ctx) => dealRound(players, 1, ctx),
@@ -175,7 +184,12 @@ export const golf: GameModule<GolfState, Action> = {
       const up = { ...state.up, [player]: state.up[player]!.map((u, i) => u || i === action.index) };
       const s = { ...state, up };
       if (state.players.every((p) => upCount(s, p) >= 2)) {
-        return { ...s, phase: "play" as const, deadline: deadlineFrom(ctx.now, ctx.config.turnSeconds), log: pushLog(s.log, `${nameOf(ctx, s.turn)} tees off.`) };
+        return {
+          ...s,
+          phase: "play" as const,
+          deadline: deadlineFrom(ctx.now, ctx.config.turnSeconds),
+          log: pushLog(s.log, `${nameOf(ctx, s.turn)} tees off.`),
+        };
       }
       return s;
     }
@@ -276,7 +290,11 @@ export const golf: GameModule<GolfState, Action> = {
       deckCount: state.deck.length,
       phase: state.phase,
       turn: state.turn,
-      holding: state.holding ? (state.holding.from === "discard" ? { from: "discard", card: state.holding.card } : { from: "deck", card: null }) : null,
+      holding: state.holding
+        ? state.holding.from === "discard"
+          ? { from: "discard", card: state.holding.card }
+          : { from: "deck", card: null }
+        : null,
       closer: state.closer,
       round: state.round,
       scores: state.scores,

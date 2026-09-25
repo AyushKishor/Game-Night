@@ -22,7 +22,11 @@ export function GameLibrary({
   const [filter, setFilter] = useState<"all" | "card" | "party" | "fits">("all");
   const [rulesFor, setRulesFor] = useState<GameMeta | null>(null);
   const list = GAMES.map((g) => g.meta).filter((m) =>
-    filter === "all" ? true : filter === "fits" ? playerCount >= m.minPlayers && playerCount <= m.maxPlayers : m.category === filter,
+    filter === "all"
+      ? true
+      : filter === "fits"
+        ? playerCount >= m.minPlayers && playerCount <= m.maxPlayers
+        : m.category === filter,
   );
   return (
     <div>
@@ -48,14 +52,19 @@ export function GameLibrary({
               >
                 <GameIcon game={m} className="size-11" />
                 <div className="min-w-0 flex-1">
-                  <p className="font-display text-lg font-bold leading-tight">{m.name}</p>
-                  <p className="text-sm text-muted">{m.tagline}</p>
+                  <p className="font-display text-lg leading-tight font-bold">{m.name}</p>
+                  <p className="text-muted text-sm">{m.tagline}</p>
                   <p className={cn("mt-1 flex items-center gap-1 text-xs", fits ? "text-muted" : "text-amber")}>
                     <Users className="size-3.5" aria-hidden /> {m.minPlayers}–{m.maxPlayers} players
                     {!fits && ` · you have ${playerCount}`}
                   </p>
                   <div className="mt-2 flex gap-2">
-                    <Button size="sm" variant={selected ? "mint" : "secondary"} onClick={() => onSelect(m.id)} aria-pressed={selected}>
+                    <Button
+                      size="sm"
+                      variant={selected ? "mint" : "secondary"}
+                      onClick={() => onSelect(m.id)}
+                      aria-pressed={selected}
+                    >
                       {selected ? <Check aria-hidden /> : null}
                       {selected ? "Selected" : "Choose"}
                     </Button>
@@ -70,9 +79,7 @@ export function GameLibrary({
         })}
       </ul>
       {COMING_SOON.length > 0 && (
-        <p className="mt-4 text-sm text-muted">
-          Coming soon (not playable yet): {COMING_SOON.map((g) => g.name).join(", ")}
-        </p>
+        <p className="text-muted mt-4 text-sm">Coming soon (not playable yet): {COMING_SOON.map((g) => g.name).join(", ")}</p>
       )}
       <Dialog open={!!rulesFor} onOpenChange={(o) => !o && setRulesFor(null)}>
         <DialogContent className="max-w-xl">

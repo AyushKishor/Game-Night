@@ -66,7 +66,9 @@ export function createQuizGame(
     const summary: RoundSummary = {
       round: state.index + 1,
       title: `Answer: ${q.choices[q.answer]}`,
-      lines: correct.length ? [`Correct: ${correct.map((p) => `${nameOf(ctx, p)} (+${gained[p]})`).join(", ")}`] : ["Nobody got it!"],
+      lines: correct.length
+        ? [`Correct: ${correct.map((p) => `${nameOf(ctx, p)} (+${gained[p]})`).join(", ")}`]
+        : ["Nobody got it!"],
       scores: gained,
     };
     return {
@@ -91,7 +93,7 @@ export function createQuizGame(
     };
   };
 
-  const module: GameModule<QuizState, Action> = {
+  const game: GameModule<QuizState, Action> = {
     meta,
     settings: ["rounds", "roundSeconds", "difficulty", "teamMode", "allowJoinInProgress"],
     houseRules: [SIP_RULE],
@@ -170,14 +172,17 @@ export function createQuizGame(
         choices: q.choices,
         answer: state.phase === "question" ? null : q.answer,
         answered: state.players.filter((p) => state.answers[p]),
-        picks: state.phase === "question" ? null : Object.fromEntries(Object.entries(state.answers).map(([p, a]) => [p, a.choice])),
+        picks:
+          state.phase === "question" ? null : Object.fromEntries(Object.entries(state.answers).map(([p, a]) => [p, a.choice])),
         scores: quizScores(state),
         log: state.log,
       };
     },
-    privateView: (state, player) => ({ choice: state.phase === "question" ? (state.answers[player]?.choice ?? null) : (state.answers[player]?.choice ?? null) }),
+    privateView: (state, player) => ({
+      choice: state.phase === "question" ? (state.answers[player]?.choice ?? null) : (state.answers[player]?.choice ?? null),
+    }),
   };
-  return module;
+  return game;
 }
 
 export interface QuizPublic {

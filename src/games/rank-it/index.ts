@@ -102,13 +102,18 @@ export const rankIt: GameModule<RankItState, Action> = {
         "Everyone else tries to guess the Ranker's exact order.",
         "The Ranker's order is revealed and points are handed out. The Ranker role rotates each round.",
       ],
-      scoring: "Guessers score 1 point per item in the right position. The Ranker scores 1 point for each guesser who got at least 3 right.",
+      scoring:
+        "Guessers score 1 point per item in the right position. The Ranker scores 1 point for each guesser who got at least 3 right.",
       ending: "Most points after the set number of rounds wins; ties share the win.",
     },
   },
   settings: ["rounds", "roundSeconds"],
   houseRules: [SIP_RULE],
-  presets: { quick: { rounds: 3, roundSeconds: 45 }, standard: { rounds: 6, roundSeconds: 60 }, long: { rounds: 10, roundSeconds: 75 } },
+  presets: {
+    quick: { rounds: 3, roundSeconds: 45 },
+    standard: { rounds: 6, roundSeconds: 60 },
+    long: { rounds: 10, roundSeconds: 75 },
+  },
   actionSchema,
 
   setup: (players, ctx) =>
@@ -149,7 +154,13 @@ export const rankIt: GameModule<RankItState, Action> = {
   apply(state, player, action, ctx) {
     if (action.type === "next") return next(state, ctx);
     if (action.type === "rank") {
-      return { ...state, order: action.order, phase: "guess", deadline: deadlineFrom(ctx.now, ctx.config.roundSeconds), log: pushLog(state.log, `${nameOf(ctx, player)} has ranked. Now guess!`) };
+      return {
+        ...state,
+        order: action.order,
+        phase: "guess",
+        deadline: deadlineFrom(ctx.now, ctx.config.roundSeconds),
+        log: pushLog(state.log, `${nameOf(ctx, player)} has ranked. Now guess!`),
+      };
     }
     const s = { ...state, guesses: { ...state.guesses, [player]: action.order } };
     return guessers(s).every((p) => s.guesses[p]) ? reveal(s, ctx) : s;
@@ -161,13 +172,20 @@ export const rankIt: GameModule<RankItState, Action> = {
   },
   deadline: (state) => (state.phase === "over" ? null : state.deadline),
   onTimeout(state, ctx) {
-    if (state.phase === "rank") return { ...state, order: ctx.rng.shuffle([0, 1, 2, 3, 4]), phase: "guess", deadline: deadlineFrom(ctx.now, ctx.config.roundSeconds) };
+    if (state.phase === "rank")
+      return {
+        ...state,
+        order: ctx.rng.shuffle([0, 1, 2, 3, 4]),
+        phase: "guess",
+        deadline: deadlineFrom(ctx.now, ctx.config.roundSeconds),
+      };
     if (state.phase === "guess") return reveal(state, ctx);
     return next(state, ctx);
   },
   botAction(state, player, ctx) {
     if (state.phase === "rank" && player === state.ranker) return { type: "rank", order: ctx.rng.shuffle([0, 1, 2, 3, 4]) };
-    if (state.phase === "guess" && player !== state.ranker && !state.guesses[player]) return { type: "guess", order: ctx.rng.shuffle([0, 1, 2, 3, 4]) };
+    if (state.phase === "guess" && player !== state.ranker && !state.guesses[player])
+      return { type: "guess", order: ctx.rng.shuffle([0, 1, 2, 3, 4]) };
     return null;
   },
   isOver: (state) => state.phase === "over",

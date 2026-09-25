@@ -84,7 +84,12 @@ export const mostLikely: GameModule<MostLikelyState, Action> = {
   },
   settings: ["rounds", "roundSeconds", "allowJoinInProgress"],
   houseRules: [
-    { key: "spicy", label: "Spicy prompts (adults)", description: "Adds cheeky prompts about dating and nights out.", default: false },
+    {
+      key: "spicy",
+      label: "Spicy prompts (adults)",
+      description: "Adds cheeky prompts about dating and nights out.",
+      default: false,
+    },
     SIP_RULE,
   ],
   presets: {
@@ -134,7 +139,9 @@ export const mostLikely: GameModule<MostLikelyState, Action> = {
   deadline: (state) => (state.phase === "over" ? null : state.deadline),
   onTimeout: (state, ctx) => (state.phase === "vote" ? reveal(state, ctx) : next(state, ctx)),
   botAction: (state, player, ctx) =>
-    state.phase === "vote" && !state.votes[player] ? { type: "vote", target: ctx.rng.pick(state.players.filter((p) => p !== player)) } : null,
+    state.phase === "vote" && !state.votes[player]
+      ? { type: "vote", target: ctx.rng.pick(state.players.filter((p) => p !== player)) }
+      : null,
   isOver: (state) => state.phase === "over",
   results: (state, ctx) => resultsFromScores(state.scores, ctx, { order: state.players }),
   roundSummaries: (state) => state.summaries,

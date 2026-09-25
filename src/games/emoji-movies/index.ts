@@ -34,7 +34,13 @@ export const emojiMovies = createQuizGame(
       .slice(0, count)
       .map((p): QuizQuestion => {
         const same = all.filter((x) => x.cat === p.cat && x.a !== p.a);
-        const choices = ctx.rng.shuffle([p.a, ...ctx.rng.shuffle(same).slice(0, 3).map((x) => x.a)]);
+        const choices = ctx.rng.shuffle([
+          p.a,
+          ...ctx.rng
+            .shuffle(same)
+            .slice(0, 3)
+            .map((x) => x.a),
+        ]);
         return {
           prompt: p.cat === "Movie" ? "Which film is this?" : "Which phrase is this?",
           display: p.e,

@@ -52,7 +52,9 @@ function endTurn(state: ClueRushState, ctx: GameContext): ClueRushState {
   const summary: RoundSummary = {
     round: state.turn + 1,
     title: `${TEAM_NAMES[team]} scored ${delta >= 0 ? "+" : ""}${delta}`,
-    lines: state.turnWords.map((w) => `${cards[w.card]!.word} — ${w.result === "got" ? "✓ got it" : w.result === "buzz" ? "✗ buzzed" : "skipped"}`),
+    lines: state.turnWords.map(
+      (w) => `${cards[w.card]!.word} — ${w.result === "got" ? "✓ got it" : w.result === "buzz" ? "✗ buzzed" : "skipped"}`,
+    ),
     scores: Object.fromEntries(state.players.map((p) => [p, state.teamOf[p] === team ? delta : 0])),
     sips: delta > 0 ? state.players.filter((p) => state.teamOf[p] !== team) : members,
   };
@@ -94,7 +96,11 @@ export const clueRush: GameModule<ClueRushState, Action> = {
   },
   settings: ["rounds", "roundSeconds"],
   houseRules: [SIP_RULE],
-  presets: { quick: { rounds: 2, roundSeconds: 45 }, standard: { rounds: 3, roundSeconds: 60 }, long: { rounds: 5, roundSeconds: 75 } },
+  presets: {
+    quick: { rounds: 2, roundSeconds: 45 },
+    standard: { rounds: 3, roundSeconds: 60 },
+    long: { rounds: 5, roundSeconds: 75 },
+  },
   actionSchema,
 
   setup(players, ctx) {
@@ -155,7 +161,8 @@ export const clueRush: GameModule<ClueRushState, Action> = {
   pending: (state) => (state.phase === "ready" || state.phase === "clue" ? [giverFor(state)] : []),
   deadline: (state) => (state.phase === "over" ? null : state.deadline),
   onTimeout(state, ctx) {
-    if (state.phase === "ready") return { ...state, phase: "clue", deadline: deadlineFrom(ctx.now, ctx.config.roundSeconds || 60) };
+    if (state.phase === "ready")
+      return { ...state, phase: "clue", deadline: deadlineFrom(ctx.now, ctx.config.roundSeconds || 60) };
     if (state.phase === "clue") return endTurn(state, ctx);
     return { ...state, turn: state.turn + 1, phase: "ready", turnWords: [], deadline: deadlineFrom(ctx.now, 30) };
   },

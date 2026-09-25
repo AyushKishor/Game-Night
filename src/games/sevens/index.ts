@@ -84,7 +84,11 @@ export const sevens: GameModule<SevensState, Action> = {
     },
   },
   settings: ["rounds", "turnSeconds"],
-  presets: { quick: { rounds: 1, turnSeconds: 15 }, standard: { rounds: 3, turnSeconds: 25 }, long: { rounds: 5, turnSeconds: 40 } },
+  presets: {
+    quick: { rounds: 1, turnSeconds: 15 },
+    standard: { rounds: 3, turnSeconds: 25 },
+    long: { rounds: 5, turnSeconds: 40 },
+  },
   actionSchema,
 
   setup: (players, ctx) => dealRound(players, 1, ctx),
@@ -114,7 +118,10 @@ export const sevens: GameModule<SevensState, Action> = {
     }
     const s = suitOf(action.card);
     const row = state.rows[s];
-    const rows = { ...state.rows, [s]: row ? { low: Math.min(row.low, v(action.card)), high: Math.max(row.high, v(action.card)) } : { low: 7, high: 7 } };
+    const rows = {
+      ...state.rows,
+      [s]: row ? { low: Math.min(row.low, v(action.card)), high: Math.max(row.high, v(action.card)) } : { low: 7, high: 7 },
+    };
     const hand = state.hands[player]!.filter((c) => c !== action.card);
     const next: SevensState = {
       ...state,

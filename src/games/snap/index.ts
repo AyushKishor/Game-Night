@@ -150,7 +150,9 @@ export const snap: GameModule<SnapState, Action> = {
   isOver: (state) => state.over,
   results(state, ctx) {
     // Any cards left in the centre are ignored.
-    return resultsFromScores(Object.fromEntries(state.players.map((p) => [p, state.piles[p]!.length])), ctx, { order: state.players });
+    return resultsFromScores(Object.fromEntries(state.players.map((p) => [p, state.piles[p]!.length])), ctx, {
+      order: state.players,
+    });
   },
   roundSummaries: () => [],
 

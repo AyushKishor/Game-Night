@@ -52,6 +52,15 @@ describe("rooms", () => {
     expect(state.room.players.map((p) => p.name)).toEqual(["Hosty", "Guest1", "Guest2", "Guest3"]);
   });
 
+  it("bumps the room version and publishes when someone joins", async () => {
+    const published: number[] = [];
+    const svc = new RoomService({ store: new MemoryStore(), now: () => clock, publish: (_c, v) => void published.push(v) });
+    const host = await svc.createRoom({ name: "H" });
+    const joined = await svc.join(host.room.code, { name: "J" });
+    expect(joined.room.version).toBeGreaterThan(host.room.version);
+    expect(published.at(-1)).toBe(joined.room.version);
+  });
+
   it("de-duplicates nicknames", async () => {
     const svc = makeService();
     const { code } = await setupRoom(svc, 1);

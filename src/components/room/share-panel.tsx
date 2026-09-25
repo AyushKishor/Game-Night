@@ -24,9 +24,14 @@ export function SharePanel({ code, large }: { code: string; large?: boolean }) {
     <Panel className={cn("p-5", large && "lg:p-7")}>
       <div className={cn("flex flex-wrap items-center justify-between gap-5", large && "sm:flex-nowrap")}>
         <div>
-          <p className="text-sm font-bold uppercase tracking-wider text-muted">Join at {origin.replace(/^https?:\/\//, "") || "this site"}</p>
+          <p className="text-muted text-sm font-bold tracking-wider uppercase">
+            Join at {origin.replace(/^https?:\/\//, "") || "this site"}
+          </p>
           <p
-            className={cn("mt-1 font-mono font-extrabold tracking-[0.18em] text-amber", large ? "text-5xl sm:text-6xl lg:text-7xl" : "text-4xl")}
+            className={cn(
+              "text-amber mt-1 font-mono font-extrabold tracking-[0.18em]",
+              large ? "text-5xl sm:text-6xl lg:text-7xl" : "text-4xl",
+            )}
             aria-label={`Room code: ${code.split("").join(" ")}`}
           >
             {code}
@@ -54,7 +59,11 @@ export function SharePanel({ code, large }: { code: string; large?: boolean }) {
           </div>
         </div>
         {origin && (
-          <QrCode value={link} label={`QR code to join room ${code}`} className={large ? "w-40 sm:w-48 lg:w-56" : "w-28"} />
+          <QrCode
+            value={link}
+            label={`QR code to join room ${code}`}
+            className={cn("shrink-0", large ? "w-40 sm:w-48 lg:w-56" : "w-28")}
+          />
         )}
       </div>
     </Panel>
@@ -100,7 +109,7 @@ export function ContinueOnPhone({ code, origin }: { code: string; origin: string
               {error}
             </p>
           ) : (
-            <div className="size-60 animate-pulse rounded-xl bg-surface-2" />
+            <div className="bg-surface-2 size-60 animate-pulse rounded-xl" />
           )}
         </div>
       </DialogContent>

@@ -17,14 +17,14 @@ export const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        "fixed left-1/2 top-1/2 z-50 max-h-[90dvh] w-[calc(100vw-1.5rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-2xl border border-border bg-surface p-6 shadow-soft scrollbar-thin",
+        "border-border bg-surface shadow-soft fixed top-1/2 left-1/2 z-50 max-h-[90dvh] w-[calc(100vw-1.5rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 scrollbar-thin overflow-y-auto rounded-2xl border p-6",
         className,
       )}
       {...props}
     >
       {children}
       <DialogPrimitive.Close
-        className="absolute right-3 top-3 inline-flex size-10 items-center justify-center rounded-lg text-muted hover:bg-surface-2 hover:text-text"
+        className="text-muted hover:bg-surface-2 hover:text-text absolute top-3 right-3 inline-flex size-10 items-center justify-center rounded-lg"
         aria-label="Close"
       >
         <X className="size-5" />
@@ -35,12 +35,9 @@ export const DialogContent = React.forwardRef<
 DialogContent.displayName = "DialogContent";
 
 export function DialogTitle({ className, ...props }: React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>) {
-  return <DialogPrimitive.Title className={cn("font-display text-xl font-bold pr-10", className)} {...props} />;
+  return <DialogPrimitive.Title className={cn("font-display pr-10 text-xl font-bold", className)} {...props} />;
 }
 
-export function DialogDescription({
-  className,
-  ...props
-}: React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>) {
-  return <DialogPrimitive.Description className={cn("mt-1 text-muted", className)} {...props} />;
+export function DialogDescription({ className, ...props }: React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>) {
+  return <DialogPrimitive.Description className={cn("text-muted mt-1", className)} {...props} />;
 }

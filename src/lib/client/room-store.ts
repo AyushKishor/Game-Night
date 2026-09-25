@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useRef } from "react";
 import { create } from "zustand";
 import type { RealtimeChannel, SupabaseClient } from "@supabase/supabase-js";
-import type { Command, StateResponse, CommandInput } from "@/lib/shared/protocol";
+import type { StateResponse, CommandInput } from "@/lib/shared/protocol";
 import { api, ApiRequestError } from "./api";
 import { clearSession, loadSession, newActionId } from "./session";
 import { play } from "./sound";

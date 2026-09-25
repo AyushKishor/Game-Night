@@ -6,7 +6,7 @@ import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/
 import { Panel, PanelBody, PanelHeader, PanelTitle } from "@/components/ui/panel";
 import type { ViewMode } from "@/components/game/types";
 import { getGame } from "@/games";
-import type { Command, StateResponse, CommandInput } from "@/lib/shared/protocol";
+import type { StateResponse, CommandInput } from "@/lib/shared/protocol";
 import { cn } from "@/lib/utils";
 import { GameLibrary } from "./game-library";
 import { GameSettings, RoomSettings } from "./game-settings";
@@ -47,7 +47,7 @@ export function Lobby({ data, mode, send }: { data: StateResponse; mode: ViewMod
         {self?.ready ? <Check aria-hidden /> : null}
         {self?.ready ? "Ready! (tap to undo)" : "I'm ready"}
       </Button>
-      <div className="mt-3 flex items-center justify-between text-sm text-muted">
+      <div className="text-muted mt-3 flex items-center justify-between text-sm">
         <span>{game ? `Next up: ${game.meta.name}` : "The host is choosing a game…"}</span>
         {room.allowSpectators && (
           <Button variant="ghost" size="sm" onClick={() => send({ kind: "setSpectator", spectator: true })}>
@@ -82,7 +82,7 @@ export function Lobby({ data, mode, send }: { data: StateResponse; mode: ViewMod
     <Panel>
       <PanelHeader>
         <PanelTitle className="flex items-center gap-2">
-          <Gamepad2 className="size-5 text-coral" aria-hidden /> {isHost && picking ? "Choose a game" : "Game"}
+          <Gamepad2 className="text-coral size-5" aria-hidden /> {isHost && picking ? "Choose a game" : "Game"}
         </PanelTitle>
         {isHost && game && (
           <Button variant="ghost" size="sm" onClick={() => setPicking(!picking)}>
@@ -127,7 +127,7 @@ export function Lobby({ data, mode, send }: { data: StateResponse; mode: ViewMod
     <Panel>
       <PanelHeader>
         <PanelTitle className="flex items-center gap-2">
-          <Settings2 className="size-5 text-sky" aria-hidden /> Settings
+          <Settings2 className="text-sky size-5" aria-hidden /> Settings
         </PanelTitle>
       </PanelHeader>
       <PanelBody className="space-y-6">
@@ -142,7 +142,7 @@ export function Lobby({ data, mode, send }: { data: StateResponse; mode: ViewMod
     <Panel>
       <PanelHeader>
         <PanelTitle className="flex items-center gap-2">
-          <Trophy className="size-5 text-amber" aria-hidden /> Tonight&apos;s leaderboard
+          <Trophy className="text-amber size-5" aria-hidden /> Tonight&apos;s leaderboard
         </PanelTitle>
       </PanelHeader>
       <PanelBody>
@@ -153,7 +153,7 @@ export function Lobby({ data, mode, send }: { data: StateResponse; mode: ViewMod
 
   if (mode === "table") {
     return (
-      <div className="grid gap-5 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
+      <div className="grid gap-5 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
         <div className="space-y-5">
           <SharePanel code={room.code} large />
           <PlayerList room={room} meId={me.playerId} send={send} />

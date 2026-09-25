@@ -9,15 +9,15 @@ export const Slider = React.forwardRef<
 >(({ className, thumbLabel, ...props }, ref) => (
   <SliderPrimitive.Root
     ref={ref}
-    className={cn("relative flex h-7 w-full touch-none select-none items-center", className)}
+    className={cn("relative flex h-7 w-full touch-none items-center select-none", className)}
     {...props}
   >
-    <SliderPrimitive.Track className="relative h-2 w-full grow overflow-hidden rounded-full bg-surface-3">
-      <SliderPrimitive.Range className="absolute h-full bg-sky" />
+    <SliderPrimitive.Track className="bg-surface-3 relative h-2 w-full grow overflow-hidden rounded-full">
+      <SliderPrimitive.Range className="bg-sky absolute h-full" />
     </SliderPrimitive.Track>
     <SliderPrimitive.Thumb
       aria-label={thumbLabel}
-      className="block size-6 rounded-full border-2 border-sky bg-text shadow transition-transform hover:scale-110"
+      className="border-sky bg-text block size-6 rounded-full border-2 shadow transition-transform hover:scale-110"
     />
   </SliderPrimitive.Root>
 ));

@@ -5,7 +5,14 @@ import { cn } from "@/lib/utils";
 
 export function ConnectionBadge() {
   const status = useRoomStore((s) => s.status);
-  const label = status === "live" ? "Live" : status === "offline" ? "Offline — reconnecting" : status === "connecting" ? "Connecting" : "Syncing";
+  const label =
+    status === "live"
+      ? "Live"
+      : status === "offline"
+        ? "Offline — reconnecting"
+        : status === "connecting"
+          ? "Connecting"
+          : "Syncing";
   const Icon = status === "offline" ? WifiOff : status === "live" ? Wifi : RefreshCw;
   return (
     <span
@@ -17,7 +24,10 @@ export function ConnectionBadge() {
         (status === "polling" || status === "connecting") && "bg-amber/15 text-amber",
       )}
     >
-      <Icon className={cn("size-3.5", status !== "live" && status !== "offline" && "animate-spin [animation-duration:2s]")} aria-hidden />
+      <Icon
+        className={cn("size-3.5", status !== "live" && status !== "offline" && "animate-spin [animation-duration:2s]")}
+        aria-hidden
+      />
       <span className={cn(status === "live" && "max-sm:sr-only")}>{label}</span>
     </span>
   );
