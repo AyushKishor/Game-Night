@@ -13,8 +13,8 @@ function counts(min: number, max: number): number[] {
 }
 
 describe("every game", () => {
-  it("has at least 24 playable games with complete metadata", () => {
-    expect(GAMES.length).toBeGreaterThanOrEqual(24);
+  it("has at least 25 playable games with complete metadata", () => {
+    expect(GAMES.length).toBeGreaterThanOrEqual(25);
     const ids = new Set<string>();
     for (const g of GAMES) {
       expect(ids.has(g.meta.id)).toBe(false);

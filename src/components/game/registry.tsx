@@ -17,6 +17,7 @@ import { CaptionView } from "./caption-view";
 import { ClueRushView } from "./clue-rush-view";
 import { MajorityView } from "./majority-view";
 import { MostLikelyView } from "./most-likely-view";
+import { NhieView } from "./nhie-view";
 import { QuickCategoriesView } from "./quick-categories-view";
 import { QuizView } from "./quiz-view";
 import { RankItView } from "./rank-it-view";
@@ -48,6 +49,7 @@ export const GAME_VIEWS: Record<string, AnyView> = {
   "emoji-movies": QuizView,
   "majority-rules": MajorityView,
   "most-likely": MostLikelyView,
+  "never-have-i-ever": NhieView,
   "rank-it": RankItView,
   "secret-signal": SecretSignalView,
   "quick-categories": QuickCategoriesView,

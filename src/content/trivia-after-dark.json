@@ -1,0 +1,896 @@
+{
+ "_note": "Adults-only 'After Dark' trivia: drinks, nightlife, dating and party culture. Mixed in when the Spicy house rule is on.",
+ "questions": [
+  {
+   "cat": "Cocktails",
+   "d": 1,
+   "q": "Which spirit is the base of a classic Mojito?",
+   "a": "White rum",
+   "w": [
+    "Vodka",
+    "Gin",
+    "Tequila"
+   ]
+  },
+  {
+   "cat": "Cocktails",
+   "d": 1,
+   "q": "A Margarita is traditionally made with tequila, lime and…",
+   "a": "Orange liqueur",
+   "w": [
+    "Cranberry juice",
+    "Coconut cream",
+    "Ginger beer"
+   ]
+  },
+  {
+   "cat": "Cocktails",
+   "d": 1,
+   "q": "Which drink is famously served in a copper mug?",
+   "a": "Moscow Mule",
+   "w": [
+    "Mai Tai",
+    "Negroni",
+    "Cosmopolitan"
+   ]
+  },
+  {
+   "cat": "Cocktails",
+   "d": 2,
+   "q": "A Negroni is equal parts gin, sweet vermouth and…",
+   "a": "Campari",
+   "w": [
+    "Aperol",
+    "Triple sec",
+    "Absinthe"
+   ]
+  },
+  {
+   "cat": "Cocktails",
+   "d": 2,
+   "q": "What gives a Cosmopolitan its pink colour?",
+   "a": "Cranberry juice",
+   "w": [
+    "Grenadine",
+    "Raspberry syrup",
+    "Pink gin"
+   ]
+  },
+  {
+   "cat": "Cocktails",
+   "d": 2,
+   "q": "The Piña Colada is the official national drink of which place?",
+   "a": "Puerto Rico",
+   "w": [
+    "Cuba",
+    "Jamaica",
+    "Mexico"
+   ]
+  },
+  {
+   "cat": "Cocktails",
+   "d": 2,
+   "q": "What's the main mixer in a Bloody Mary?",
+   "a": "Tomato juice",
+   "w": [
+    "Cranberry juice",
+    "Orange juice",
+    "Grapefruit juice"
+   ]
+  },
+  {
+   "cat": "Cocktails",
+   "d": 2,
+   "q": "An Aperol Spritz is topped up with Aperol, soda and which wine?",
+   "a": "Prosecco",
+   "w": [
+    "Merlot",
+    "Rosé",
+    "Port"
+   ]
+  },
+  {
+   "cat": "Cocktails",
+   "d": 3,
+   "q": "Which cocktail is made with bourbon, sugar, bitters and an orange twist?",
+   "a": "Old Fashioned",
+   "w": [
+    "Manhattan",
+    "Whiskey Sour",
+    "Sazerac"
+   ]
+  },
+  {
+   "cat": "Cocktails",
+   "d": 3,
+   "q": "A 'Sex on the Beach' contains vodka, orange juice, cranberry and which liqueur?",
+   "a": "Peach schnapps",
+   "w": [
+    "Amaretto",
+    "Baileys",
+    "Kahlúa"
+   ]
+  },
+  {
+   "cat": "Cocktails",
+   "d": 3,
+   "q": "Which coffee liqueur goes into a White Russian?",
+   "a": "Kahlúa",
+   "w": [
+    "Baileys",
+    "Frangelico",
+    "Sambuca"
+   ]
+  },
+  {
+   "cat": "Cocktails",
+   "d": 1,
+   "q": "What's the classic garnish on a Margarita glass rim?",
+   "a": "Salt",
+   "w": [
+    "Sugar",
+    "Chilli flakes",
+    "Cocoa"
+   ]
+  },
+  {
+   "cat": "Spirits",
+   "d": 1,
+   "q": "Tequila is made from which plant?",
+   "a": "Blue agave",
+   "w": [
+    "Cactus",
+    "Sugarcane",
+    "Aloe vera"
+   ]
+  },
+  {
+   "cat": "Spirits",
+   "d": 1,
+   "q": "Which spirit gets its flavour mainly from juniper berries?",
+   "a": "Gin",
+   "w": [
+    "Vodka",
+    "Rum",
+    "Whisky"
+   ]
+  },
+  {
+   "cat": "Spirits",
+   "d": 2,
+   "q": "Rum is made from sugarcane juice or…",
+   "a": "Molasses",
+   "w": [
+    "Potatoes",
+    "Barley",
+    "Grapes"
+   ]
+  },
+  {
+   "cat": "Spirits",
+   "d": 2,
+   "q": "Which spirit was nicknamed 'the green fairy'?",
+   "a": "Absinthe",
+   "w": [
+    "Chartreuse",
+    "Midori",
+    "Crème de menthe"
+   ]
+  },
+  {
+   "cat": "Spirits",
+   "d": 2,
+   "q": "Jägermeister comes from which country?",
+   "a": "Germany",
+   "w": [
+    "Austria",
+    "Switzerland",
+    "Denmark"
+   ]
+  },
+  {
+   "cat": "Spirits",
+   "d": 3,
+   "q": "Which spirit is the most consumed in the world by volume?",
+   "a": "Baijiu",
+   "w": [
+    "Vodka",
+    "Whisky",
+    "Rum"
+   ]
+  },
+  {
+   "cat": "Spirits",
+   "d": 3,
+   "q": "Mezcal and tequila are both made from agave. Which one is usually known for a smoky taste?",
+   "a": "Mezcal",
+   "w": [
+    "Tequila",
+    "Both equally",
+    "Neither"
+   ]
+  },
+  {
+   "cat": "Spirits",
+   "d": 2,
+   "q": "Scotch whisky has to be aged for at least how many years?",
+   "a": "3 years",
+   "w": [
+    "1 year",
+    "5 years",
+    "10 years"
+   ]
+  },
+  {
+   "cat": "Spirits",
+   "d": 3,
+   "q": "Soju, often drunk as shots, is the famous spirit of which country?",
+   "a": "South Korea",
+   "w": [
+    "Japan",
+    "China",
+    "Vietnam"
+   ]
+  },
+  {
+   "cat": "Spirits",
+   "d": 2,
+   "q": "Sake is brewed from which ingredient?",
+   "a": "Rice",
+   "w": [
+    "Barley",
+    "Plums",
+    "Potatoes"
+   ]
+  },
+  {
+   "cat": "Wine & Beer",
+   "d": 1,
+   "q": "Real Champagne can only come from a region in which country?",
+   "a": "France",
+   "w": [
+    "Italy",
+    "Spain",
+    "Germany"
+   ]
+  },
+  {
+   "cat": "Wine & Beer",
+   "d": 1,
+   "q": "Prosecco comes from which country?",
+   "a": "Italy",
+   "w": [
+    "France",
+    "Spain",
+    "Portugal"
+   ]
+  },
+  {
+   "cat": "Wine & Beer",
+   "d": 1,
+   "q": "Which city hosts Oktoberfest?",
+   "a": "Munich",
+   "w": [
+    "Berlin",
+    "Vienna",
+    "Hamburg"
+   ]
+  },
+  {
+   "cat": "Wine & Beer",
+   "d": 2,
+   "q": "Guinness was first brewed in which city?",
+   "a": "Dublin",
+   "w": [
+    "Belfast",
+    "Cork",
+    "London"
+   ]
+  },
+  {
+   "cat": "Wine & Beer",
+   "d": 2,
+   "q": "Which plant gives beer most of its bitterness?",
+   "a": "Hops",
+   "w": [
+    "Barley",
+    "Wheat",
+    "Yeast"
+   ]
+  },
+  {
+   "cat": "Wine & Beer",
+   "d": 2,
+   "q": "Rosé wine usually gets its pink colour from…",
+   "a": "Brief contact with red grape skins",
+   "w": [
+    "Adding strawberries",
+    "Mixing red and white wine always",
+    "Food colouring"
+   ]
+  },
+  {
+   "cat": "Wine & Beer",
+   "d": 3,
+   "q": "What does 'IPA' stand for?",
+   "a": "India Pale Ale",
+   "w": [
+    "International Pale Ale",
+    "Imperial Pint Ale",
+    "Irish Premium Ale"
+   ]
+  },
+  {
+   "cat": "Wine & Beer",
+   "d": 3,
+   "q": "Sangria is a punch that comes from which country?",
+   "a": "Spain",
+   "w": [
+    "Mexico",
+    "Italy",
+    "Greece"
+   ]
+  },
+  {
+   "cat": "Wine & Beer",
+   "d": 2,
+   "q": "What's the name for the drips that run down the inside of a wine glass?",
+   "a": "Legs",
+   "w": [
+    "Tears of joy",
+    "Streaks",
+    "Runners"
+   ]
+  },
+  {
+   "cat": "Wine & Beer",
+   "d": 3,
+   "q": "Port wine comes from which country?",
+   "a": "Portugal",
+   "w": [
+    "Spain",
+    "France",
+    "Italy"
+   ]
+  },
+  {
+   "cat": "Cheers!",
+   "d": 1,
+   "q": "How do you say 'cheers' in German?",
+   "a": "Prost",
+   "w": [
+    "Salud",
+    "Skål",
+    "Kanpai"
+   ]
+  },
+  {
+   "cat": "Cheers!",
+   "d": 1,
+   "q": "'Salud!' means cheers in which language?",
+   "a": "Spanish",
+   "w": [
+    "Italian",
+    "Portuguese",
+    "French"
+   ]
+  },
+  {
+   "cat": "Cheers!",
+   "d": 2,
+   "q": "'Kanpai!' is how you say cheers in…",
+   "a": "Japanese",
+   "w": [
+    "Korean",
+    "Chinese",
+    "Thai"
+   ]
+  },
+  {
+   "cat": "Cheers!",
+   "d": 2,
+   "q": "'Skål!' is a toast from which part of the world?",
+   "a": "Scandinavia",
+   "w": [
+    "Eastern Europe",
+    "The Balkans",
+    "South America"
+   ]
+  },
+  {
+   "cat": "Cheers!",
+   "d": 3,
+   "q": "'Sláinte!' is a toast in which language?",
+   "a": "Irish Gaelic",
+   "w": [
+    "Welsh",
+    "Icelandic",
+    "Dutch"
+   ]
+  },
+  {
+   "cat": "Cheers!",
+   "d": 3,
+   "q": "'Na zdrowie!' is a toast in which language?",
+   "a": "Polish",
+   "w": [
+    "Russian",
+    "Czech",
+    "Hungarian"
+   ]
+  },
+  {
+   "cat": "Hangover Science",
+   "d": 1,
+   "q": "Alcohol makes you pee more. What's that effect called?",
+   "a": "Diuretic",
+   "w": [
+    "Sedative",
+    "Stimulant",
+    "Laxative"
+   ]
+  },
+  {
+   "cat": "Hangover Science",
+   "d": 2,
+   "q": "Which organ does most of the work breaking down alcohol?",
+   "a": "Liver",
+   "w": [
+    "Kidneys",
+    "Stomach",
+    "Pancreas"
+   ]
+  },
+  {
+   "cat": "Hangover Science",
+   "d": 3,
+   "q": "Which toxic chemical does your body make when it breaks down alcohol, adding to hangovers?",
+   "a": "Acetaldehyde",
+   "w": [
+    "Formaldehyde",
+    "Methanol",
+    "Lactic acid"
+   ]
+  },
+  {
+   "cat": "Hangover Science",
+   "d": 2,
+   "q": "Why does 'beer before liquor' not really matter?",
+   "a": "Total alcohol drunk matters most",
+   "w": [
+    "Beer blocks liquor",
+    "Liquor cancels beer",
+    "It's only true for wine"
+   ]
+  },
+  {
+   "cat": "Hangover Science",
+   "d": 3,
+   "q": "Roughly how long does an average adult body take to process one standard drink?",
+   "a": "About 1 hour",
+   "w": [
+    "About 10 minutes",
+    "About 4 hours",
+    "About 1 day"
+   ]
+  },
+  {
+   "cat": "Hangover Science",
+   "d": 2,
+   "q": "Why do you often need the loo constantly once you 'break the seal'?",
+   "a": "Alcohol suppresses the hormone that holds water in",
+   "w": [
+    "The bladder gets weaker",
+    "Ice in drinks",
+    "It's a myth with no cause"
+   ]
+  },
+  {
+   "cat": "Drinking History",
+   "d": 1,
+   "q": "During Prohibition, what was banned in the United States?",
+   "a": "Making and selling alcohol",
+   "w": [
+    "Gambling",
+    "Dancing",
+    "Smoking"
+   ]
+  },
+  {
+   "cat": "Drinking History",
+   "d": 2,
+   "q": "US Prohibition ended in which year?",
+   "a": "1933",
+   "w": [
+    "1929",
+    "1945",
+    "1920"
+   ]
+  },
+  {
+   "cat": "Drinking History",
+   "d": 2,
+   "q": "What were secret Prohibition-era bars called?",
+   "a": "Speakeasies",
+   "w": [
+    "Hideouts",
+    "Whisper rooms",
+    "Night dens"
+   ]
+  },
+  {
+   "cat": "Drinking History",
+   "d": 3,
+   "q": "Which ancient people brewed beer and even paid pyramid workers partly in it?",
+   "a": "Egyptians",
+   "w": [
+    "Romans",
+    "Vikings",
+    "Aztecs"
+   ]
+  },
+  {
+   "cat": "Party Games",
+   "d": 1,
+   "q": "In beer pong, where do you aim the ball?",
+   "a": "Into the other team's cups",
+   "w": [
+    "Into a bucket",
+    "At a bell",
+    "Into your own cups"
+   ]
+  },
+  {
+   "cat": "Party Games",
+   "d": 2,
+   "q": "Beer pong is also known by which city's name?",
+   "a": "Beirut",
+   "w": [
+    "Boston",
+    "Berlin",
+    "Bangkok"
+   ]
+  },
+  {
+   "cat": "Party Games",
+   "d": 2,
+   "q": "In the card drinking game 'Kings Cup', what happens when the fourth King is drawn?",
+   "a": "That player drinks the cup in the middle",
+   "w": [
+    "Everyone swaps seats",
+    "Game restarts",
+    "The dealer drinks"
+   ]
+  },
+  {
+   "cat": "Party Games",
+   "d": 1,
+   "q": "In 'Flip Cup', what do you do after drinking?",
+   "a": "Flip the cup upside down from the table edge",
+   "w": [
+    "Throw it at a target",
+    "Stack it",
+    "Hand it to the next team"
+   ]
+  },
+  {
+   "cat": "Party Games",
+   "d": 2,
+   "q": "In 'Never Have I Ever', who drinks?",
+   "a": "People who HAVE done the thing",
+   "w": [
+    "People who haven't",
+    "Only the person asking",
+    "Everyone"
+   ]
+  },
+  {
+   "cat": "Dating",
+   "d": 1,
+   "q": "On most dating apps, swiping right means…",
+   "a": "You like them",
+   "w": [
+    "You pass",
+    "You block them",
+    "You report them"
+   ]
+  },
+  {
+   "cat": "Dating",
+   "d": 1,
+   "q": "What's it called when someone vanishes and stops replying with no explanation?",
+   "a": "Ghosting",
+   "w": [
+    "Benching",
+    "Breadcrumbing",
+    "Catfishing"
+   ]
+  },
+  {
+   "cat": "Dating",
+   "d": 2,
+   "q": "Pretending to be someone else online to lure people in is called…",
+   "a": "Catfishing",
+   "w": [
+    "Ghosting",
+    "Phishing",
+    "Benching"
+   ]
+  },
+  {
+   "cat": "Dating",
+   "d": 2,
+   "q": "On Bumble's classic setting, who has to message first in a match between a man and a woman?",
+   "a": "The woman",
+   "w": [
+    "The man",
+    "Whoever swiped first",
+    "The app picks"
+   ]
+  },
+  {
+   "cat": "Dating",
+   "d": 2,
+   "q": "Sending the odd flirty message just to keep someone interested, with no plans to date, is called…",
+   "a": "Breadcrumbing",
+   "w": [
+    "Ghosting",
+    "Love bombing",
+    "Cuffing"
+   ]
+  },
+  {
+   "cat": "Dating",
+   "d": 3,
+   "q": "'Cuffing season' refers to which time of year?",
+   "a": "Autumn and winter",
+   "w": [
+    "Spring",
+    "Summer",
+    "Exam season"
+   ]
+  },
+  {
+   "cat": "Dating",
+   "d": 2,
+   "q": "Showering someone with over-the-top affection early on is called…",
+   "a": "Love bombing",
+   "w": [
+    "Soft launching",
+    "Zombieing",
+    "Orbiting"
+   ]
+  },
+  {
+   "cat": "Dating",
+   "d": 3,
+   "q": "Posting a partner online without showing their face is called a…",
+   "a": "Soft launch",
+   "w": [
+    "Hard launch",
+    "Ghost post",
+    "Blind drop"
+   ]
+  },
+  {
+   "cat": "Dating",
+   "d": 2,
+   "q": "When an ex who ghosted you suddenly pops back up, it's called…",
+   "a": "Zombieing",
+   "w": [
+    "Haunting",
+    "Benching",
+    "Boomeranging"
+   ]
+  },
+  {
+   "cat": "Nightlife",
+   "d": 1,
+   "q": "'Last orders' means…",
+   "a": "Final chance to buy a drink",
+   "w": [
+    "The DJ's last song",
+    "The club is full",
+    "Free drinks round"
+   ]
+  },
+  {
+   "cat": "Nightlife",
+   "d": 2,
+   "q": "Which Spanish island is world-famous for its superclubs?",
+   "a": "Ibiza",
+   "w": [
+    "Majorca",
+    "Tenerife",
+    "Lanzarote"
+   ]
+  },
+  {
+   "cat": "Nightlife",
+   "d": 2,
+   "q": "A 'pregame' (or 'pre-drinks') is…",
+   "a": "Drinking before going out",
+   "w": [
+    "The first drink at the club",
+    "Breakfast after a night out",
+    "A warm-up dance"
+   ]
+  },
+  {
+   "cat": "Nightlife",
+   "d": 2,
+   "q": "The famous Berlin techno club with a notoriously strict door is…",
+   "a": "Berghain",
+   "w": [
+    "Fabric",
+    "Pacha",
+    "Tresor Palace"
+   ]
+  },
+  {
+   "cat": "Nightlife",
+   "d": 3,
+   "q": "In Spain, what's the late-night bar-hop through small bars eating snacks called?",
+   "a": "Tapeo",
+   "w": [
+    "Siesta",
+    "Fiesta",
+    "Paseo"
+   ]
+  },
+  {
+   "cat": "Nightlife",
+   "d": 1,
+   "q": "What's the name for a greasy late-night food stop after a night out in the UK?",
+   "a": "Kebab shop",
+   "w": [
+    "Tea room",
+    "Deli",
+    "Bakery"
+   ]
+  },
+  {
+   "cat": "Pop Culture",
+   "d": 1,
+   "q": "What drink is James Bond famous for ordering 'shaken, not stirred'?",
+   "a": "Martini",
+   "w": [
+    "Mojito",
+    "Old Fashioned",
+    "Champagne"
+   ]
+  },
+  {
+   "cat": "Pop Culture",
+   "d": 2,
+   "q": "In a sitcom about six friends in New York, what's the name of their coffee shop?",
+   "a": "Central Perk",
+   "w": [
+    "Monk's",
+    "MacLaren's",
+    "The Brew"
+   ]
+  },
+  {
+   "cat": "Pop Culture",
+   "d": 2,
+   "q": "In a sitcom about friends who meet at a New York bar, what's the bar called?",
+   "a": "MacLaren's",
+   "w": [
+    "Paddy's",
+    "Cheers",
+    "Moe's"
+   ]
+  },
+  {
+   "cat": "Pop Culture",
+   "d": 2,
+   "q": "The Cosmopolitan became iconic thanks to which TV show about four women in New York?",
+   "a": "Sex and the City",
+   "w": [
+    "Gossip Girl",
+    "Girls",
+    "Friends"
+   ]
+  },
+  {
+   "cat": "Pop Culture",
+   "d": 3,
+   "q": "Which 'dude' in a 1998 cult comedy constantly drinks White Russians?",
+   "a": "The Dude (Jeffrey Lebowski)",
+   "w": [
+    "Ferris Bueller",
+    "Wayne Campbell",
+    "Ron Burgundy"
+   ]
+  },
+  {
+   "cat": "Pop Culture",
+   "d": 1,
+   "q": "The phrase 'YOLO' stands for…",
+   "a": "You Only Live Once",
+   "w": [
+    "Your Only Love Online",
+    "You Owe Lots Of",
+    "Yell Out Loud Often"
+   ]
+  },
+  {
+   "cat": "Pop Culture",
+   "d": 2,
+   "q": "What does 'FOMO' stand for?",
+   "a": "Fear Of Missing Out",
+   "w": [
+    "Friends Only Meet Once",
+    "Fun On My Own",
+    "Fear Of Moving On"
+   ]
+  },
+  {
+   "cat": "Pop Culture",
+   "d": 2,
+   "q": "'Rizz' means…",
+   "a": "Charm / the ability to flirt",
+   "w": [
+    "Being hungover",
+    "Dancing badly",
+    "Being broke"
+   ]
+  },
+  {
+   "cat": "Pop Culture",
+   "d": 3,
+   "q": "What does 'situationship' describe?",
+   "a": "A romantic relationship with no label",
+   "w": [
+    "A group chat",
+    "A work friendship",
+    "A long-distance couple"
+   ]
+  },
+  {
+   "cat": "Weird But True",
+   "d": 2,
+   "q": "What's the fear of long words called (ironically)?",
+   "a": "Hippopotomonstrosesquippedaliophobia",
+   "w": [
+    "Logophobia",
+    "Verbophobia",
+    "Lexiphobia"
+   ]
+  },
+  {
+   "cat": "Weird But True",
+   "d": 2,
+   "q": "Why do bubbles in Guinness famously seem to sink?",
+   "a": "They flow down the glass sides while rising in the middle",
+   "w": [
+    "They're heavier than beer",
+    "The glass is magnetic",
+    "Nitrogen is heavier than air"
+   ]
+  },
+  {
+   "cat": "Weird But True",
+   "d": 3,
+   "q": "Champagne bubbles are mostly which gas?",
+   "a": "Carbon dioxide",
+   "w": [
+    "Nitrogen",
+    "Oxygen",
+    "Helium"
+   ]
+  },
+  {
+   "cat": "Weird But True",
+   "d": 3,
+   "q": "In the UK, what's a 'Jägerbomb' made of?",
+   "a": "Jägermeister dropped into an energy drink",
+   "w": [
+    "Jäger and cola",
+    "Jäger and beer",
+    "Jäger and cider"
+   ]
+  }
+ ]
+}

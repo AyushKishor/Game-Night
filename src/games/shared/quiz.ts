@@ -1,6 +1,15 @@
 import { z } from "zod";
 import { deadlineFrom, nameOf, pushLog, resultsFromScores, zeroScores } from "@/lib/engine/helpers";
-import type { GameContext, GameMeta, GameModule, PlayerId, PresetId, GameConfig, RoundSummary } from "@/lib/engine/types";
+import type {
+  GameContext,
+  GameMeta,
+  GameModule,
+  HouseRuleDef,
+  PlayerId,
+  PresetId,
+  GameConfig,
+  RoundSummary,
+} from "@/lib/engine/types";
 import { SIP_RULE, TEAM_NAMES, teamsFor } from "./party";
 
 /**
@@ -27,6 +36,8 @@ export interface QuizState {
   answers: Record<PlayerId, { choice: number; at: number }>;
   askedAt: number;
   points: Record<PlayerId, number>;
+  /** Consecutive correct answers. */
+  streaks: Record<PlayerId, number>;
   summaries: RoundSummary[];
   deadline: number | null;
   log: string[];
@@ -49,34 +60,46 @@ export function createQuizGame(
   meta: GameMeta,
   build: (ctx: GameContext, count: number) => QuizQuestion[],
   presets: Record<PresetId, Partial<GameConfig>>,
+  extraHouseRules: HouseRuleDef[] = [],
 ): GameModule<QuizState, Action> {
   const reveal = (state: QuizState, ctx: GameContext): QuizState => {
     const q = state.questions[state.index]!;
     const window = Math.max(1, (state.deadline ?? ctx.now) - state.askedAt);
     const gained: Record<PlayerId, number> = {};
+    const streaks: Record<PlayerId, number> = {};
     for (const p of state.players) {
       const a = state.answers[p];
       if (a && a.choice === q.answer) {
         const speed = Math.max(0, 1 - (a.at - state.askedAt) / window);
-        gained[p] = 10 + Math.round(speed * 5);
-      } else gained[p] = 0;
+        streaks[p] = (state.streaks[p] ?? 0) + 1;
+        const streakBonus = Math.min(streaks[p]! - 1, 3) * 2;
+        gained[p] = 10 + Math.round(speed * 5) + streakBonus;
+      } else {
+        gained[p] = 0;
+        streaks[p] = 0;
+      }
     }
     const correct = state.players.filter((p) => gained[p]! > 0);
+    const fastest = correct.slice().sort((a, b) => state.answers[a]!.at - state.answers[b]!.at)[0];
     const points = Object.fromEntries(state.players.map((p) => [p, state.points[p]! + gained[p]!]));
+    const hot = state.players.filter((p) => streaks[p]! >= 3);
     const summary: RoundSummary = {
       round: state.index + 1,
       title: `Answer: ${q.choices[q.answer]}`,
-      lines: correct.length
-        ? [`Correct: ${correct.map((p) => `${nameOf(ctx, p)} (+${gained[p]})`).join(", ")}`]
-        : ["Nobody got it!"],
+      lines: [
+        correct.length ? `${correct.length} of ${state.players.length} got it right` : "Nobody got it! 😬",
+        ...(fastest ? [`⚡ Fastest finger: ${nameOf(ctx, fastest)}`] : []),
+        ...hot.map((p) => `🔥 ${nameOf(ctx, p)} is on a ${streaks[p]}-answer streak`),
+      ],
       scores: gained,
     };
     return {
       ...state,
       phase: "reveal",
       points,
+      streaks,
       summaries: [...state.summaries, summary],
-      deadline: ctx.now + 7000,
+      deadline: ctx.now + 10_000,
       log: pushLog(state.log, summary.title),
     };
   };
@@ -96,7 +119,7 @@ export function createQuizGame(
   const game: GameModule<QuizState, Action> = {
     meta,
     settings: ["rounds", "roundSeconds", "difficulty", "teamMode", "allowJoinInProgress"],
-    houseRules: [SIP_RULE],
+    houseRules: [...extraHouseRules, SIP_RULE],
     presets,
     actionSchema,
 
@@ -112,6 +135,7 @@ export function createQuizGame(
         answers: {},
         askedAt: ctx.now,
         points: zeroScores(players),
+        streaks: zeroScores(players),
         summaries: [],
         deadline: deadlineFrom(ctx.now, ctx.config.roundSeconds || 20),
         log: [teamMode ? "Teams are set — answers are pooled!" : "Get ready!"],
@@ -153,7 +177,13 @@ export function createQuizGame(
       const players = [...state.players, player];
       const counts = [0, 1].map((t) => state.players.filter((p) => state.teamOf[p] === t).length);
       const team = state.teamMode ? (counts[0]! <= counts[1]! ? 0 : 1) : players.length - 1;
-      return { ...state, players, teamOf: { ...state.teamOf, [player]: team }, points: { ...state.points, [player]: 0 } };
+      return {
+        ...state,
+        players,
+        teamOf: { ...state.teamOf, [player]: team },
+        points: { ...state.points, [player]: 0 },
+        streaks: { ...state.streaks, [player]: 0 },
+      };
     },
 
     publicView(state): QuizPublic {
@@ -175,6 +205,7 @@ export function createQuizGame(
         picks:
           state.phase === "question" ? null : Object.fromEntries(Object.entries(state.answers).map(([p, a]) => [p, a.choice])),
         scores: quizScores(state),
+        streaks: state.streaks,
         log: state.log,
       };
     },
@@ -201,6 +232,7 @@ export interface QuizPublic {
   answered: PlayerId[];
   picks: Record<PlayerId, number> | null;
   scores: Record<PlayerId, number>;
+  streaks: Record<PlayerId, number>;
   log: string[];
 }
 export interface QuizPrivate {

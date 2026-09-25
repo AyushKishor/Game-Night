@@ -43,6 +43,7 @@ export function MostLikelyView({
         <LockedIn players={pub.players} done={pub.voted} room={room} names={names} label="Voted" />
       ) : (
         <RoundReveal
+          scores={pub.scores}
           summary={game.roundSummaries.at(-1)}
           room={room}
           me={me}

@@ -114,6 +114,7 @@ export function RankItView({ pub, priv, mode, room, game, me, names, send }: Gam
       {pub.phase === "guess" && <LockedIn players={guessers} done={pub.guessed} room={room} names={names} label="Guessed" />}
       {pub.last && (
         <RoundReveal
+          scores={pub.scores}
           summary={game.roundSummaries.at(-1)}
           room={room}
           me={me}

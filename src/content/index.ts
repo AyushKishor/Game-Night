@@ -9,6 +9,9 @@ import emojiRaw from "./emoji-movies.json";
 import mostLikelyRaw from "./most-likely.json";
 import clueRushRaw from "./clue-rush.json";
 import botCaptionsRaw from "./bot-captions.json";
+import afterDarkRaw from "./trivia-after-dark.json";
+import nhieRaw from "./never-have-i-ever.json";
+import majoritySpicyRaw from "./majority-rules-spicy.json";
 
 /**
  * Party-game content lives in versioned JSON files so it can be reviewed,
@@ -58,6 +61,9 @@ export const content = {
   mostLikely: mostLikelySchema.parse(mostLikelyRaw),
   clueRush: clueRushSchema.parse(clueRushRaw),
   botCaptions: botCaptionsSchema.parse(botCaptionsRaw),
+  triviaAfterDark: z.object({ questions: triviaSchema.shape.questions.element.array().min(60) }).parse(afterDarkRaw),
+  neverHaveIEver: z.object({ prompts: z.array(z.string().min(10)).min(80) }).parse(nhieRaw),
+  majoritySpicy: z.object({ questions: majorityRulesSchema.shape.questions.element.array().min(40) }).parse(majoritySpicyRaw),
 };
 
 export type ContentLibrary = typeof content;

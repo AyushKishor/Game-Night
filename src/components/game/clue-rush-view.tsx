@@ -99,6 +99,7 @@ export function ClueRushView({ pub, priv, mode, room, game, me, names, send }: G
       )}
       {(pub.phase === "turnEnd" || pub.phase === "over") && (
         <RoundReveal
+          scores={pub.scores}
           summary={game.roundSummaries.at(-1)}
           room={room}
           me={me}

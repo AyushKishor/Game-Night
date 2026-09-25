@@ -19,6 +19,7 @@ import {
   Vote,
   Zap,
   Hash,
+  Beer,
   type LucideIcon,
 } from "lucide-react";
 import type { GameMeta } from "@/lib/engine/types";
@@ -45,6 +46,7 @@ const ICONS: Record<string, LucideIcon> = {
   Vote,
   Zap,
   Hash,
+  Beer,
 };
 
 const ACCENTS: Record<GameMeta["accent"], string> = {

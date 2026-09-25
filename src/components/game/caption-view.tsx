@@ -69,6 +69,7 @@ export function CaptionView({ pub, priv, mode, room, game, me, names, send }: Ga
       )}
       {pub.last && (
         <RoundReveal
+          scores={pub.scores}
           summary={game.roundSummaries.at(-1)}
           room={room}
           me={me}

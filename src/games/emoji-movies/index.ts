@@ -22,7 +22,7 @@ export const emojiMovies = createQuizGame(
         "Play solo or turn on team mode to pool points.",
         "Difficulty: Easy is films only, Hard mixes in phrases.",
       ],
-      scoring: "10 points per correct answer plus a speed bonus of up to 5.",
+      scoring: "10 points per correct answer, up to 5 more for speed, and up to 6 more for answer streaks 🔥.",
       ending: "Most points after the last puzzle wins; ties share the win.",
     },
   },

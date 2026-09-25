@@ -9,15 +9,39 @@ import { api } from "@/lib/client/api";
 import { loadSession } from "@/lib/client/session";
 import { cn } from "@/lib/utils";
 
+const LOCAL_HOSTS = new Set(["localhost", "127.0.0.1", "[::1]", "::1"]);
+
+/**
+ * The address to share. If this screen was opened as http://localhost, phones
+ * can't reach it, so we ask the server for this computer's Wi-Fi address.
+ */
 function useOrigin() {
   const [origin, setOrigin] = useState("");
-  // eslint-disable-next-line react-hooks/set-state-in-effect -- window.location is browser-only
-  useEffect(() => setOrigin(window.location.origin), []);
-  return origin;
+  const [unreachable, setUnreachable] = useState(false);
+  useEffect(() => {
+    const loc = window.location;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- window.location is browser-only
+    setOrigin(loc.origin);
+    if (!LOCAL_HOSTS.has(loc.hostname)) return;
+    let alive = true;
+    fetch("/api/network")
+      .then((r) => r.json())
+      .then((d: { addresses?: string[] }) => {
+        if (!alive) return;
+        const ip = d.addresses?.[0];
+        if (ip) setOrigin(`${loc.protocol}//${ip}${loc.port ? `:${loc.port}` : ""}`);
+        else setUnreachable(true);
+      })
+      .catch(() => alive && setUnreachable(true));
+    return () => {
+      alive = false;
+    };
+  }, []);
+  return { origin, unreachable };
 }
 
 export function SharePanel({ code, large }: { code: string; large?: boolean }) {
-  const origin = useOrigin();
+  const { origin, unreachable } = useOrigin();
   const link = `${origin}/r/${code}`;
   const [copied, setCopied] = useState(false);
   return (
@@ -57,6 +81,13 @@ export function SharePanel({ code, large }: { code: string; large?: boolean }) {
             </Button>
             <ContinueOnPhone code={code} origin={origin} />
           </div>
+          {unreachable && (
+            <p className="text-amber mt-2 text-sm" role="note">
+              Phones can&apos;t open “localhost”. Connect this computer to Wi-Fi and reload, or open this page using the
+              computer&apos;s network address.
+            </p>
+          )}
+          <div className="hidden"></div>
         </div>
         {origin && (
           <QrCode

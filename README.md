@@ -2,15 +2,29 @@
 
 Host card and party games on one shared screen (laptop, TV, Fire TV Stick browser) while everyone plays from their own phone. Friends join with a six-character room code, a QR code or a link. No accounts or installs, and no betting or purchases.
 
-- **24 fully playable games.** 9 party games: Trivia Night, Emoji Movies, Most Likely To, Clue Rush, Majority Rules, Quick Categories, Caption Clash, Rank It, Secret Signal. 15 card games: Crazy Eights, Go Fish, Old Maid, War, Snap, Memory Match, Hearts, Spades, President, Bluff, Sevens, Golf, Higher or Lower, Twenty-One, Switch.
+- **25 fully playable games.** 10 party games: Never Have I Ever, Trivia Night, Emoji Movies, Most Likely To, Clue Rush, Majority Rules, Quick Categories, Caption Clash, Rank It, Secret Signal. 15 card games: Crazy Eights, Go Fish, Old Maid, War, Snap, Memory Match, Hearts, Spades, President, Bluff, Sevens, Golf, Higher or Lower, Twenty-One, Switch.
 - **Private information stays private.** Hands, secret symbols, rankings and votes are filtered on the server. Another player's browser never receives them.
 - **Scores add up across games** on a Game Night leaderboard for the whole room.
 - **Real-time and resilient.** Players can reconnect after a refresh or a network drop. The host role moves automatically if the host disappears. Turn and round timers are built in, and the computer plays for anyone who's away.
-- **Party extras.** Team mode (Trivia, Emoji Movies, Spades, Clue Rush), bots, spectators, rematch, game switching without a new room, an optional **Sip mode (adults only)** drinking-game rule, and a spicy prompt pack for Most Likely To. The family-friendly text filter is off by default and hosts can switch it on.
+- **Built for pregaming.** Spicy adults-only content is on by default (After Dark trivia, spicy would-you-rather, cheeky Most Likely To prompts). Never Have I Ever works as a drinking game, and an optional **Sip mode** house rule turns the other party games into drinking games. A Kahoot-style leaderboard with rank changes and 🔥 answer streaks appears after every round.
+- **Party extras.** Team mode (Trivia, Emoji Movies, Spades, Clue Rush), bots, spectators, rematch, and switching games without a new room. The family-friendly text filter is off by default and hosts can switch it on.
 
 Full rules for every game: [GAME_RULES.md](./GAME_RULES.md) (also shown in the app at `/rules`).
 
 ---
+
+## Play on your Mac with phones (same Wi-Fi)
+
+```bash
+git clone https://github.com/AyushKishor/Game-Night.git
+cd Game-Night
+npm install
+npm run party        # builds, then prints the address to open
+```
+
+Open the address it prints (for example `http://192.168.1.23:3000`) on the Mac and click **Host a game**. Everyone scans the QR code with their phone. If you open `http://localhost:3000` instead, the app swaps in your Mac's Wi-Fi address for the QR code, since phones can't reach "localhost". Phones must be on the same Wi-Fi as the Mac. If macOS asks whether to allow incoming connections, click **Allow**.
+
+For development with live reload, use `npm run dev` (it also listens on your Wi-Fi address).
 
 ## Try it in 5 minutes (get a URL for your TV)
 
@@ -34,7 +48,7 @@ For a production setup with persistence and multiple instances, use **Vercel + S
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Rooms         | 6-character codes (no look-alike characters), QR code, share link, lock room, capacity (12 players + 20 spectators), spectators, idle expiry                                         |
 | Players       | Nicknames with duplicate handling (`Sam`, `Sam 2`), avatars, ready status, host removes players, host transfer, leave, bots                                                          |
-| Games         | 24 games, presets (Quick / Standard / Long), only relevant settings shown, house rules, rematch, change game, return to lobby                                                        |
+| Games         | 25 games, presets (Quick / Standard / Long), only relevant settings shown, house rules, rematch, change game, return to lobby                                                        |
 | Real time     | Server-authoritative engine, version pings over Supabase Realtime or Server-Sent Events, polling fallback, timer wake-ups                                                            |
 | Reliability   | Reconnect by token, idempotent action IDs, row-locked mutations, stale-action rejection, autopilot for away players                                                                  |
 | Screens       | Shared **Table** view (public info only) and personal **My hand** view; one-time "continue on my phone" handoff link                                                                 |
@@ -92,7 +106,7 @@ git clone https://github.com/AyushKishor/Game-Night.git
 cd Game-Night
 npm install
 cp .env.example .env.local      # optional: leave DATABASE_URL empty for the in-memory store
-npm run dev                      # http://localhost:3000
+npm run dev                      # http://localhost:3000 (also reachable from phones on your Wi-Fi)
 ```
 
 To test with phones on your Wi-Fi, run `npm run dev -- -H 0.0.0.0` and open `http://<your-computer's-LAN-IP>:3000` on the phone. The QR code uses whatever address the host screen was opened with.
@@ -203,18 +217,21 @@ To stage an unfinished game, list it in `COMING_SOON` in `src/games/index.ts`. I
 
 All prompts are original and stored as JSON in `src/content/`, validated with Zod at startup:
 
-| File                    | Items                                |
-| ----------------------- | ------------------------------------ |
-| `quick-categories.json` | 108 categories + letters             |
-| `majority-rules.json`   | 102 questions                        |
-| `rank-it.json`          | 101 prompt sets × 5 items            |
-| `caption-clash.json`    | 102 scenarios                        |
-| `trivia.json`           | 148 questions, 3 difficulty levels   |
-| `emoji-movies.json`     | 86 emoji puzzles (films and phrases) |
-| `most-likely.json`      | 60 classic + 45 spicy prompts        |
-| `clue-rush.json`        | 120 word cards with forbidden words  |
-| `secret-signal.json`    | 40 symbols with bot hints            |
-| `moderation.json`       | optional word filter                 |
+| File                        | Items                                                |
+| --------------------------- | ---------------------------------------------------- |
+| `quick-categories.json`     | 108 categories + letters                             |
+| `majority-rules.json`       | 102 questions                                        |
+| `rank-it.json`              | 101 prompt sets × 5 items                            |
+| `caption-clash.json`        | 102 scenarios                                        |
+| `trivia.json`               | 148 questions, 3 difficulty levels                   |
+| `trivia-after-dark.json`    | 81 adults-only questions (drinks, nightlife, dating) |
+| `never-have-i-ever.json`    | 96 prompts                                           |
+| `majority-rules-spicy.json` | 50 spicy would-you-rather questions                  |
+| `emoji-movies.json`         | 86 emoji puzzles (films and phrases)                 |
+| `most-likely.json`          | 60 classic + 45 spicy prompts                        |
+| `clue-rush.json`            | 120 word cards with forbidden words                  |
+| `secret-signal.json`        | 40 symbols with bot hints                            |
+| `moderation.json`           | optional word filter                                 |
 
 Emoji Movies and some trivia answers mention well-known film titles as factual answers; no artwork, logos or quotes are used.
 

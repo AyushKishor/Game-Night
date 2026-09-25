@@ -11,6 +11,7 @@ import { higherLower } from "./higher-lower";
 import { majorityRules } from "./majority-rules";
 import { memory } from "./memory";
 import { mostLikely } from "./most-likely";
+import { neverHaveIEver } from "./never-have-i-ever";
 import { oldMaid } from "./old-maid";
 import { president } from "./president";
 import { quickCategories } from "./quick-categories";
@@ -27,6 +28,7 @@ import { war } from "./war";
 /** Every fully playable game, in library order. */
 export const GAMES: AnyGameModule[] = [
   // Party games
+  neverHaveIEver,
   trivia,
   emojiMovies,
   mostLikely,

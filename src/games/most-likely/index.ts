@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { REVEAL_SECONDS, deadlineFrom, nameOf, pushLog, resultsFromScores, zeroScores } from "@/lib/engine/helpers";
 import type { GameContext, GameModule, PlayerId, RoundSummary } from "@/lib/engine/types";
-import { SIP_RULE } from "../shared/party";
+import { SIP_RULE, SPICY_RULE } from "../shared/party";
 import { playerIdSchema } from "../shared/schemas";
 
 export interface MostLikelyState {
@@ -76,22 +76,14 @@ export const mostLikely: GameModule<MostLikelyState, Action> = {
         "A “Who is most likely to…” prompt appears on the big screen.",
         "Everyone secretly votes for a player (you can vote for yourself).",
         "Votes are revealed. The most-voted player is the group's pick.",
-        "Turn on the Spicy house rule for grown-up prompts, and Sip mode for a drinking-game twist: the group's pick takes a sip.",
+        "Spicy prompts are on by default. Turn on Sip mode for the drinking-game version: whoever the group picks drinks.",
       ],
       scoring: "1 point if you voted for the player the group picked.",
       ending: "Most points after the set number of prompts wins; ties share the win.",
     },
   },
   settings: ["rounds", "roundSeconds", "allowJoinInProgress"],
-  houseRules: [
-    {
-      key: "spicy",
-      label: "Spicy prompts (adults)",
-      description: "Adds cheeky prompts about dating and nights out.",
-      default: false,
-    },
-    SIP_RULE,
-  ],
+  houseRules: [SPICY_RULE, SIP_RULE],
   presets: {
     quick: { rounds: 6, roundSeconds: 20, allowJoinInProgress: true },
     standard: { rounds: 12, roundSeconds: 25, allowJoinInProgress: true },
@@ -100,12 +92,10 @@ export const mostLikely: GameModule<MostLikelyState, Action> = {
   actionSchema,
 
   setup(players, ctx) {
-    const pool = ctx.config.houseRules.spicy
-      ? [...ctx.content.mostLikely.spicy, ...ctx.content.mostLikely.classic]
-      : ctx.content.mostLikely.classic;
-    const prompts = ctx.config.houseRules.spicy
-      ? ctx.rng.shuffle(pool).slice(0, ctx.config.rounds)
-      : ctx.rng.shuffle(pool).slice(0, ctx.config.rounds);
+    const classic = ctx.rng.shuffle(ctx.content.mostLikely.classic);
+    const spicy = ctx.rng.shuffle(ctx.content.mostLikely.spicy);
+    const nSpicy = (ctx.config.houseRules.spicy ?? true) ? Math.min(spicy.length, Math.ceil((ctx.config.rounds * 2) / 3)) : 0;
+    const prompts = ctx.rng.shuffle([...spicy.slice(0, nSpicy), ...classic.slice(0, ctx.config.rounds - nSpicy)]);
     return {
       players,
       prompts,

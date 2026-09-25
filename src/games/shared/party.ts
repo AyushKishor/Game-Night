@@ -50,3 +50,11 @@ export function teamsFor(players: PlayerId[], teamMode: boolean): Record<PlayerI
 }
 
 export const TEAM_NAMES = ["Team Coral", "Team Sky", "Team Mint", "Team Amber"];
+
+/** Adults-only prompt packs. On by default — this is a pregame app. */
+export const SPICY_RULE: HouseRuleDef = {
+  key: "spicy",
+  label: "Spicy content (adults)",
+  description: "Mixes in grown-up questions about drinking, dating and nights out.",
+  default: true,
+};

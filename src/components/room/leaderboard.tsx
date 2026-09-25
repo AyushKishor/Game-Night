@@ -22,7 +22,7 @@ export function Leaderboard({ players, meId, className }: { players: PublicPlaye
             <th scope="col" className="py-2">
               Player
             </th>
-            <th scope="col" className="py-2 text-right">
+            <th scope="col" className="py-2 pr-3 text-right">
               Wins
             </th>
             <th scope="col" className="py-2 text-right">
@@ -45,7 +45,7 @@ export function Leaderboard({ players, meId, className }: { players: PublicPlaye
                   <span className="font-semibold">{p.name}</span>
                   {p.id === meId && <span className="text-muted"> (you)</span>}
                 </td>
-                <td className="py-2 text-right tabular-nums">
+                <td className="py-2 pr-3 text-right tabular-nums">
                   {p.wins > 0 && <Medal className="text-amber mr-1 inline size-4" aria-hidden />}
                   {p.wins}
                 </td>

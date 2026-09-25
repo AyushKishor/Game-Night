@@ -2,9 +2,26 @@
 
 _Generated from the game modules by `npm run rules:generate`. The same rules are shown in the app._
 
-24 games are fully playable. Games marked **bots** can be filled with computer players.
+25 games are fully playable. Games marked **bots** can be filled with computer players.
 
 ## Party games
+
+### Never Have I Ever
+
+_Confess in secret, guess how guilty the room is — then the guilty drink._ · 3–12 players · 10–20 min · bots
+
+**Goal:** Read the room: guess how many people have done it.
+
+1. A “Never have I ever…” statement appears on the big screen.
+2. On your phone, secretly tap I HAVE or NEVER.
+3. Then guess how many people in the room (including you) have done it.
+4. The reveal shows who's guilty. With the drinking game on (default), everyone who has done it drinks.
+
+**Scoring:** Guess the exact number: 3 points. Off by one: 1 point.
+
+**Ending & ties:** Most points after the set number of statements wins; ties share the win. The results also crown the night's most guilty player.
+
+**House rules:** Drinking game (adults only) — Everyone who HAS done it drinks. Any drink works — please drink responsibly.
 
 ### Trivia Night
 
@@ -16,13 +33,13 @@ _Quick-fire multiple choice. Fast and right wins._ · 1–12 players · 10–20 
 2. Everyone picks an answer on their own phone before time runs out.
 3. Correct answers score 10, plus up to 5 bonus points for speed.
 4. Team mode splits the room into two teams whose points are pooled.
-5. Difficulty chooses easier or harder questions.
+5. Difficulty chooses easier or harder questions. Spicy mode (on by default) mixes in an After Dark pack about drinks, dating and nights out.
 
-**Scoring:** 10 points per correct answer plus a speed bonus of up to 5.
+**Scoring:** 10 points per correct answer, up to 5 more for speed, and up to 6 more for answer streaks 🔥.
 
 **Ending & ties:** Most points after the last question wins (in team mode, the whole team shares the result); ties share the win.
 
-**House rules:** Sip mode (adults only) — The screen calls out who takes a sip each round — any drink works. Please drink responsibly.
+**House rules:** Spicy content (adults) — Mixes in grown-up questions about drinking, dating and nights out.; Sip mode (adults only) — The screen calls out who takes a sip each round — any drink works. Please drink responsibly.
 
 ### Emoji Movies
 
@@ -36,7 +53,7 @@ _Guess the film or phrase from a string of emoji._ · 1–12 players · 10–15 
 4. Play solo or turn on team mode to pool points.
 5. Difficulty: Easy is films only, Hard mixes in phrases.
 
-**Scoring:** 10 points per correct answer plus a speed bonus of up to 5.
+**Scoring:** 10 points per correct answer, up to 5 more for speed, and up to 6 more for answer streaks 🔥.
 
 **Ending & ties:** Most points after the last puzzle wins; ties share the win.
 
@@ -51,13 +68,13 @@ _Who in the room is most likely to…? Vote and find out._ · 3–12 players · 
 1. A “Who is most likely to…” prompt appears on the big screen.
 2. Everyone secretly votes for a player (you can vote for yourself).
 3. Votes are revealed. The most-voted player is the group's pick.
-4. Turn on the Spicy house rule for grown-up prompts, and Sip mode for a drinking-game twist: the group's pick takes a sip.
+4. Spicy prompts are on by default. Turn on Sip mode for the drinking-game version: whoever the group picks drinks.
 
 **Scoring:** 1 point if you voted for the player the group picked.
 
 **Ending & ties:** Most points after the set number of prompts wins; ties share the win.
 
-**House rules:** Spicy prompts (adults) — Adds cheeky prompts about dating and nights out.; Sip mode (adults only) — The screen calls out who takes a sip each round — any drink works. Please drink responsibly.
+**House rules:** Spicy content (adults) — Mixes in grown-up questions about drinking, dating and nights out.; Sip mode (adults only) — The screen calls out who takes a sip each round — any drink works. Please drink responsibly.
 
 ### Clue Rush
 
@@ -92,7 +109,7 @@ _Pick a side. Score by agreeing with the crowd._ · 3–12 players · 5–15 min
 
 **Ending & ties:** Most points after the set number of questions wins; ties share the win.
 
-**House rules:** Sip mode (adults only) — The screen calls out who takes a sip each round — any drink works. Please drink responsibly.
+**House rules:** Spicy content (adults) — Mixes in grown-up questions about drinking, dating and nights out.; Sip mode (adults only) — The screen calls out who takes a sip each round — any drink works. Please drink responsibly.
 
 ### Quick Categories
 

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -H 0.0.0.0",
     "build": "next build",
     "start": "next start",
     "lint": "eslint src tests",
@@ -16,7 +16,8 @@
     "format:check": "prettier --check .",
     "db:migrate": "tsx scripts/migrate.ts",
     "db:seed": "tsx scripts/seed.ts",
-    "rules:generate": "tsx scripts/generate-rules.ts"
+    "rules:generate": "tsx scripts/generate-rules.ts",
+    "party": "next build && node scripts/party.mjs"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.23",

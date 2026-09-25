@@ -124,6 +124,7 @@ export function QuickCategoriesView({
       )}
       {pub.last && (
         <RoundReveal
+          scores={pub.scores}
           summary={game.roundSummaries.at(-1)}
           room={room}
           me={me}

@@ -1,13 +1,13 @@
 import { z } from "zod";
 import { REVEAL_SECONDS, deadlineFrom, pushLog, resultsFromScores, zeroScores } from "@/lib/engine/helpers";
 import type { GameContext, GameModule, PlayerId, RoundSummary } from "@/lib/engine/types";
-import { SIP_RULE, pickIndices } from "../shared/party";
+import { SIP_RULE, SPICY_RULE } from "../shared/party";
 
 type Side = "a" | "b";
 
 export interface MajorityState {
   players: PlayerId[];
-  questions: number[];
+  questions: { q: string; a: string; b: string }[];
   round: number;
   phase: "vote" | "reveal" | "over";
   votes: Record<PlayerId, Side>;
@@ -23,15 +23,15 @@ const actionSchema = z.discriminatedUnion("type", [
 ]);
 type Action = z.infer<typeof actionSchema>;
 
-function question(state: MajorityState, ctx: { content: GameContext["content"] }) {
-  return ctx.content.majorityRules.questions[state.questions[state.round - 1]!]!;
+function question(state: MajorityState) {
+  return state.questions[state.round - 1]!;
 }
 
 function reveal(state: MajorityState, ctx: GameContext): MajorityState {
   const a = state.players.filter((p) => state.votes[p] === "a");
   const b = state.players.filter((p) => state.votes[p] === "b");
   const winners = a.length > b.length ? a : b.length > a.length ? b : [];
-  const q = question(state, ctx);
+  const q = question(state);
   const scores = { ...state.scores };
   for (const p of winners) scores[p]! += 1;
   const summary: RoundSummary = {
@@ -81,7 +81,7 @@ export const majorityRules: GameModule<MajorityState, Action> = {
     },
   },
   settings: ["rounds", "roundSeconds", "allowJoinInProgress"],
-  houseRules: [SIP_RULE],
+  houseRules: [SPICY_RULE, SIP_RULE],
   presets: {
     quick: { rounds: 5, roundSeconds: 20, allowJoinInProgress: true },
     standard: { rounds: 10, roundSeconds: 25, allowJoinInProgress: true },
@@ -91,7 +91,13 @@ export const majorityRules: GameModule<MajorityState, Action> = {
 
   setup: (players, ctx) => ({
     players,
-    questions: pickIndices(ctx.content.majorityRules.questions.length, ctx.config.rounds, ctx.rng),
+    questions: (() => {
+      const classic = ctx.rng.shuffle(ctx.content.majorityRules.questions);
+      if (!(ctx.config.houseRules.spicy ?? true)) return classic.slice(0, ctx.config.rounds);
+      const spicy = ctx.rng.shuffle(ctx.content.majoritySpicy.questions);
+      const nSpicy = Math.min(spicy.length, Math.ceil((ctx.config.rounds * 2) / 3));
+      return ctx.rng.shuffle([...spicy.slice(0, nSpicy), ...classic.slice(0, ctx.config.rounds - nSpicy)]);
+    })(),
     round: 1,
     phase: "vote",
     votes: {},
@@ -125,8 +131,8 @@ export const majorityRules: GameModule<MajorityState, Action> = {
   roundSummaries: (state) => state.summaries,
   addPlayer: (state, player) => ({ ...state, players: [...state.players, player], scores: { ...state.scores, [player]: 0 } }),
 
-  publicView(state, ctx): MajorityPublic {
-    const q = question(state, ctx);
+  publicView(state): MajorityPublic {
+    const q = question(state);
     return {
       players: state.players,
       round: state.round,

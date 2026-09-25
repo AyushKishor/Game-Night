@@ -832,6 +832,7 @@ export function HigherLowerView({
         <LockedIn players={pub.players} done={pub.lockedIn} room={room} names={names} />
       ) : (
         <RoundReveal
+          scores={pub.scores}
           summary={game.roundSummaries.at(-1)}
           room={room}
           me={me}
@@ -901,6 +902,7 @@ export function TwentyOneView({ pub, mode, room, game, me, names, send }: GameVi
       )}
       {pub.phase === "reveal" && (
         <RoundReveal
+          scores={pub.scores}
           summary={game.roundSummaries.at(-1)}
           room={room}
           me={me}

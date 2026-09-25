@@ -169,6 +169,9 @@ export function RoundReveal({
   names,
   onNext,
   children,
+  scores,
+  badges,
+  lowerIsBetter,
 }: {
   summary: RoundSummary | undefined;
   room: RoomSnapshot;
@@ -177,10 +180,24 @@ export function RoundReveal({
   names: Record<string, string>;
   onNext: () => void;
   children?: React.ReactNode;
+  /** Running totals: shows a Kahoot-style leaderboard with rank changes. */
+  scores?: Record<string, number>;
+  badges?: Record<string, string>;
+  lowerIsBetter?: boolean;
 }) {
   const sips = summary && game.config.houseRules.sips ? sippersOf(summary) : [];
   return (
     <div className="border-mint/40 bg-mint/10 space-y-3 rounded-2xl border p-4">
+      {sips.length > 0 && (
+        <motion.p
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          className="bg-amber flex items-center justify-center gap-2 rounded-xl px-3 py-3 text-center text-xl font-extrabold text-[#2a1c00]"
+          role="status"
+        >
+          <Beer className="size-6" aria-hidden /> DRINK: {sips.map((p) => names[p] ?? "Player").join(", ")}
+        </motion.p>
+      )}
       {summary && <h3 className="font-display text-xl font-bold">{summary.title}</h3>}
       {children}
       {summary && summary.lines.length > 0 && !children && (
@@ -190,10 +207,16 @@ export function RoundReveal({
           ))}
         </ul>
       )}
-      {sips.length > 0 && (
-        <p className="bg-amber/15 text-amber flex items-center gap-2 rounded-xl px-3 py-2 font-bold" role="status">
-          <Beer className="size-5" aria-hidden /> Sip: {sips.map((p) => names[p] ?? "Player").join(", ")}
-        </p>
+      {scores && summary && (
+        <RoundStandings
+          scores={scores}
+          gained={summary.scores}
+          names={names}
+          room={room}
+          meId={me.playerId}
+          badges={badges}
+          lowerIsBetter={lowerIsBetter}
+        />
       )}
       {!game.over && <NextRoundButton room={room} me={me} deadline={game.deadline} onNext={onNext} label="Next" />}
     </div>
@@ -272,5 +295,98 @@ export function Scoreline({
         </li>
       ))}
     </ol>
+  );
+}
+
+/** Kahoot-style leaderboard after a round: animated bars, points gained and rank movement. */
+export function RoundStandings({
+  scores,
+  gained,
+  names,
+  room,
+  meId,
+  badges,
+  lowerIsBetter,
+  limit = 8,
+}: {
+  scores: Record<string, number>;
+  gained: Record<string, number>;
+  names: Record<string, string>;
+  room: RoomSnapshot;
+  meId?: string;
+  badges?: Record<string, string>;
+  lowerIsBetter?: boolean;
+  limit?: number;
+}) {
+  const ids = Object.keys(scores);
+  const order = (m: Record<string, number>) =>
+    ids.slice().sort((a, b) => (lowerIsBetter ? m[a]! - m[b]! : m[b]! - m[a]!) || (names[a] ?? "").localeCompare(names[b] ?? ""));
+  const before = Object.fromEntries(ids.map((id) => [id, (scores[id] ?? 0) - (gained[id] ?? 0)]));
+  const nowOrder = order(scores);
+  const better = (m: Record<string, number>, id: string) =>
+    ids.filter((o) => (lowerIsBetter ? m[o]! < m[id]! : m[o]! > m[id]!)).length;
+  // Tied players share a rank.
+  const rankNow = Object.fromEntries(ids.map((id) => [id, better(scores, id)]));
+  const prevRank = Object.fromEntries(ids.map((id) => [id, better(before, id)]));
+  const max = Math.max(1, ...ids.map((id) => Math.abs(scores[id] ?? 0)));
+  const avatar = (id: string) => room.players.find((p) => p.id === id)?.avatar ?? "👤";
+  return (
+    <div className="bg-bg-2/80 rounded-2xl p-3" aria-label="Leaderboard after this round">
+      <p className="text-muted mb-2 text-sm font-bold tracking-wider uppercase">Leaderboard</p>
+      <ol className="space-y-1.5">
+        {nowOrder.slice(0, limit).map((id, i) => {
+          const rank = rankNow[id]!;
+          const move = prevRank[id]! - rank;
+          const g = gained[id] ?? 0;
+          return (
+            <motion.li
+              layout
+              key={id}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: i * 0.06, type: "spring", stiffness: 300, damping: 26 }}
+              className={cn(
+                "relative flex items-center gap-2 overflow-hidden rounded-xl px-3 py-2",
+                rank === 0 ? "bg-amber/20" : "bg-surface-2",
+                id === meId && "ring-sky ring-2",
+              )}
+            >
+              <motion.span
+                aria-hidden
+                className={cn("absolute inset-y-0 left-0", rank === 0 ? "bg-amber/25" : "bg-sky/15")}
+                initial={{ width: 0 }}
+                animate={{ width: `${(Math.abs(scores[id] ?? 0) / max) * 100}%` }}
+                transition={{ duration: 0.8, delay: 0.2 + i * 0.06 }}
+              />
+              <span className="relative w-6 text-center font-mono font-extrabold">
+                {rank === 0 && (scores[id] ?? 0) !== 0 ? "👑" : rank + 1}
+              </span>
+              <span className="relative text-xl" aria-hidden>
+                {avatar(id)}
+              </span>
+              <span className="relative flex-1 truncate font-semibold">
+                {names[id] ?? "Player"}
+                {badges?.[id] && <span className="ml-1.5 text-sm">{badges[id]}</span>}
+              </span>
+              {move !== 0 && (
+                <span
+                  className={cn("relative text-sm font-bold", move > 0 ? "text-mint" : "text-rose")}
+                  aria-label={move > 0 ? `up ${move}` : `down ${-move}`}
+                >
+                  {move > 0 ? `▲${move}` : `▼${-move}`}
+                </span>
+              )}
+              {g !== 0 && (
+                <span className={cn("relative text-sm font-bold", g > 0 ? "text-mint" : "text-rose")}>
+                  {g > 0 ? "+" : ""}
+                  {g}
+                </span>
+              )}
+              <span className="relative w-12 text-right font-mono text-lg font-extrabold tabular-nums">{scores[id]}</span>
+            </motion.li>
+          );
+        })}
+      </ol>
+    </div>
   );
 }

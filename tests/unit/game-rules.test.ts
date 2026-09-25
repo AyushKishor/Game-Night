@@ -507,3 +507,46 @@ describe("Trivia Night", () => {
     expect(team0.every((x) => x.score === 15)).toBe(true);
   });
 });
+
+describe("Never Have I Ever", () => {
+  it("scores close guesses, marks the guilty to drink and keeps answers secret until reveal", async () => {
+    const { neverHaveIEver } = await import("@/games/never-have-i-ever");
+    type S = import("@/games/never-have-i-ever").NhieState;
+    const { envelope, env, players } = start(neverHaveIEver, 3);
+    const [a, b, c] = players as [string, string, string];
+    rejects(neverHaveIEver, envelope, a, { type: "answer", have: true, guess: 0 }, env);
+    rejects(neverHaveIEver, envelope, a, { type: "answer", have: false, guess: 9 }, env);
+    let e = act(neverHaveIEver, envelope, a, { type: "answer", have: true, guess: 2 }, env);
+    const pub = JSON.stringify(neverHaveIEver.publicView(st<S>(e), { ...env, config: e.config }));
+    expect(pub).not.toContain('"have":true');
+    e = act(neverHaveIEver, e, b, { type: "answer", have: true, guess: 1 }, env);
+    e = act(neverHaveIEver, e, c, { type: "answer", have: false, guess: 0 }, env);
+    const s = st<S>(e);
+    expect(s.scores).toEqual({ [a]: 3, [b]: 1, [c]: 0 });
+    expect(s.summaries[0]!.sips).toEqual([a, b]);
+    expect(s.confessions[a]).toBe(1);
+  });
+});
+
+describe("Spicy content", () => {
+  it("mixes After Dark questions into Trivia by default and not when spicy is off", () => {
+    const spicyOn = start(trivia, 2, { rounds: 9 });
+    const qs = st<QuizStateAlias>(spicyOn.envelope).questions.map((q) => q.prompt);
+    const afterDark = new Set(spicyOn.env.content.triviaAfterDark.questions.map((q) => q.q));
+    expect(qs.filter((q) => afterDark.has(q)).length).toBeGreaterThanOrEqual(5);
+    const spicyOff = start(trivia, 2, { rounds: 9, houseRules: { spicy: false } });
+    expect(st<QuizStateAlias>(spicyOff.envelope).questions.some((q) => afterDark.has(q.prompt))).toBe(false);
+  });
+  it("rewards answer streaks in the quiz", () => {
+    const { envelope, env, players } = start(trivia, 1, { rounds: 3 });
+    let e = envelope;
+    for (let i = 0; i < 3; i++) {
+      const q = st<QuizStateAlias>(e).questions[i]!;
+      e = act(trivia, e, players[0]!, { type: "answer", choice: q.answer }, env);
+      if (i < 2) e = act(trivia, e, players[0]!, { type: "next" }, env);
+    }
+    const s = st<QuizStateAlias>(e);
+    expect(s.streaks[players[0]!]).toBe(3);
+    expect(s.points[players[0]!]).toBe(15 + 17 + 19);
+  });
+});

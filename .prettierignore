@@ -5,3 +5,4 @@ test-results
 playwright-report
 src/content/*.json
 next-env.d.ts
+.smoke

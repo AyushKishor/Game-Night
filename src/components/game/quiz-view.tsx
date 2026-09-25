@@ -58,6 +58,12 @@ export function QuizView({ pub, priv, mode, room, game, me, names, send }: GameV
         <LockedIn players={pub.players} done={pub.answered} room={room} names={names} label="Answered" />
       ) : (
         <RoundReveal
+          scores={pub.scores}
+          badges={Object.fromEntries(
+            Object.entries(pub.streaks ?? {})
+              .filter(([, n]) => n >= 2)
+              .map(([p, n]) => [p, `🔥${n}`]),
+          )}
           summary={game.roundSummaries.at(-1)}
           room={room}
           me={me}
