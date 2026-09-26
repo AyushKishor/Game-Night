@@ -34,9 +34,12 @@ export function GameStage({
   const inGame = snap.players.includes(me.playerId);
   const myTurn = snap.pending.includes(me.playerId);
   const gameSend = (action: object) => send({ kind: "game", action });
+  const wide = mode === "table" && !!game?.meta.wideTable;
 
   return (
-    <div className={mode === "table" ? "grid gap-5 xl:grid-cols-[minmax(0,1fr)_20rem]" : "mx-auto max-w-3xl"}>
+    <div
+      className={mode === "table" ? (wide ? "grid gap-5" : "grid gap-5 xl:grid-cols-[minmax(0,1fr)_20rem]") : "mx-auto max-w-3xl"}
+    >
       <div className="min-w-0 space-y-4">
         <div className="flex flex-wrap items-center gap-3">
           {game && <GameIcon game={game.meta} className="size-10" />}
@@ -114,7 +117,7 @@ export function GameStage({
         )}
       </div>
       {mode === "table" && (
-        <aside className="space-y-4" aria-label="Room info">
+        <aside className={wide ? "grid items-start gap-4 md:grid-cols-2" : "space-y-4"} aria-label="Room info">
           <Panel>
             <PanelHeader>
               <PanelTitle className="flex items-center gap-2">

@@ -291,6 +291,181 @@ function PlayerTable({
   );
 }
 
+// ───────────────────────── Shared screen (TV) ─────────────────────────
+
+/** One colour set as a readable vertical stack of cards. */
+function TvSet({ pile }: { pile: Pile }) {
+  const info = COLOR_INFO[pile.color];
+  const full = isComplete(pile);
+  const n = pile.cards.length;
+  const offset = 2.7; // rem between stacked cards: enough to read each name
+  return (
+    <div
+      className={cn(
+        "relative flex w-[8.2rem] flex-col gap-1.5 rounded-2xl border-2 p-1.5",
+        full ? "border-amber bg-amber/15 shadow-[0_0_22px_rgba(255,193,69,0.45)]" : "border-border bg-black/20",
+      )}
+    >
+      {full && (
+        <span className="bg-amber absolute -top-3 left-1/2 -translate-x-1/2 rounded-full px-2 py-0.5 text-[0.65rem] font-black tracking-wider whitespace-nowrap text-[#2a1c00]">
+          FULL SET
+        </span>
+      )}
+      <div className="px-0.5 pt-1">
+        <p className="flex items-center justify-between text-sm font-extrabold">
+          <span className="truncate">{info.name}</span>
+          <span className="font-mono">
+            {Math.min(n, info.size)}/{info.size}
+          </span>
+        </p>
+        <div className="mt-1 flex gap-0.5" aria-hidden>
+          {Array.from({ length: info.size }, (_, i) => (
+            <span
+              key={i}
+              className="h-2 flex-1 rounded-full ring-1 ring-black/30"
+              style={{ background: i < n ? info.hex : "rgb(255 255 255 / 0.12)" }}
+            />
+          ))}
+        </div>
+      </div>
+      <div className="relative mx-auto w-[6.2rem]" style={{ height: `calc(8.8rem + ${(n - 1) * offset}rem)` }}>
+        {pile.cards.map((id, i) => (
+          <div key={id} className="absolute left-0" style={{ top: `${i * offset}rem` }}>
+            <DealCard id={id} size="md" color={card(id).kind === "wild" ? pile.color : undefined} />
+          </div>
+        ))}
+      </div>
+      {(pile.house || pile.hotel) && (
+        <div className="flex justify-center gap-1 text-xs font-bold">
+          {pile.house && (
+            <span className="bg-mint/20 text-mint inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5">
+              <Home className="size-3.5" aria-hidden /> +3
+            </span>
+          )}
+          {pile.hotel && (
+            <span className="bg-coral/20 text-coral inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5">
+              <Hotel className="size-3.5" aria-hidden /> +4
+            </span>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function TvPlayerBoard({
+  pub,
+  id,
+  names,
+  avatar,
+}: {
+  pub: PropertyDealPublic;
+  id: string;
+  names: Record<string, string>;
+  avatar: string;
+}) {
+  const piles = pub.props[id]!;
+  const bank = pub.banks[id]!;
+  const sets = new Set(completeColors(piles)).size;
+  const turn = pub.turn === id && !pub.over;
+  const owes = pub.request?.targets.find((t) => t.player === id && !t.done);
+  const bills = [...bank].sort((a, b) => card(b).value - card(a).value);
+  const rentBest = Math.max(0, ...piles.map((p) => rentOf(piles, p.color)));
+  const fan = Math.min(pub.handCounts[id]!, 9);
+  return (
+    <section
+      aria-label={`${names[id] ?? "Player"}'s table`}
+      className={cn(
+        "rounded-3xl border-2 p-4",
+        turn ? "border-amber bg-amber/5 shadow-[0_0_30px_rgba(255,193,69,0.25)]" : "border-border bg-surface/70",
+        pub.winner === id && "border-mint bg-mint/10",
+      )}
+    >
+      <header className="flex flex-wrap items-center gap-3">
+        <span className="bg-surface-3 grid size-14 place-items-center rounded-full text-3xl">{avatar}</span>
+        <div className="min-w-0">
+          <h3 className="font-display flex items-center gap-2 text-2xl font-extrabold">
+            <span className="truncate">{names[id] ?? "Player"}</span>
+            {turn && (
+              <span className="bg-amber rounded-full px-2 py-0.5 text-sm font-black text-[#2a1c00]">
+                TURN · {pub.playsLeft} left
+              </span>
+            )}
+          </h3>
+          {owes && (
+            <p className="text-rose font-bold">
+              {owes.waiting === "actor" ? "🙅 Just Said No!" : owes.amount ? `Owes ${money(owes.amount)}…` : "Deciding…"}
+            </p>
+          )}
+        </div>
+        <div className="ml-auto flex items-center gap-1" aria-label={`${sets} of ${pub.setsToWin} full sets`}>
+          {Array.from({ length: pub.setsToWin }, (_, i) => (
+            <Trophy
+              key={i}
+              className={cn(
+                "size-9",
+                i < sets ? "fill-amber text-amber drop-shadow-[0_0_8px_rgba(255,193,69,0.7)]" : "text-white/20",
+              )}
+              aria-hidden
+            />
+          ))}
+        </div>
+      </header>
+
+      <div className="mt-3 grid gap-3 sm:grid-cols-[1fr_auto]">
+        <div className="rounded-2xl bg-black/20 p-2.5">
+          <p className="flex items-baseline gap-2">
+            <Landmark className="text-mint size-5 self-center" aria-hidden />
+            <span className="text-muted text-sm font-bold uppercase">Bank</span>
+            <span className="font-display text-mint text-3xl font-black">{money(valueOf(bank))}</span>
+            {rentBest > 0 && <span className="text-muted ml-auto text-sm">best rent {money(rentBest)}</span>}
+          </p>
+          <div className="mt-1.5 flex flex-wrap gap-1">
+            {bills.map((c) => {
+              const d = card(c);
+              return (
+                <span
+                  key={c}
+                  title={d.name}
+                  className={cn(
+                    "rounded-md px-1.5 py-0.5 font-mono text-xs font-black",
+                    d.kind === "money" ? "bg-[#d9ecd0] text-[#1f5c2e]" : "bg-[#efe3ff] text-[#4b2a86]",
+                  )}
+                >
+                  {d.value}M
+                </span>
+              );
+            })}
+            {!bills.length && <span className="text-muted text-sm">Empty</span>}
+          </div>
+        </div>
+        <div
+          className="flex flex-col items-center justify-center rounded-2xl bg-black/20 px-4 py-2"
+          aria-label={`${pub.handCounts[id]} cards in hand`}
+        >
+          <div className="relative h-12 w-20">
+            {Array.from({ length: fan }, (_, i) => (
+              <span
+                key={i}
+                className="absolute bottom-0 left-1/2 h-11 w-8 origin-bottom rounded-md border border-white/70 bg-[#1f5c2e] shadow"
+                style={{ transform: `translateX(-50%) rotate(${(i - (fan - 1) / 2) * 9}deg)` }}
+              />
+            ))}
+          </div>
+          <span className="text-sm font-bold">{pub.handCounts[id]} in hand</span>
+        </div>
+      </div>
+
+      <div className="mt-4 flex flex-wrap gap-3">
+        {piles.map((p) => (
+          <TvSet key={p.color} pile={p} />
+        ))}
+        {!piles.length && <p className="text-muted py-6 text-lg">No properties yet.</p>}
+      </div>
+    </section>
+  );
+}
+
 // ───────────────────────── Requests ─────────────────────────
 
 function describeRequest(r: DealRequest, names: Record<string, string>) {
@@ -693,6 +868,7 @@ export function PropertyDealView({
   pub,
   priv,
   mode,
+  room,
   game,
   me,
   names,
@@ -755,7 +931,9 @@ export function PropertyDealView({
             className="flex items-center gap-3"
           >
             <DealCard id={pub.last.card} size={handMode ? "sm" : "lg"} />
-            <p className={cn("max-w-sm font-semibold", handMode ? "text-sm" : "text-lg")}>{pub.last.text}</p>
+            <p className={cn("font-semibold", handMode ? "max-w-sm text-sm" : "font-display max-w-xl text-2xl")}>
+              {pub.last.text}
+            </p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -763,18 +941,28 @@ export function PropertyDealView({
   );
 
   if (!handMode) {
+    const avatarOf = (p: string) => room.players.find((x) => x.id === p)?.avatar ?? "👤";
+    const cols = pub.players.length === 3 || pub.players.length >= 5 ? "lg:grid-cols-2 2xl:grid-cols-3" : "lg:grid-cols-2";
     return (
       <div className="space-y-4">
         <StatusBanner tone={pub.over ? "done" : "neutral"}>{status}</StatusBanner>
         <Countdown deadline={game.deadline} />
-        {centre}
-        {r && <RequestStatus r={r} names={names} />}
-        <div className="grid gap-3 lg:grid-cols-2">
-          {tableOrder.map((p) => (
-            <PlayerTable key={p} pub={pub} id={p} names={names} me={meId} />
+        <div className="grid items-center gap-4 xl:grid-cols-[minmax(0,1fr)_26rem]">
+          <div className="space-y-3">
+            {centre}
+            {r && (
+              <div className="flex justify-center">
+                <RequestStatus r={r} names={names} />
+              </div>
+            )}
+          </div>
+          <EventLog entries={pub.log} className="text-base" />
+        </div>
+        <div className={cn("grid items-start gap-4", cols)}>
+          {pub.players.map((p) => (
+            <TvPlayerBoard key={p} pub={pub} id={p} names={names} avatar={avatarOf(p)} />
           ))}
         </div>
-        <EventLog entries={pub.log} />
       </div>
     );
   }

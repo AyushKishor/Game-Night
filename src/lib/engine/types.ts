@@ -62,6 +62,8 @@ export interface GameMeta {
   lowerIsBetter?: boolean;
   supportsBots: boolean;
   supportsJoinInProgress?: boolean;
+  /** The shared-screen view wants the full width (room info moves below the game). */
+  wideTable?: boolean;
 }
 
 export interface GameContext {

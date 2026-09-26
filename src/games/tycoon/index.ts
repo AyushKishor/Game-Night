@@ -499,6 +499,7 @@ export const tycoon: GameModule<TycoonState, Action> = {
     icon: "Landmark",
     accent: "amber",
     supportsBots: true,
+    wideTable: true,
     rules: {
       goal: "Be the last player standing — or the richest when time runs out.",
       steps: [

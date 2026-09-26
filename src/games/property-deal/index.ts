@@ -685,6 +685,7 @@ export const propertyDeal: GameModule<PropertyDealState, Action> = {
     icon: "Building2",
     accent: "mint",
     supportsBots: true,
+    wideTable: true,
     rules: {
       goal: "Be the first to collect 3 full property sets in different colours.",
       steps: [

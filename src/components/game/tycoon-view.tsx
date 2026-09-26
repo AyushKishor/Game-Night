@@ -22,6 +22,7 @@ import { Countdown, EventLog, StatusBanner } from "./common";
 import type { GameViewProps } from "./types";
 
 const TOKEN_COLORS = ["#ff6b6b", "#4cc9f0", "#51e0a0", "#ffc145", "#b28dff", "#ff8fab"];
+const tokenColor = (pub: { players: string[] }, p: string) => TOKEN_COLORS[pub.players.indexOf(p) % TOKEN_COLORS.length]!;
 const DIE = ["", "⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
 
 /** Grid row/column (1-based) for a board index on an 11×11 grid. */
@@ -73,96 +74,181 @@ function Board({
   compact?: boolean;
   center: React.ReactNode;
 }) {
-  const color = (p: string) => TOKEN_COLORS[pub.players.indexOf(p) % TOKEN_COLORS.length]!;
+  const color = (p: string) => tokenColor(pub, p);
   const avatar = (p: string) => players.find((x) => x.id === p)?.avatar ?? "●";
   return (
-    <div
-      className="grid aspect-square w-full gap-[2px] rounded-xl bg-[#0b3d2a] p-[2px]"
-      style={{ gridTemplateColumns: "1.6fr repeat(9, 1fr) 1.6fr", gridTemplateRows: "1.6fr repeat(9, 1fr) 1.6fr" }}
-      role="img"
-      aria-label="Game board"
-    >
-      {BOARD.map((sp) => {
-        const { row, col } = cellPos(sp.i);
-        const owner = pub.owner[sp.i];
-        const h = pub.houses[sp.i] ?? 0;
-        const here = pub.players.filter((p) => pub.pos[p] === sp.i && !pub.bankrupt.includes(p));
-        const side = sp.i < 10 ? "bottom" : sp.i < 20 ? "left" : sp.i < 30 ? "top" : "right";
-        const band = sp.kind === "street" ? GROUP_HEX[sp.group] : null;
-        return (
-          <div
-            key={sp.i}
-            style={{ gridRow: row, gridColumn: col }}
-            className={cn(
-              "relative flex overflow-hidden rounded-[3px] bg-[#e9f3e4] text-[#1d1d1d]",
-              side === "bottom" && "flex-col",
-              side === "top" && "flex-col-reverse",
-              side === "left" && "flex-row-reverse",
-              side === "right" && "flex-row",
-              pub.mortgaged.includes(sp.i) && "opacity-55",
-            )}
-            title={sp.name}
-          >
-            {band && (
-              <div
-                className={side === "bottom" || side === "top" ? "h-[22%] shrink-0" : "w-[22%] shrink-0"}
-                style={{ background: band }}
-              />
-            )}
-            <div className="flex min-h-0 min-w-0 flex-1 flex-col items-center justify-center p-[1px] text-center leading-[1.05]">
-              {!compact && <span className="line-clamp-2 text-[clamp(0.35rem,0.75vw,0.7rem)] font-bold">{sp.name}</span>}
-              {spaceIcon(sp) && (
-                <span className={compact ? "text-[0.6rem]" : "text-[clamp(0.5rem,1vw,1rem)]"}>{spaceIcon(sp)}</span>
+    <div className="@container w-full">
+      <div
+        className="grid aspect-square w-full gap-[0.25cqw] rounded-[1.2cqw] bg-[#0b3d2a] p-[0.35cqw] shadow-2xl"
+        style={{ gridTemplateColumns: "1.6fr repeat(9, 1fr) 1.6fr", gridTemplateRows: "1.6fr repeat(9, 1fr) 1.6fr" }}
+        role="img"
+        aria-label="Game board"
+      >
+        {BOARD.map((sp) => {
+          const { row, col } = cellPos(sp.i);
+          const owner = pub.owner[sp.i];
+          const h = pub.houses[sp.i] ?? 0;
+          const here = pub.players.filter((p) => pub.pos[p] === sp.i && !pub.bankrupt.includes(p));
+          const side = sp.i < 10 ? "bottom" : sp.i < 20 ? "left" : sp.i < 30 ? "top" : "right";
+          const band = sp.kind === "street" ? GROUP_HEX[sp.group] : null;
+          const vertical = side === "bottom" || side === "top";
+          return (
+            <div
+              key={sp.i}
+              style={{
+                gridRow: row,
+                gridColumn: col,
+                background: owner ? `color-mix(in srgb, ${color(owner)} 30%, #eef6ea)` : "#eef6ea",
+              }}
+              className={cn(
+                "relative flex overflow-hidden rounded-[0.4cqw] text-[#1d1d1d]",
+                side === "bottom" && "flex-col",
+                side === "top" && "flex-col-reverse",
+                side === "left" && "flex-row-reverse",
+                side === "right" && "flex-row",
+                pub.mortgaged.includes(sp.i) && "opacity-50 grayscale",
               )}
-              {!compact && "price" in sp && !owner && (
-                <span className="text-[clamp(0.3rem,0.6vw,0.6rem)] text-black/60">${sp.price}</span>
+              title={`${sp.name}${owner ? ` — ${names[owner]}` : ""}`}
+            >
+              {band && <div className={vertical ? "h-[24%] shrink-0" : "w-[24%] shrink-0"} style={{ background: band }} />}
+              <div
+                className={cn(
+                  "flex min-h-0 min-w-0 flex-1 flex-col items-center justify-center p-[0.2cqw] text-center leading-[1.05]",
+                  side === "bottom" && "pb-[1.1cqw]",
+                  side === "top" && "pt-[1.1cqw]",
+                  side === "left" && "pl-[1.1cqw]",
+                  side === "right" && "pr-[1.1cqw]",
+                )}
+              >
+                {!compact && <span className="line-clamp-2 w-full text-[1.2cqw] font-extrabold break-words">{sp.name}</span>}
+                {spaceIcon(sp) && <span className="text-[2cqw] leading-none">{spaceIcon(sp)}</span>}
+                {!compact && "price" in sp && !owner && (
+                  <span className="text-[1.05cqw] font-semibold text-black/60">${sp.price}</span>
+                )}
+              </div>
+              {owner && (
+                <span
+                  className={cn(
+                    "absolute",
+                    side === "bottom" && "inset-x-0 bottom-0 h-[0.9cqw]",
+                    side === "top" && "inset-x-0 top-0 h-[0.9cqw]",
+                    side === "left" && "inset-y-0 left-0 w-[0.9cqw]",
+                    side === "right" && "inset-y-0 right-0 w-[0.9cqw]",
+                  )}
+                  style={{ background: color(owner) }}
+                  aria-hidden
+                />
+              )}
+              {h > 0 && (
+                <span
+                  className={cn(
+                    "absolute flex gap-[0.2cqw]",
+                    vertical ? "inset-x-0 justify-center" : "inset-y-0 flex-col justify-center",
+                    side === "bottom" && "top-[4%]",
+                    side === "top" && "bottom-[4%]",
+                    side === "left" && "right-[4%]",
+                    side === "right" && "left-[4%]",
+                  )}
+                  aria-label={h === 5 ? "hotel" : `${h} houses`}
+                >
+                  {h === 5 ? (
+                    <span className="h-[1.5cqw] w-[2.6cqw] rounded-[0.2cqw] bg-[#e23b3b] ring-1 ring-black/50" />
+                  ) : (
+                    Array.from({ length: h }, (_, k) => (
+                      <span key={k} className="size-[1.2cqw] rounded-[0.15cqw] bg-[#1f9d55] ring-1 ring-black/50" />
+                    ))
+                  )}
+                </span>
+              )}
+              {here.length > 0 && (
+                <span className="absolute inset-0 flex flex-wrap items-center justify-center gap-[0.2cqw]">
+                  {here.map((p) => (
+                    <motion.span
+                      layoutId={`token-${p}`}
+                      key={p}
+                      className="grid size-[3.4cqw] place-items-center rounded-full text-[2cqw] shadow-md"
+                      style={{
+                        background: color(p),
+                        boxShadow: pub.turn === p ? "0 0 0 0.35cqw #fff, 0 0 1.2cqw #fff" : "0 0 0 0.2cqw rgba(0,0,0,.5)",
+                      }}
+                      title={names[p]}
+                    >
+                      {avatar(p)}
+                    </motion.span>
+                  ))}
+                </span>
               )}
             </div>
-            {owner && (
-              <span
-                className="absolute top-0.5 right-0.5 size-[22%] max-h-3 max-w-3 rounded-full ring-1 ring-black/40"
-                style={{ background: color(owner) }}
-                title={`Owned by ${names[owner]}`}
-              />
-            )}
-            {h > 0 && (
-              <span className="absolute bottom-0 left-0 flex gap-[1px] p-[1px]">
-                {h === 5 ? (
-                  <span className="h-2 w-3 rounded-[2px] bg-[#e23b3b] ring-1 ring-black/40" />
-                ) : (
-                  Array.from({ length: h }, (_, k) => (
-                    <span key={k} className="size-1.5 rounded-[1px] bg-[#1f9d55] ring-1 ring-black/40" />
-                  ))
-                )}
-              </span>
-            )}
-            {here.length > 0 && (
-              <span className="absolute inset-0 flex flex-wrap items-center justify-center gap-[1px]">
-                {here.map((p) => (
-                  <motion.span
-                    layoutId={`token-${p}`}
-                    key={p}
-                    className={cn(
-                      "grid place-items-center rounded-full ring-2",
-                      compact ? "size-3.5 text-[0.5rem]" : "size-[clamp(0.9rem,2vw,1.8rem)] text-[clamp(0.55rem,1.2vw,1.1rem)]",
+          );
+        })}
+        <div
+          style={{ gridRow: "2 / 11", gridColumn: "2 / 11" }}
+          className="flex flex-col items-center justify-center gap-[1cqw] overflow-hidden p-[1.5cqw] text-white"
+        >
+          {center}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/** A player's properties as little title-deed cards, grouped by colour set. */
+function Deeds({ pub, player, big }: { pub: TycoonPublic; player: string; big?: boolean }) {
+  const owned = BOARD.filter((sp) => pub.owner[sp.i] === player);
+  if (!owned.length) return <p className="text-muted text-sm">No properties yet</p>;
+  const groups: Space[][] = [];
+  for (const sp of owned) {
+    const key = sp.kind === "street" ? sp.group : sp.kind;
+    const g = groups.find((x) => (x[0]!.kind === "street" ? (x[0] as { group: string }).group : x[0]!.kind) === key);
+    if (g) g.push(sp);
+    else groups.push([sp]);
+  }
+  return (
+    <div className="flex flex-wrap gap-2">
+      {groups.map((g) => {
+        const first = g[0]!;
+        const full =
+          first.kind === "street" && BOARD.filter((x) => x.kind === "street" && x.group === first.group).length === g.length;
+        return (
+          <div
+            key={first.i}
+            className={cn("flex gap-1 rounded-lg p-1", full ? "bg-amber/15 ring-amber ring-2" : "bg-black/20")}
+            title={full ? "Full set" : undefined}
+          >
+            {g.map((sp) => {
+              const h = pub.houses[sp.i] ?? 0;
+              const mort = pub.mortgaged.includes(sp.i);
+              const band = sp.kind === "street" ? GROUP_HEX[sp.group] : sp.kind === "railroad" ? "#2d2d2d" : "#9aa5ad";
+              return (
+                <div
+                  key={sp.i}
+                  title={`${sp.name}${mort ? " (mortgaged)" : ""}`}
+                  className={cn(
+                    "flex flex-col overflow-hidden rounded-md bg-[#fbf7ee] text-[#1d1d1d] shadow ring-1 ring-black/20",
+                    big ? "h-16 w-12" : "h-12 w-9",
+                    mort && "opacity-40",
+                  )}
+                >
+                  <div className="grid h-[38%] place-items-center text-[0.6rem] text-white" style={{ background: band }}>
+                    {sp.kind === "railroad" ? "🚉" : sp.kind === "utility" ? spaceIcon(sp) : ""}
+                  </div>
+                  <div className="flex flex-1 flex-wrap content-center items-center justify-center gap-[2px] px-0.5">
+                    {mort ? (
+                      <span className="text-[0.55rem] font-black text-[#e23b3b]">MORT</span>
+                    ) : h === 5 ? (
+                      <Hotel className="size-4 text-[#e23b3b]" aria-label="hotel" />
+                    ) : h > 0 ? (
+                      Array.from({ length: h }, (_, k) => <span key={k} className="size-2 rounded-[2px] bg-[#1f9d55]" />)
+                    ) : (
+                      <span className="line-clamp-2 text-center text-[0.5rem] leading-tight font-bold">{sp.name}</span>
                     )}
-                    style={{ background: color(p), boxShadow: `0 0 0 2px ${pub.turn === p ? "#fff" : "transparent"}` }}
-                    title={names[p]}
-                  >
-                    {avatar(p)}
-                  </motion.span>
-                ))}
-              </span>
-            )}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         );
       })}
-      <div
-        style={{ gridRow: "2 / 11", gridColumn: "2 / 11" }}
-        className="flex flex-col items-center justify-center gap-2 overflow-hidden p-2 text-white"
-      >
-        {center}
-      </div>
     </div>
   );
 }
@@ -381,34 +467,49 @@ export function TycoonView({ pub, mode, room, game, me, names, send }: GameViewP
                   : "Build, trade or end your turn"
               : `${names[pub.turn]}'s turn`;
 
-  const center = (
+  const turnPlayer = room.players.find((x) => x.id === pub.turn);
+  const center = handMode ? (
     <>
-      <p
-        className={cn(
-          "font-display font-black tracking-wider text-[#ffd166]",
-          handMode ? "text-sm" : "text-[clamp(1rem,2.4vw,2.2rem)]",
-        )}
-      >
-        TYCOON
-      </p>
+      <p className="font-display text-sm font-black tracking-wider text-[#ffd166]">TYCOON</p>
       {pub.dice && (
-        <p
-          className={cn("leading-none", handMode ? "text-3xl" : "text-[clamp(2rem,5vw,4.5rem)]")}
-          aria-label={`Dice ${pub.dice[0]} and ${pub.dice[1]}`}
-        >
+        <p className="text-3xl leading-none" aria-label={`Dice ${pub.dice[0]} and ${pub.dice[1]}`}>
           {DIE[pub.dice[0]]}
           {DIE[pub.dice[1]]}
         </p>
       )}
-      {pub.lastCard && !handMode && (
-        <div className="max-w-[80%] rounded-lg bg-white/95 px-3 py-2 text-center text-[clamp(0.6rem,1.1vw,1rem)] font-semibold text-[#1d1d1d] shadow">
-          {pub.lastCard.deck === "chance" ? "❓ Chance" : "🎁 Treasure Chest"}: {pub.lastCard.text}
+    </>
+  ) : (
+    <>
+      <p className="font-display text-[3.2cqw] font-black tracking-[0.2em] text-[#ffd166] drop-shadow">TYCOON</p>
+      {pub.phase !== "over" && (
+        <div className="flex items-center gap-[1cqw] rounded-full bg-black/30 py-[0.5cqw] pr-[2cqw] pl-[0.6cqw]">
+          <span
+            className="grid size-[5cqw] place-items-center rounded-full text-[3cqw]"
+            style={{ background: tokenColor(pub, pub.turn) }}
+          >
+            {turnPlayer?.avatar ?? "●"}
+          </span>
+          <span className="font-display text-[2.6cqw] font-extrabold">{names[pub.turn]}&apos;s turn</span>
         </div>
       )}
-      {!handMode && <p className="text-center text-[clamp(0.6rem,1.2vw,1.1rem)] font-semibold">{pub.log[pub.log.length - 1]}</p>}
-      {pub.pot > 0 && <p className="text-xs font-bold">Free Parking pot: {money(pub.pot)}</p>}
-      <p className="text-[0.65rem] text-white/60">
-        Round {Math.min(pub.round, pub.maxRounds)}/{pub.maxRounds}
+      {pub.dice && (
+        <p className="text-[9cqw] leading-none drop-shadow-lg" aria-label={`Dice ${pub.dice[0]} and ${pub.dice[1]}`}>
+          {DIE[pub.dice[0]]}
+          {DIE[pub.dice[1]]}
+        </p>
+      )}
+      {pub.lastCard && (
+        <div className="max-w-[85%] rounded-[1cqw] bg-white px-[2cqw] py-[1.2cqw] text-center text-[1.9cqw] font-bold text-[#1d1d1d] shadow-xl">
+          <span className="block text-[1.4cqw] tracking-widest text-black/50 uppercase">
+            {pub.lastCard.deck === "chance" ? "❓ Chance" : "🎁 Treasure Chest"}
+          </span>
+          {pub.lastCard.text}
+        </div>
+      )}
+      {!pub.lastCard && <p className="max-w-[90%] text-center text-[2cqw] font-semibold">{pub.log[pub.log.length - 1]}</p>}
+      {pub.pot > 0 && <p className="text-[1.8cqw] font-bold text-[#ffd166]">Free Parking pot: {money(pub.pot)}</p>}
+      <p className="text-[1.4cqw] text-white/60">
+        Round {Math.min(pub.round, pub.maxRounds)} of {pub.maxRounds}
       </p>
     </>
   );
@@ -434,20 +535,79 @@ export function TycoonView({ pub, mode, room, game, me, names, send }: GameViewP
             {pub.bankrupt.includes(p) ? "Bankrupt" : `${BOARD[pub.pos[p]!]!.name} · worth ${money(pub.worth[p]!)}`}
             {pub.jailCards[p]! > 0 && " · 🗝️"}
           </p>
+          {!pub.bankrupt.includes(p) && (
+            <div className="mt-1.5">
+              <Deeds pub={pub} player={p} />
+            </div>
+          )}
         </li>
       ))}
     </ul>
   );
 
   if (!handMode) {
+    const ranked = [...pub.players].sort((a, b) => pub.worth[b]! - pub.worth[a]!);
     return (
       <div className="space-y-3">
         <StatusBanner tone={pub.phase === "over" ? "done" : "neutral"}>{status}</StatusBanner>
         <Countdown deadline={game.deadline} />
-        <div className="mx-auto max-w-[min(100%,78vh)]">
-          <Board pub={pub} names={names} players={room.players} center={center} />
+        <div className="grid items-start gap-4 lg:grid-cols-[auto_minmax(20rem,1fr)]">
+          <div className="mx-auto w-full lg:w-[min(calc(100dvh-9rem),62vw)]">
+            <Board pub={pub} names={names} players={room.players} center={center} />
+          </div>
+          <ul className="space-y-3" aria-label="Players">
+            {pub.players.map((p) => {
+              const out = pub.bankrupt.includes(p);
+              const turn = pub.turn === p && pub.phase !== "over";
+              const rank = ranked.indexOf(p) + 1;
+              const pp = room.players.find((x) => x.id === p);
+              return (
+                <li
+                  key={p}
+                  className={cn(
+                    "bg-surface-2 rounded-2xl border-2 p-3 transition-colors",
+                    turn ? "border-amber shadow-[0_0_24px_rgba(255,193,69,0.35)]" : "border-border",
+                    pub.winner === p && "border-mint bg-mint/10",
+                    out && "opacity-45",
+                  )}
+                >
+                  <div className="flex items-center gap-3">
+                    <span
+                      className="grid size-12 shrink-0 place-items-center rounded-full text-2xl ring-4 ring-black/30"
+                      style={{ background: tokenColor(pub, p) }}
+                    >
+                      {pp?.avatar ?? "●"}
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <p className="flex flex-wrap items-center gap-2">
+                        <span className="font-display truncate text-xl font-extrabold">{names[p]}</span>
+                        {turn && (
+                          <span className="bg-amber rounded-full px-2 py-0.5 text-xs font-black text-[#2a1c00]">TURN</span>
+                        )}
+                        {pub.inJail.includes(p) && (
+                          <span className="bg-rose/20 text-rose inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-bold">
+                            <Lock className="size-3" aria-hidden /> JAIL
+                          </span>
+                        )}
+                        {pub.jailCards[p]! > 0 && <span title="Get Out of Jail Free">🗝️</span>}
+                        {out && <span className="text-rose text-xs font-black">BANKRUPT</span>}
+                      </p>
+                      <p className="text-muted truncate text-sm">
+                        #{rank} · worth {money(pub.worth[p]!)} · {out ? "out" : BOARD[pub.pos[p]!]!.name}
+                      </p>
+                    </div>
+                    <span className="font-display text-3xl font-black text-[#51e0a0] tabular-nums">{money(pub.cash[p]!)}</span>
+                  </div>
+                  {!out && (
+                    <div className="mt-2">
+                      <Deeds pub={pub} player={p} big={pub.players.length <= 4} />
+                    </div>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
         </div>
-        {playerList}
       </div>
     );
   }
